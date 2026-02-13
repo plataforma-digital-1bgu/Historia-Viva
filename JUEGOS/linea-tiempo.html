@@ -1,0 +1,289 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Línea del Tiempo – Pensamiento Histórico</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --principal:#4f8fc0;
+  --oscuro:#1d3557;
+  --claro:#f4f8fc;
+  --ok:#22c55e;
+  --error:#ef4444;
+}
+
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#e8f1fb,var(--principal));
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.app{
+  background:#fff;
+  width:95%;
+  max-width:1150px;
+  border-radius:32px;
+  padding:28px;
+  box-shadow:0 35px 70px rgba(0,0,0,.25);
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+header h2{ color:var(--oscuro); }
+
+.botones{
+  display:flex;
+  gap:10px;
+}
+
+.btn{
+  background:var(--principal);
+  color:#fff;
+  border:none;
+  padding:10px 22px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+#mensaje{
+  text-align:center;
+  font-weight:600;
+  margin:10px 0 20px;
+  min-height:24px;
+}
+
+.progreso{
+  background:#e6edf5;
+  height:14px;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:25px;
+}
+#barra{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--ok),#86efac);
+  transition:.4s;
+}
+
+.tarjetas{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  margin-bottom:35px;
+}
+
+.tarjeta{
+  background:var(--claro);
+  padding:14px 20px;
+  border-radius:20px;
+  cursor:grab;
+  font-weight:600;
+  transition:.25s;
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.tarjeta:active{cursor:grabbing}
+
+.tarjeta.error{
+  background:#fee2e2;
+  animation:shake .3s;
+}
+
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-4px)}
+  100%{transform:translateX(0)}
+}
+
+.linea{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:18px;
+}
+
+.zona{
+  border:3px dashed var(--principal);
+  border-radius:22px;
+  min-height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  color:#6b7280;
+  transition:.3s;
+}
+
+.zona.correcta{
+  background:#dcfce7;
+  border-color:var(--ok);
+  color:#166534;
+  animation:pop .4s;
+}
+
+@keyframes pop{
+  0%{transform:scale(.9)}
+  60%{transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+
+.final{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.final-box{
+  background:#fff;
+  padding:45px;
+  border-radius:32px;
+  text-align:center;
+  animation:pop .5s;
+}
+
+.final-box h1{color:var(--ok)}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <h2>🧠 Línea del Tiempo Histórica</h2>
+  <div class="botones">
+    <button class="btn" onclick="toggleMusica()">🎵 Música</button>
+    <button class="btn" onclick="volver()">⬅ Volver</button>
+  </div>
+</header>
+
+<div id="mensaje">Toca la pantalla para comenzar 🎵</div>
+
+<div class="progreso"><div id="barra"></div></div>
+
+<div class="tarjetas" id="tarjetas"></div>
+
+<div class="linea">
+  <div class="zona" data-e="paleo">Paleolítico</div>
+  <div class="zona" data-e="neo">Neolítico</div>
+  <div class="zona" data-e="metal">Edad de los Metales</div>
+  <div class="zona" data-e="antigua">Edad Antigua</div>
+  <div class="zona" data-e="media">Edad Media</div>
+</div>
+
+</div>
+
+<div class="final" id="final">
+  <div class="final-box">
+    <h1>🏆 Muy bien</h1>
+    <p>Construiste la historia pensando, no memorizando.</p>
+    <button class="btn" onclick="volver()">Volver al menú</button>
+  </div>
+</div>
+
+<!-- SONIDOS -->
+<audio id="ok" src="../Sonido/Sonido-Correcto.mp3"></audio>
+<audio id="bad" src="../Sonido/Sonido-Error.mp3"></audio>
+<audio id="music" src="../Sonido/ambiente.mp3" loop></audio>
+
+<script>
+const eventos=[
+ {t:"Uso del fuego",e:"paleo"},
+ {t:"Vida nómada",e:"paleo"},
+ {t:"Agricultura",e:"neo"},
+ {t:"Aldeas sedentarias",e:"neo"},
+ {t:"Metalurgia",e:"metal"},
+ {t:"Bronce y hierro",e:"metal"},
+ {t:"Escritura",e:"antigua"},
+ {t:"Grecia y Roma",e:"antigua"},
+ {t:"Feudalismo",e:"media"},
+ {t:"Castillos",e:"media"}
+];
+
+eventos.sort(()=>Math.random()-0.5);
+
+let arr=null, correctos=0;
+let musicaIniciada=false;
+
+const cont=document.getElementById("tarjetas");
+const msg=document.getElementById("mensaje");
+const barra=document.getElementById("barra");
+const ok=document.getElementById("ok");
+const bad=document.getElementById("bad");
+const music=document.getElementById("music");
+
+music.volume=0.5;
+
+// 🎵 INICIAR AL TOCAR PANTALLA
+document.addEventListener("click",()=>{
+  if(!musicaIniciada){
+    music.play();
+    musicaIniciada=true;
+    msg.textContent="Observa, analiza y decide con calma 💭";
+  }
+});
+
+eventos.forEach(ev=>{
+  const d=document.createElement("div");
+  d.className="tarjeta";
+  d.textContent=ev.t;
+  d.dataset.e=ev.e;
+  d.draggable=true;
+  d.ondragstart=()=>arr=d;
+  cont.appendChild(d);
+});
+
+document.querySelectorAll(".zona").forEach(z=>{
+  z.ondragover=e=>e.preventDefault();
+  z.ondrop=()=>{
+    if(arr && arr.dataset.e===z.dataset.e){
+      z.textContent=arr.textContent;
+      z.classList.add("correcta");
+      ok.currentTime=0; ok.play();
+      arr.remove();
+      correctos++;
+      barra.style.width=(correctos/eventos.length*100)+"%";
+      msg.textContent="✔ Bien pensado";
+      if(correctos===eventos.length){
+        music.pause(); // 🔇 se detiene al finalizar
+        document.getElementById("final").style.display="flex";
+      }
+    }else{
+      arr.classList.add("error");
+      bad.currentTime=0; bad.play();
+      msg.textContent="💡 Observa la época histórica";
+      setTimeout(()=>arr.classList.remove("error"),300);
+    }
+    arr=null;
+  };
+});
+
+function toggleMusica(){
+  music.paused ? music.play() : music.pause();
+}
+
+function volver(){
+  window.location.href="http://127.0.0.1:8888/Historia/Juego.html";
+}
+</script>
+
+</body>
+</html>

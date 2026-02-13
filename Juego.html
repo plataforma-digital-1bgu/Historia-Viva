@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Juegos de Historia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --azul:#1d3557;
+  --azul2:#457b9d;
+  --verde:#2a9d8f;
+  --morado:#6a4c93;
+  --rosa:#ef476f;
+  --amarillo:#ffb703;
+  --gris:#f4f6f9;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:var(--gris);
+  color:#333;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#1d3557,#3F88C3,#457b9d);
+  color:#fff;
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.btn-inicio{
+  background:linear-gradient(135deg,#ffd166,#f4a261);
+  color:#1d3557;
+  font-weight:bold;
+  padding:8px 18px;
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
+}
+
+/* BANNER */
+.banner{
+  height:320px;
+  background:
+    linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)),
+    url("F.Juego.png") center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.banner-box{
+  background:rgba(255,255,255,.9);
+  padding:30px 40px;
+  border-radius:20px;
+  text-align:center;
+  animation:fadeIn 1s ease;
+}
+
+/* SECCION */
+.seccion{
+  padding:50px 20px;
+  text-align:center;
+  flex:1;
+}
+
+.juegos{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+  max-width:1150px;
+  margin:auto;
+}
+
+.card{
+  background:#fff;
+  padding:30px 20px;
+  border-radius:20px;
+  box-shadow:0 12px 25px rgba(0,0,0,.15);
+  opacity:0;
+  transform:translateY(20px);
+  animation:aparecer .8s ease forwards;
+  transition:.3s;
+}
+
+.card:nth-child(1){animation-delay:.2s;}
+.card:nth-child(2){animation-delay:.4s;}
+.card:nth-child(3){animation-delay:.6s;}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 18px 35px rgba(0,0,0,.25);
+}
+
+@keyframes aparecer{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+.card.linea{border-top:6px solid var(--verde)}
+.card.decision-mundo{border-top:6px solid var(--morado)}
+.card.quiz{border-top:6px solid var(--rosa)}
+
+.btn-jugar{
+  margin-top:18px;
+  border:none;
+  padding:12px 26px;
+  border-radius:25px;
+  color:#fff;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.3s;
+}
+
+.btn-jugar:active{
+  transform:scale(.95);
+}
+
+.linea .btn-jugar{background:var(--verde)}
+.decision-mundo .btn-jugar{
+  background:linear-gradient(135deg,var(--morado),var(--amarillo));
+}
+.quiz .btn-jugar{background:var(--rosa)}
+
+footer{
+  background:linear-gradient(135deg,#1d3557,#3F88C3,#457b9d);
+  color:#fff;
+  text-align:center;
+  padding:25px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="btn-inicio" onclick="irInicio()">🏠 Inicio</button>
+  <div>
+    <h1>🎮 Juegos de Historia</h1>
+    <p>Aprende jugando</p>
+  </div>
+</header>
+
+<section class="banner">
+  <div class="banner-box">
+    <h2>Aprender Historia Nunca Fue Tan Divertido</h2>
+    <p>Explora, decide y demuestra lo que sabes</p>
+  </div>
+</section>
+
+<section class="seccion">
+<div class="juegos">
+
+  <div class="card linea">
+    <h3>📜 Línea del Tiempo</h3>
+    <p>Procesos históricos</p>
+    <button class="btn-jugar" onclick="abrirJuego('JUEGOS/linea-tiempo.html')">
+      Jugar
+    </button>
+  </div>
+
+  <div class="card decision-mundo">
+    <h3>⚔️🌍 Decisiones</h3>
+    <p>Poder, conflictos y civilizaciones</p>
+    <button class="btn-jugar" onclick="abrirJuego('JUEGOS/decisiones.html')">
+      Jugar
+    </button>
+  </div>
+
+  <div class="card quiz">
+    <h3>🧠 Quiz Histórico</h3>
+    <p>Conceptos clave</p>
+    <button class="btn-jugar" onclick="abrirJuego('JUEGOS/quiz.html')">
+      Jugar
+    </button>
+  </div>
+
+</div>
+</section>
+
+<footer>
+© 2026 • Plataforma Educativa de Historia
+</footer>
+
+<audio id="sndClick" src="Sonido/Sonidodeseleccionar.mp3"></audio>
+
+<script>
+function abrirJuego(ruta){
+  const sndClick = document.getElementById("sndClick");
+  sndClick.currentTime = 0;
+  sndClick.play();
+
+  setTimeout(()=>{
+    window.location.href = ruta;
+  },200);
+}
+
+function irInicio(){
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

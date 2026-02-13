@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Explorador del Mundo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Segoe UI;background:#f4f6f9;padding:20px}
+img{width:100%;border-radius:20px}
+button{margin:10px;padding:12px;border-radius:12px}
+</style>
+</head>
+
+<body>
+
+<h2>🌍 Explorador del Mundo</h2>
+<p>¿Qué civilización se desarrolló aquí?</p>
+
+<img src="img/mapa-egipto.png">
+
+<button onclick="ok()">Egipcia</button>
+<button onclick="bad()">Griega</button>
+<button onclick="bad()">Romana</button>
+<button onclick="bad()">China</button>
+<button onclick="bad()">Maya</button>
+
+<p id="res"></p>
+
+<script>
+function ok(){res.innerText="✅ Correcto"}
+function bad(){res.innerText="❌ Incorrecto"}
+</script>
+
+</body>
+</html>

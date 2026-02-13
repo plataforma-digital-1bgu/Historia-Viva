@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>🎡 Ruleta Histórica</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:#000;
+  color:white;
+  overflow:hidden;
+  transition: background 0.5s ease;
+}
+
+/* PARTICULAS FONDO */
+#particles{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* CONFETI */
+#confeti{
+  position:fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+  display:none;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 40px;
+}
+
+.volver{
+  background:#ffd700;
+  color:black;
+  padding:10px 25px;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* CONTENEDOR */
+.container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:80px;
+  margin-top:40px;
+  flex-wrap:wrap;
+}
+
+/* RULETA */
+
+.ruleta {
+  box-shadow: 
+    0 0 30px rgba(0, 200, 255, 0.4),
+    inset 0 0 25px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease;
+}
+
+.ruleta:hover {
+  transform: scale(1.03);
+}
+
+
+
+
+.ruleta-container{ position:relative; }
+
+canvas#ruleta{
+  border-radius:50%;
+  background:#111;
+  box-shadow:0 0 50px rgba(0,150,255,0.4);
+ animation: pulso 2s infinite alternate;
+}
+@keyframes latidoRuleta{
+  from { transform: scale(1); }
+  to { transform: scale(1.02); }
+}
+
+
+
+
+.puntero{
+  position:absolute;
+  top:-25px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:45px;
+  color:#ffd700;
+}
+
+/* PANEL */
+.app{
+  background:rgba(20,20,20,0.95);
+  padding:30px;
+  border-radius:25px;
+  width:420px;
+  text-align:center;
+}
+
+.opcion{
+  background:#2d2d2d;
+  margin:15px 0;
+  padding:14px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.correcta{
+  background:#00cc66 !important;
+  box-shadow:0 0 25px #00ff88;
+}
+
+.incorrecta{
+  background:crimson !important;
+}
+
+#feedback{
+  margin-top:15px;
+  padding:10px;
+  border-radius:15px;
+  display:none;
+}
+
+.feedback-bien{
+  background:#003d1f;
+}
+
+.feedback-mal{
+  background:#3d0000;
+}
+
+button{
+  margin-top:20px;
+  padding:12px 30px;
+  border:none;
+  border-radius:25px;
+  background:#ffd700;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+#pantallaFinal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.92);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  font-size:26px;
+}
+
+
+#vidas{
+  font-size:22px;
+  letter-spacing:3px;
+  transition:transform 0.2s ease;
+}
+
+
+#contadorMonedas{
+  background:linear-gradient(135deg,#ffd700,#ffb300);
+  color:black;
+  padding:8px 18px;
+  border-radius:20px;
+  font-weight:bold;
+  box-shadow:0 0 15px rgba(255,215,0,0.6);
+}
+
+.glow-total {
+  animation: brillo 1s infinite alternate;
+  text-shadow: 0 0 10px gold, 0 0 20px orange, 0 0 40px gold;
+}
+
+@keyframes brillo {
+  from { 
+    text-shadow: 0 0 10px gold, 0 0 20px orange; 
+  }
+  to { 
+    text-shadow: 0 0 25px #fff700, 0 0 50px #ffae00; 
+  }
+}
+
+
+/* EFECCTO DEL JUEGO  */
+.shake {
+  animation: temblar 1s;
+}
+
+@keyframes temblar {
+  0% { transform: translate(0px, 0px); }
+  10% { transform: translate(-8px, 5px); }
+  20% { transform: translate(8px, -5px); }
+  30% { transform: translate(-6px, 4px); }
+  40% { transform: translate(6px, -4px); }
+  50% { transform: translate(-4px, 3px); }
+  60% { transform: translate(4px, -3px); }
+  70% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  90% { transform: translate(-1px, 1px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+
+
+
+body.girando {
+  filter: brightness(0.7);
+}
+
+.boton-girar {
+  animation: pulso 2s infinite;
+}
+
+@keyframes pulso {
+  0% { box-shadow: 0 0 10px #ffd700; }
+  50% { box-shadow: 0 0 25px #ffcc00; }
+  100% { box-shadow: 0 0 10px #ffd700; }
+}
+
+.glow-stop {
+  box-shadow: 
+    0 0 40px #fff,
+    0 0 80px gold,
+    0 0 120px orange,
+    0 0 160px #ffd700 !important;
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+.vidas span {
+  animation: latido 1.5s infinite;
+}
+
+@keyframes latido {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+
+
+.puntero {
+  filter: drop-shadow(0 0 10px gold);
+}
+
+
+
+
+@keyframes subir {
+  from { opacity:1; transform:translate(-50%,-50%) scale(1); }
+  to { opacity:0; transform:translate(-50%,-80%) scale(1.5); }
+}
+
+
+
+
+
+.btn-secundario{
+  background: transparent;
+  border: 2px solid #ffd700;
+  color: #ffd700;
+  padding: 10px 25px;
+  border-radius: 30px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-secundario:hover{
+  background: #ffd700;
+  color: black;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<canvas id="confeti"></canvas>
+
+<header>
+<h2>🎡 Ruleta Histórica</h2>
+<div style="display:flex; gap:20px; align-items:center;">
+  <div id="contadorMonedas">🪙 0</div>
+  <div id="vidas">❤️❤️❤️</div>
+
+   <div id="btnMusica" style="
+    font-size:22px;
+    cursor:pointer;
+    transition:0.2s;
+  ">🔊</div>
+
+  <div class="volver" id="btnVolver">⬅ Volver</div>
+</div>
+</header>
+
+
+
+
+<div class="container">
+
+<div class="ruleta-container">
+<div class="puntero">▼</div>
+<canvas id="ruleta" class="ruleta" width="500" height="500"></canvas>
+</div>
+
+<div class="app">
+<div id="pregunta"></div>
+<div id="opciones"></div>
+<button id="btnGirar">Girar Ruleta</button>
+<div id="feedback"></div>
+</div>
+
+</div>
+
+<div id="pantallaFinal">
+  <div id="mensajeFinal"></div>
+
+  <button onclick="location.reload()">Jugar otra vez</button>
+
+  <button class="btn-secundario" onclick="volverMenu()">
+    Volver al menú
+  </button>
+</div>
+
+
+
+<!-- SONIDOS -->
+<audio id="sndRuleta" src="../Sonido/ruleta.mp3"></audio>
+<audio id="sndCorrecto" src="../Sonido/Sonido-Correcto.mp3"></audio>
+<audio id="sndIncorrecto" src="../Sonido/incorrecto.mp3"></audio>
+<audio id="sndVolver" src="../Sonido/Sonidodeseleccionar.mp3"></audio>
+<audio id="sndFondo" src="../Sonido/musica-fondo.mp3" loop></audio>
+<audio id="sonidoMoneda" src="../Sonido/moneda.mp3"></audio>
+
+
+
+
+<script>
+function efectoAcierto(){
+  const efecto = document.createElement("div");
+  efecto.innerText = "✨ +10";
+  efecto.style.position = "fixed";
+  efecto.style.top = "50%";
+  efecto.style.left = "50%";
+  efecto.style.fontSize = "40px";
+  efecto.style.color = "gold";
+  efecto.style.transform = "translate(-50%,-50%)";
+  efecto.style.animation = "subir 1s forwards";
+  document.body.appendChild(efecto);
+
+  setTimeout(()=>efecto.remove(),1000);
+}
+
+
+
+
+
+
+
+
+
+
+// 🔊 REFERENCIAS DE SONIDO
+const sndRuleta = document.getElementById("sndRuleta");
+const sndCorrecto = document.getElementById("sndCorrecto");
+const sndIncorrecto = document.getElementById("sndIncorrecto");
+const sndVolver = document.getElementById("sndVolver");
+const sndFondo = document.getElementById("sndFondo");
+const sonidoMoneda = document.getElementById("sonidoMoneda");
+
+
+
+// 🎵 BOTÓN MUSICA (AQUÍ VA)
+
+const btnMusica = document.getElementById("btnMusica");
+let musicaActiva = true;
+
+btnMusica.onclick = function(){
+
+  if(musicaActiva){
+    sndFondo.pause();
+    btnMusica.innerText = "🔇";
+    musicaActiva = false;
+  }else{
+    sndFondo.play();
+    btnMusica.innerText = "🔊";
+    musicaActiva = true;
+  }
+
+  btnMusica.style.transform = "scale(1.3)";
+  setTimeout(()=>{
+    btnMusica.style.transform = "scale(1)";
+  },200);
+
+};
+
+
+// 🔉 VOLUMENES (0 a 1)
+sndRuleta.volume = 0.1;     // más bajito
+sndCorrecto.volume = 0.6;
+sndIncorrecto.volume = 0.6;
+sndVolver.volume = 0.5;
+sndFondo.volume = 0.5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* PARTICULAS FONDO */
+
+const bg=document.getElementById("particles");
+const bgCtx=bg.getContext("2d");
+bg.width=window.innerWidth;
+bg.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<120;i++){
+ stars.push({
+  x:Math.random()*bg.width,
+  y:Math.random()*bg.height,
+  r:Math.random()*1.5,
+  s:Math.random()*0.5
+ });
+}
+
+function animStars(){
+ bgCtx.clearRect(0,0,bg.width,bg.height);
+ bgCtx.fillStyle="white";
+ stars.forEach(st=>{
+  st.y+=st.s;
+  if(st.y>bg.height) st.y=0;
+  bgCtx.beginPath();
+  bgCtx.arc(st.x,st.y,st.r,0,Math.PI*2);
+  bgCtx.fill();
+ });
+ requestAnimationFrame(animStars);
+}
+animStars();
+
+/* CONFETI */
+const confeti=document.getElementById("confeti");
+const cCtx=confeti.getContext("2d");
+confeti.width=window.innerWidth;
+confeti.height=window.innerHeight;
+
+let piezas=[];
+
+function lanzarConfeti(){
+ confeti.style.display="block";
+ for(let i=0;i<150;i++){
+  piezas.push({
+   x:Math.random()*confeti.width,
+   y:Math.random()*-confeti.height,
+   r:Math.random()*6+4,
+   d:Math.random()*confeti.height,
+   color:`hsl(${Math.random()*360},100%,50%)`,
+   tilt:Math.random()*10
+  });
+ }
+ animConfeti();
+}
+
+function animConfeti(){
+ cCtx.clearRect(0,0,confeti.width,confeti.height);
+ piezas.forEach(p=>{
+  cCtx.beginPath();
+  cCtx.fillStyle=p.color;
+  cCtx.fillRect(p.x,p.y,p.r,p.r);
+  p.y+=3;
+  if(p.y>confeti.height) p.y=0;
+ });
+ requestAnimationFrame(animConfeti);
+}
+
+/* DATOS (5 FECHAS) */
+const banco=[
+{anio:"1776",evento:"Independencia de EE.UU.",exp:"Declaración de Independencia."},
+{anio:"1789",evento:"Revolución Francesa",exp:"Inicio de la revolución."},
+{anio:"1822",evento:"Batalla de Pichincha",exp:"Clave para Ecuador."},
+{anio:"1969",evento:"Llegada a la Luna",exp:"Armstrong pisó la Luna."},
+{anio:"1989",evento:"Caída del Muro de Berlín",exp:"Fin simbólico de la Guerra Fría."}
+];
+
+let preguntas=[...banco];
+let aciertos=0;
+let monedas=0;
+let racha=0;  
+let vidas = 3;
+let angulo=0;
+let indiceActual=null;
+
+const canvas=document.getElementById("ruleta");
+const ctx=canvas.getContext("2d");
+
+function dibujar(){
+ const total=preguntas.length;
+ if(total===0) return;
+ const arc=2*Math.PI/total;
+
+ for(let i=0;i<total;i++){
+  ctx.beginPath();
+  ctx.fillStyle=`hsl(${i*360/total},70%,50%)`;
+  ctx.moveTo(250,250);
+  ctx.arc(250,250,230,i*arc+angulo,(i+1)*arc+angulo);
+  ctx.fill();
+
+  ctx.save();
+  ctx.translate(250,250);
+  ctx.rotate(i*arc+arc/2+angulo);
+  ctx.fillStyle="white";
+  ctx.font="bold 18px Arial";
+  ctx.fillText(preguntas[i].anio,120,5);
+  ctx.restore();
+ }
+}
+dibujar();
+
+
+
+
+
+function seleccionar(){
+ const total = preguntas.length;
+ const arc = 2*Math.PI/total;
+ let grados = (angulo % (2*Math.PI));
+ let index = Math.floor((2*Math.PI - grados) / arc);
+
+ if(index >= total) index = 0;
+
+ indiceActual = index;
+ mostrarPregunta();
+}
+
+
+
+
+
+function mostrarPregunta(){
+ const data=preguntas[indiceActual];
+ pregunta.innerText="¿Qué ocurrió en "+data.anio+"?";
+ opciones.innerHTML="";
+ feedback.style.display="none";
+
+ let incorrectas=banco
+   .filter(e=>e.evento!==data.evento)
+   .sort(()=>Math.random()-0.5)
+   .slice(0,3)
+   .map(e=>e.evento);
+
+ let mezcladas=[...incorrectas];
+ mezcladas.splice(Math.floor(Math.random()*4),0,data.evento);
+
+ mezcladas.forEach(op=>{
+  let div=document.createElement("div");
+  div.className="opcion";
+  div.innerText=op;
+  div.onclick=()=>responder(div,op,data);
+  opciones.appendChild(div);
+ });
+}
+
+function responder(div,op,data){
+ document.querySelectorAll(".opcion").forEach(o=>o.style.pointerEvents="none");
+
+
+
+
+
+ if(op===data.evento){
+  div.classList.add("correcta");
+  sndCorrecto.play();
+  feedback.className="feedback-bien";
+  feedback.innerHTML="✅ ¡Correcto! "+data.exp;
+
+  aciertos++; 
+  racha++;
+
+  if(racha >= 3){
+  document.body.style.background = "linear-gradient(135deg,#240046,#5a189a)";
+}else if(racha >= 2){
+  document.body.style.background = "linear-gradient(135deg,#001f3f,#0074D9)";
+}
+
+ let premio = 10 + (racha*2);
+monedas += premio;
+actualizarMonedas();
+
+
+sonidoMoneda.currentTime = 0;
+sonidoMoneda.play();
+
+// 🔊 SONIDO DE MONEDA
+sonidoMoneda.currentTime = 0;
+
+
+// ✨ efecto visual
+efectoAcierto();
+
+
+
+
+
+
+
+
+}else{
+  racha = 0;
+  document.body.style.background = "linear-gradient(135deg,#000000,#111111)";
+
+  vidas--;
+  actualizarVidas();
+
+  if(vidas <= 0){
+
+    document.body.style.background = "linear-gradient(135deg,#3a0000,#8b0000)";
+
+    document.body.classList.add("shake");
+
+    setTimeout(()=>{
+      document.body.classList.remove("shake");
+      finalizar();
+    },600);
+}
+
+
+  div.classList.add("incorrecta");
+  sndIncorrecto.play();
+  feedback.className="feedback-mal";
+  feedback.innerHTML="❌ Incorrecto.<br><b>Correcta:</b> "+data.evento;
+}
+
+
+
+ feedback.style.display="block";
+
+ preguntas.splice(indiceActual,1);
+
+ if(preguntas.length===0){
+  setTimeout(finalizar,1500);
+ }
+}
+
+function actualizarMonedas(){
+  const contador=document.getElementById("contadorMonedas");
+  contador.innerHTML="🪙 "+monedas;
+
+  contador.style.transform="scale(1.2)";
+  setTimeout(()=>{
+    contador.style.transform="scale(1)";
+  },200);
+}
+
+
+
+function escribirTexto(elemento, texto, velocidad = 30){
+  elemento.innerHTML = "";
+  let i = 0;
+
+  function escribir(){
+    if(i < texto.length){
+      elemento.innerHTML += texto.charAt(i);
+      i++;
+      setTimeout(escribir, velocidad);
+    }
+  }
+
+  escribir();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function actualizarVidas(){
+  const cont = document.getElementById("vidas");
+
+  cont.innerHTML = "❤️".repeat(vidas);
+
+  // 👇 animación cuando cambia
+  cont.style.transform = "scale(1.3)";
+  setTimeout(()=>{
+    cont.style.transform = "scale(1)";
+  },200);
+}
+
+
+
+
+
+
+function finalizar(){
+
+  document.body.style.background = "#000";
+  sndFondo.pause();
+  pantallaFinal.style.display="flex";
+  lanzarConfeti();
+
+  let mensaje="";
+
+  if(aciertos===5){
+    mensaje="🏆 ¡Excelente! Dominio total de la historia.";
+  }else if(aciertos>=3){
+    mensaje="👍 Muy buen trabajo. Vas por buen camino.";
+  }else if(aciertos>=1){
+    mensaje="💪 Bien intento. Sigue practicando y mejorarás.";
+  }else{
+    mensaje="🚀 No te rindas. Cada intento te hace más fuerte.";
+  }
+
+  let textoFinal = `
+  <h2 style="font-size:38px;margin-bottom:20px;">📚 RESULTADO FINAL</h2>
+
+  <div style="font-size:26px;margin:10px 0;">
+  🪙 ${monedas} Monedas
+  </div>
+
+  <div style="font-size:26px;margin:10px 0;">
+  🎯 ${aciertos}/5 Aciertos
+  </div>
+
+  <div style="margin-top:25px;font-size:22px;opacity:0.9;">
+  ${mensaje}
+  </div>
+  `;
+
+  mensajeFinal.innerHTML = textoFinal;
+
+  // 👇 si sacó 5/5 activa glow
+  if(aciertos === 5){
+    mensajeFinal.classList.add("glow-total");
+  }
+}
+
+
+btnGirar.onclick = function(){
+  if(musicaActiva){
+    sndFondo.play();
+  }
+  girar();
+};
+
+
+
+btnVolver.onclick=function(){
+ sndVolver.play();
+ setTimeout(()=>window.location.href="../Juego.html",300);
+};
+
+
+
+
+
+
+
+function girar(){
+ if(preguntas.length===0) return;
+
+ sndRuleta.play();
+
+ // 🔥 oscurece pantalla mientras gira
+ document.body.classList.add("girando");
+
+ let velocidad=Math.random()*0.4+0.6;
+
+ let anim=setInterval(()=>{
+  angulo+=velocidad;
+  velocidad*=0.985;
+  ctx.clearRect(0,0,500,500);
+  dibujar();
+
+  if(velocidad<0.01){
+   clearInterval(anim);
+
+   sndRuleta.pause();
+   sndRuleta.currentTime=0;
+
+   // 🔥 quitar efecto oscuro
+   document.body.classList.remove("girando");
+
+   // ✨ glow cuando se detiene
+canvas.classList.add("glow-stop");
+
+setTimeout(()=>{
+  canvas.classList.remove("glow-stop");
+},500);
+
+   seleccionar();
+  }
+
+ },20);
+}
+
+
+function volverMenu(){
+  window.location.href = "../Juego.html";
+}
+
+
+
+</script>
+</body>
+</html>

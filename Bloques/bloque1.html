@@ -1,0 +1,3446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Historia Interactiva</title>
+
+<style>
+
+
+
+.titulo-seccion{
+  text-align: center;
+  color: white;
+}
+
+.titulo-seccion span{
+  display: block;
+}
+
+.linea1{
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.linea2{
+  font-size: 32px;
+  font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* SLIDE ENTRE TEMAS */
+.tema{
+  display:none;
+  animation-duration:0.6s;
+  animation-fill-mode:both;
+  width:100%;
+
+}
+.tema.activo{
+  display: block;
+}
+.tema.slide-in-right{
+  animation-name:slideInRight;
+}
+
+.tema.slide-in-left{
+  animation-name:slideInLeft;
+}
+
+@keyframes slideInRight{
+  from{
+    opacity:0;
+    transform:translateX(60px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes slideInLeft{
+  from{
+    opacity:0;
+    transform:translateX(-60px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* LOS BOTONES DE TEMAS DE ARRIBA */
+
+.menu-temas{
+  display:flex;
+  gap:22px; /* más separación */
+  justify-content:center;
+  margin:20px 0 20px;
+  flex-wrap:wrap;
+}
+
+/* BOTONES */
+.menu-temas button{
+  background:linear-gradient(135deg, #0f2c3a, #3b82b8);
+  color:white;
+  border:none;
+
+  /* 👇 MÁS GRANDES */
+  padding:20px 28px;
+  font-size:18px;
+  min-width:150px;
+
+  border-radius:22px;
+  cursor:pointer;
+  font-weight:700;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  /* 👇 animación de entrada */
+  animation: aparecer .6s ease forwards;
+}
+
+/* ENTRADA SUAVE */
+@keyframes aparecer{
+  from{
+    opacity:0;
+    transform:translateY(-20px) scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* HOVER */
+.menu-temas button:hover{
+  transform:translateY(-8px) scale(1.08);
+  box-shadow:0 18px 38px rgba(0,0,0,.35);
+  background:linear-gradient(135deg,#1e40af,#1d4ed8);
+}
+
+/* BOTÓN ACTIVO (el que está seleccionado) */
+.menu-temas button.activo{
+  background:linear-gradient(135deg,#0f172a,#1e3a8a);
+  box-shadow:0 22px 45px rgba(0,0,0,.45);
+
+  /* 👇 pulso elegante */
+  animation:pulso 1.6s infinite;
+}
+
+/* PULSO PRO */
+@keyframes pulso{
+  0%{
+    transform:scale(1.05);
+    box-shadow:0 0 0 0 rgba(59,130,246,.7);
+  }
+  70%{
+    transform:scale(1.1);
+    box-shadow:0 0 0 18px rgba(59,130,246,0);
+  }
+  100%{
+    transform:scale(1.05);
+    box-shadow:0 0 0 0 rgba(59,130,246,0);
+  }
+}
+
+/* CLICK */
+.menu-temas button:active{
+  transform:scale(.92);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* LOS COLORES DE LAS HOJA AÑADIDOS*/
+
+
+:root{
+  --principal:#2563eb;
+  --secundario:#1e3a8a;
+  --fondo:#3b6ea5;
+  --tarjeta:#ffffff;
+  --texto:#1f2937;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:  #f1f5f9 ;
+  color:var(--texto);
+  line-height:1.6;
+ min-height:100vh;
+  display:flex;
+  flex-direction:column;
+
+}
+
+
+
+
+/*0 HEADER */
+
+header{
+  background: linear-gradient(135deg, #0f2c3a, #3b82b8);
+  color:white;
+  padding:16px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+  justify-content:center; /* 🔥 centrado real */
+  position:relative;      /* necesario para el botón */
+
+
+}
+
+
+
+
+  
+
+header button{
+  background:#ffffff25;
+  border:none;
+  color:white;
+  padding:8px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:background .3s;
+position: absolute;
+left: 50px;
+}
+
+header button:hover{
+  background:#ffffff40;
+}
+
+
+
+
+/* CONTENEDOR o lo que une todo en una hoja */
+main{
+  max-width:1000px;
+  margin:0px auto 60px;
+  padding:20px;
+
+}
+
+.contenedor-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  justify-items: center; /* 🔥 CLAVE */
+}
+
+
+.card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:var(--tarjeta);
+  border-radius:20px;
+  padding:36px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+  margin-bottom:50px;
+  animation:entrada .6s ease;
+}
+
+
+.card-contenido{
+  padding: 20px;
+  line-height: 1.5;
+}
+
+
+@media (max-width: 600px){
+  .seccion{
+    padding: 10px;
+  }
+
+  .card{
+    margin-bottom: 15px;
+  }
+ }
+}
+
+
+
+/* IMÁGENES EÑ MANEJO DE TODOS LOS IMAGENES PRINCIPALES */
+img{
+  max-width:360px;
+  display:block;
+  margin:28px auto;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transition:transform .3s;
+}
+
+img:hover{
+  transform:scale(1.03);
+}
+
+
+.img-historia{
+  display:block;
+  margin:30px auto;
+  max-width:50%;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transition: transform .3s ease;
+}
+
+.img-historia:hover{
+  transform: scale(1.03);
+}
+
+
+
+
+
+
+/* TEXTO DESTACADO */
+.texto-extra{
+  background:#eef2ff;
+  border-left:6px solid var(--principal);
+  padding:18px;
+  margin:26px 0;
+  border-radius:14px;
+  font-style:italic;
+}
+
+
+
+
+/* SECCIONES */
+
+.seccion h1{
+  color:#1d3557;
+  text-align:center;
+  margin-bottom:30px;
+  border-bottom:3px solid #3f6fa3;
+  display:inline-block;
+  padding-bottom:8px;
+  font-size:1.0em; /* más pequeño que el h1 normal */
+}
+
+.seccion h2{              /* Este es el de tema 2 */
+  color:#1d3557;  
+  text-align:center;
+  margin-bottom:30px;
+  border-bottom:3px solid #3f6fa3;
+  padding-bottom:8px;
+}
+
+
+
+
+
+/* BOTONES de mapa mental y quiz */
+
+/* CONTENEDOR */
+.actions{
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:150px;
+}
+
+/* BOTONES */
+.actions button{
+  width:240px;        /* 👈 mismo ancho exacto */
+  height:58px;        /* 👈 mismo alto */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  background:linear-gradient(135deg,#2563eb,#38bdf8);
+  border:3px solid #1e40af;
+  border-radius:18px;
+
+  color:white;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+
+  transition:all .3s ease;
+}
+
+/* EFECTO LUZ */
+.actions button::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.4),
+    transparent
+  );
+  transition: left .6s;
+}
+
+/* HOVER */
+.actions button:hover{
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(37,99,235,.45);
+  background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+}
+
+.actions button:hover::before{
+  left:100%;
+}
+
+/* CLICK */
+.actions button:active{
+  transform: scale(0.96);
+  box-shadow: 0 6px 14px rgba(0,0,0,.3);
+}
+
+/* VARIANTE QUIZ (opcional) */
+.actions button.quiz{
+  background: linear-gradient(135deg, #16a34a, #4ade80);
+  border-color: #14532d;
+}
+
+.actions button.quiz:hover{
+  background: linear-gradient(135deg, #15803d, #22c55e);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== NAVEGACIÓN ===== */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  gap:22px;
+  margin-top:40px;
+}
+
+.nav button{
+  background:#f1f5f9;           /* gris claro */
+  border:2px solid #94a3b8;     /* borde suave */
+  padding:14px 26px;
+  border-radius:18px;
+
+  color:#1f2933;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  transition:all .3s ease;
+}
+
+/* 🌱 Hover */
+.nav button:hover{
+  background:#ecfeff;
+  border-color:#14b8a6;
+  color:#065f46;
+  transform:translateY(-3px);
+  box-shadow:0 12px 26px rgba(20,184,166,0.25);
+}
+
+/* ✔ Activo */
+.nav button:active{
+  transform:scale(0.96);
+}
+
+
+
+
+
+
+
+/* ===== MODAL de lo qu e tiene dentro el boton de mapa mental  ===== */
+
+
+/* ===== MODAL MAPA MENTAL – NIVEL PREMIUM ===== */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(59,130,246,.15), rgba(2,6,23,.85));
+  backdrop-filter: blur(12px);
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+/* CAJA DEL MODAL */
+.modal-content{
+  background:
+    linear-gradient(145deg,#ffffff,#f1f5f9);
+  padding:34px;
+  border-radius:28px;
+  max-width:58px;
+  width:92%;
+top: 26px;
+
+  border:none;
+
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.35),
+    0 0 0 1px rgba(255,255,255,.6) inset;
+
+  animation:entradaPremium .55s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+
+/* CONTENEDOR DEL MAPA */
+.mapa-container{
+  background:
+    linear-gradient(135deg,#eef2ff,#e0e7ff,#f8fafc);
+  padding:24px;
+  border-radius:24px;
+  margin:24px auto;
+  max-width:900px;
+
+  box-shadow:
+    0 22px 45px rgba(0,0,0,.22);
+}
+
+/* IMAGEN */
+.mapa-container img{
+  width:100%;
+  max-width:780px;
+  height:auto;
+  display:block;
+  margin:auto;
+
+  border-radius:22px;
+  background:
+    linear-gradient(180deg,#ffffff,#f8fafc);
+  padding:14px;
+
+  border:1px solid rgba(148,163,184,.6);
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.22),
+    0 0 0 6px rgba(99,102,241,.08);
+}
+
+/* ANIMACIÓN */
+@keyframes entradaPremium{
+  from{
+    opacity:0;
+    transform:scale(.94) translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== LISTA BASE ===== */
+.lista-dinamica{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+/* ===== TÍTULO ARRIBA ===== */
+.lista-dinamica li::before{
+  content: attr(data-title);
+  display:block;
+  font-weight:700;
+  font-size:18px;
+  letter-spacing:.4px;
+  color:#334155;
+  margin-bottom:14px;
+  text-align:center;
+  transition:all .35s ease;
+}
+
+/* ===== TARJETA ===== */
+.tarjeta{
+  display:none;
+  position:relative;
+  background:
+    radial-gradient(
+      circle at top center,
+      #ffffff 0%,
+      #f8fafc 60%,
+      #eef2ff 100%
+    );
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
+  animation:aparecer .45s ease forwards;
+  overflow:hidden;
+}
+
+/* ===== MARCO DEGRADADO ===== */
+.tarjeta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:2px;
+  border-radius:22px;
+  background:linear-gradient(
+    135deg,
+    #60a5fa,
+    #818cf8,
+    #22d3ee
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+/* ===== TARJETA ACTIVA ===== */
+.lista-dinamica li.activa .tarjeta{
+  display:block;
+  transform:translateY(-6px);
+  box-shadow:0 26px 55px rgba(59,130,246,.25);
+}
+
+/* ===== TEXTO ANIMADO ===== */
+.lista-dinamica li.activa .tarjeta h2,
+.lista-dinamica li.activa .tarjeta p{
+  animation:textoEntrada .5s ease forwards;
+}
+
+/* ===== TÍTULO ACTIVO ===== */
+.lista-dinamica li.activa::before{
+  color:#2563eb;
+  transform:scale(1.05);
+}
+
+/* ===== HOVER SUAVE ===== */
+.lista-dinamica li:hover .tarjeta{
+  box-shadow:0 30px 65px rgba(59,130,246,.3);
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes aparecer{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.96);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes textoEntrada{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+
+:root{
+  --azul:#0f3d5e;
+  --azul-suave:#e6f0f7;
+  --gris:#f9fafb;
+}
+
+
+.seccion h3{
+  text-align:center;
+  font-size:1.7rem;
+  color:var(--azul);
+  margin-bottom:30px;
+}
+
+
+
+
+
+
+
+/* ===== LISTA ===== */
+.lista-dinamica{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+  list-style:none;
+  padding:0;
+}
+/* ===== ITEM (TARJETA) ===== */
+.lista-dinamica li{
+  position:relative;
+  background:
+    linear-gradient(180deg,#ffffff,var(--azul-claro));
+  border-radius:20px;
+  padding:20px 22px;
+  cursor:pointer;
+  color:var(--texto);
+  font-weight:600;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border .35s ease;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.08);
+  overflow:hidden;
+}
+
+/* ===== BORDE DEGRADADO SUTIL ===== */
+.lista-dinamica li::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:2px;
+  border-radius:20px;
+  background:linear-gradient(
+    135deg,
+    var(--azul),
+    #60a5fa
+  );
+  opacity:.35;
+  pointer-events:none;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+}
+.lista-dinamica li:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 45px rgba(29,53,87,.25);
+}
+/* ===== BORDE MÁS FUERTE AL HOVER ===== */
+.lista-dinamica li:hover::before{
+  opacity:.75;
+}
+
+/* ===== ITEM ACTIVO ===== */
+.lista-dinamica li.activa{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:
+    0 28px 65px rgba(29,53,87,.35);
+}
+
+/* ===== BORDE ACTIVO ===== */
+.lista-dinamica li.activa::before{
+  opacity:1;
+}
+
+
+
+
+/* ===== TARJETA DE EVOLUCION HUMANA ===== */
+.tarjeta{
+  display:none;
+  margin-top:14px;
+  padding:16px;
+  background:white;
+  border-radius:14px;
+  border-left:5px solid var(--azul);
+  animation:aparecer .35s ease;
+  font-weight:normal;
+}
+
+.lista-dinamica li.activo .tarjeta{
+  display:block;
+}
+
+.tarjeta h4{
+  margin:0 0 8px;
+  color:var(--azul);
+}
+
+
+
+
+
+
+/* ===== MODAL QUIZ TEMA 1 ===== */
+/* ===== QUIZ MODAL ===== */
+.quiz-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.quiz-box{
+  background: white;
+  width: 90%;
+  max-width: 420px;
+  padding: 30px 26px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,.35);
+  animation: aparecer .4s ease;
+  position: relative;
+
+}
+
+/* animación suave */
+@keyframes aparecer{
+  from{ transform: scale(.9); opacity: 0 }
+  to{ transform: scale(1); opacity: 1 }
+}
+
+.cerrar{
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.quiz-titulo{
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  color: #1d3557;
+}
+
+.quiz-pregunta{
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.quiz-opciones{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quiz-opciones button{
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  cursor: pointer;
+  font-size: .95rem;
+  transition: .25s;
+}
+
+.quiz-opciones button:hover{
+  background: #e0f2fe;
+}
+
+.quiz-opciones button.correcta{
+  background: #d1fae5;
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.quiz-opciones button.incorrecta{
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #7f1d1d;
+}
+
+.quiz-feedback{
+  margin-top: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.btn-siguiente{
+  margin-top: 15px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.btn-siguiente:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37,99,235,.4);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== TEMA 3 HORIZONTAL ===== */
+.seccion.horizontal{
+  max-width:900px;
+  margin:auto;
+}
+
+/* BOTONES */
+.etapas-horizontal{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:25px;
+}
+
+.etapas-horizontal button{
+  background:#eef2f7;
+  border:2px solid #dbe4ee;
+  padding:14px 18px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:600;
+  transition:all .3s ease;
+}
+
+.etapas-horizontal button:hover{
+  background:#1f4e79;
+  color:white;
+  transform:translateY(-4px);
+}
+
+/* CUADRO HORIZONTAL */
+.info-horizontal{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  background:linear-gradient(135deg,#f8fafc,#eef4fb);
+  border-left:6px solid #1f4e79;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.1);
+  animation:aparecer .4s ease;
+}
+
+.info-horizontal h4{
+  min-width:180px;
+  margin:0;
+  color:#1f4e79;
+}
+
+.info-horizontal p{
+  margin:0;
+  line-height:1.6;
+  color:#1f2937;
+}
+
+/* 📱 CELULAR */
+@media(max-width:700px){
+  .info-horizontal{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .info-horizontal h4{
+    min-width:auto;
+  }
+}
+
+
+
+
+
+.mapa-tema[data-tema="2"]{
+  max-width: 550px;
+  width: 85%;
+}
+
+
+
+
+
+
+.mapa-mental{
+  width: 70%;
+  max-width: 650px;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.mapa-mental:hover{
+  transform: scale(1.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= ANIMACIÓN ================= */
+@keyframes abrir{
+  from{
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= ICONO ROTACIÓN ================= */
+.lista-dinamica li span{
+  display: inline-block;
+  transition: transform .35s ease;
+}
+
+.lista-dinamica li.activo span{
+  transform: rotate(90deg);
+}
+
+/* ================= CELULAR ================= */
+@media(max-width:600px){
+  .lista-dinamica{
+    grid-template-columns: 1fr;
+  }
+
+  .lista-dinamica li{
+    padding: 16px;
+  }
+
+  .tarjeta{
+    font-size: .95rem;
+  }
+}
+
+
+/* ===== SLIDER ===== */
+.slider{
+  position: relative;
+  max-width: 500px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,.2);
+  background: #fff;
+}
+
+.slider-track{
+  display: flex;
+  transition: transform .5s ease;
+}
+
+.slider-track img{
+  width: 100%;
+  flex-shrink: 0;
+  border-radius: 18px;
+}
+
+/* BOTONES */
+.slider-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(31,78,121,.85);
+  color: white;
+  border: none;
+  font-size: 28px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.slider-btn.left{ left: 12px; }
+.slider-btn.right{ right: 12px; }
+
+.slider-btn:hover{
+  background: #1f4e79;
+}
+
+/* 📱 CELULAR */
+@media(max-width:600px){
+  .slider{
+    max-width: 90%;
+  }
+}
+
+
+.sin-negrita{
+  font-weight: normal;
+}
+
+
+
+
+
+
+
+
+/* DETALLES DEL BOTON DEL TEMA 4r */
+
+/* ===== CIVILIZACIONES ===== */
+.civilizaciones{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:30px 0;
+}
+
+.btn-info{
+  position:relative;
+  padding:18px 30px;
+  border:2px solid #1d4ed8;
+  border-radius:16px;
+  font-weight:600;
+  cursor:pointer;
+  background:#fff;
+  transition:all .3s ease;
+}
+
+.btn-info:hover{
+  background:#1d4ed8;
+  color:white;
+  transform:translateY(-4px);
+}
+
+
+
+
+
+
+
+.btn-info{
+  position:relative;
+}
+
+
+/* LINEA DE TIEMPO TEMA 5*/
+
+
+/* LÍNEA CENTRAL */
+.timeline{
+  position:relative;
+  max-width:900px;
+  margin:50px auto;
+}
+.timeline-content{  
+text-align: center;
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:4px;
+  height:0;
+  background:linear-gradient(to bottom,#3b82f6,#93c5fd);
+  transform:translateX(-50%);
+  transition:height 1.2s ease;
+}
+
+.timeline.visible::before{
+  height:100%;
+}
+.timeline-section{
+  background:#f8fafc;
+  padding:40px 20px;
+  border-radius:20px;
+}
+
+
+/* EVENTO BASE */
+.evento{
+  width:45%;
+  padding:20px;
+  position:relative;
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .6s ease;
+}
+
+.evento.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* IZQ / DER */
+.evento.izq{ left:0; text-align:right; }
+.evento.der{ left:55%; text-align:left; }
+
+/* FECHA */
+.fecha{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+  opacity:.7;
+}
+
+/* TÍTULO */
+.evento h3{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+/* PUNTO */
+.punto{
+  position:absolute;
+  top:24px;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  box-shadow:0 0 0 6px #f1f5f9;
+}
+
+.evento.izq .punto{ right:-34px; }
+.evento.der .punto{ left:-34px; }
+
+/* TARJETA */
+.tarjeta{
+  display:none;
+  background:white;
+  padding:16px;
+  border-radius:14px;
+  margin-top:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  text-align:center;
+
+}
+
+.evento.activa .tarjeta{
+  display:block;
+}
+
+/* 🎨 COLORES POR ETAPA */
+.etapa-temprana .punto{ background:#3b82f6; }
+.etapa-temprana h3{ color:#1e40af; }
+
+.etapa-media .punto{ background:#10b981; }
+.etapa-media h3{ color:#047857; }
+
+.etapa-tardia .punto{ background:#f59e0b; }
+.etapa-tardia h3{ color:#b45309; }
+
+.indicacion{
+  text-align:center;
+  font-size:15px;
+  color:#475569;
+  margin-bottom:25px;
+  font-style:italic;
+}
+
+.punto{
+  animation: pulso 1.8s infinite;
+  cursor:pointer;
+}
+
+@keyframes pulso{
+  0%{ box-shadow:0 0 0 0 rgba(59,130,246,.5); }
+  70%{ box-shadow:0 0 0 10px rgba(59,130,246,0); }
+  100%{ box-shadow:0 0 0 0 rgba(59,130,246,0); }
+}
+
+
+
+
+.hint{
+  display:block;
+  font-size:12px;
+  color:#64748b;
+  margin-top:4px;
+  font-style:italic;
+}
+
+
+
+
+
+
+
+
+
+/* TARJETA OCULTA TEMA 5*/
+.btn-info::after{
+  content: attr(data-text);
+  position:absolute;
+  bottom:-110px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px) scale(0.95);
+  width:280px;
+  background:white;
+  color:#1e293b;
+  padding:16px;
+  border-radius:16px;
+  font-size:14px;
+  line-height:1.4;
+  opacity:0;
+  pointer-events:none;
+
+  /* efecto tarjeta flotante */
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  border:1px solid #e5e7eb;
+
+  transition:
+    opacity .35s ease,
+    transform .35s ease;
+
+  z-index:20;
+}
+
+/* ANIMACIÓN AL PASAR EL MOUSE */
+.btn-info:hover::after{
+  opacity:1;
+  transform:translateX(-50%) translateY(0) scale(1);
+}
+
+
+/* ===== para q refeleje el tema 2  ===== */
+.tarjeta{
+  display:none;
+}
+
+.lista-dinamica li.activa .tarjeta{
+  display:block;
+}
+
+/* Título visible siempre */
+.titulo-item{
+  text-align:center;
+  font-size:18px;
+  font-weight:700;
+  color:var(--azul);
+  margin-bottom:10px;
+}
+
+
+
+
+
+/* ===== CONCEPTOS INTERACTIVOS ===== */
+/* ================= TOOLTIP LATERAL ================= */
+.conceptos .btn-info{
+  position: relative;
+  cursor: pointer;
+}
+
+/* TARJETA DEL TEMA 5  */
+.conceptos .btn-info::after{
+  content: attr(data-text);
+  position: absolute;
+  top: 50%;
+  left: 105%; /* sale hacia la derecha */
+  transform: translateY(-50%) translateX(-15px);
+  width: 260px;
+
+  background: #ffffff;
+  color: #1e293b;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.4;
+
+  opacity: 0;
+  pointer-events: none;
+
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+  border: 1px solid #e5e7eb;
+
+  transition: all .35s ease;
+  z-index: 40;
+}
+
+/* FLECHITA */
+.conceptos .btn-info::before{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 98%;
+  transform: translateY(-50%) translateX(-15px);
+
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent #ffffff transparent transparent;
+
+  opacity: 0;
+  transition: all .35s ease;
+
+/* ANIMACIÓN AL PASAR EL MOUSE */
+.conceptos .btn-info:hover::after{
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+
+
+
+
+
+
+/* Vibración al acertar sonido */
+@keyframes vibrar{
+  0%{ transform: translateX(0); }
+  20%{ transform: translateX(-4px); }
+  40%{ transform: translateX(4px); }
+  60%{ transform: translateX(-4px); }
+  80%{ transform: translateX(4px); }
+  100%{ transform: translateX(0); }
+}
+
+.vibrar{
+  animation: vibrar .35s ease;
+}
+
+
+
+
+.tema{
+  position: relative;
+}
+
+.btn-audio{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+}
+
+/* BOTÓN */
+.btnLeer{
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg,#2563eb,#1e40af);
+  color: white;
+  border: none;
+  font-size: 22px;
+
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  transition: all .25s ease;
+}
+
+.btnLeer:hover{
+  transform: scale(1.15);
+}
+
+/* leyendo */
+.btnLeer.leyendo{
+  background: linear-gradient(135deg,#ef4444,#b91c1c);
+  animation: pulso 1.4s infinite;
+}
+
+@keyframes pulso{
+  0%{ box-shadow:0 0 0 0 rgba(239,68,68,.6);}
+  70%{ box-shadow:0 0 0 16px rgba(239,68,68,0);}
+  100%{ box-shadow:0 0 0 0 rgba(239,68,68,0);}
+}
+
+
+
+
+/* TEMA 2 QUIZ */
+
+
+#quiz-tema-2{
+  margin-top:20px;
+  padding:15px;
+  background:#f1f5f9;
+  border-radius:12px;
+}
+
+.quiz-titulo{
+  margin-top:25px;
+  color:#1d3557;
+}
+
+.quiz button{
+  margin-top:10px;
+  background:#2a9d8f;
+}
+
+#resultado{
+  margin-top:10px;
+  font-weight:bold;
+}
+
+
+
+/* DE LOS QUIZZ */
+
+
+.btn-siguiente{
+  margin-top: 18px;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(59,130,246,.35);
+  transition: all .25s ease;
+}
+
+.btn-siguiente:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(59,130,246,.45);
+}
+
+.btn-siguiente:active{
+  transform: scale(.96);
+
+/* ANIMACIÓN DE CAMBIO DE PREGUNTA */
+.animar-cambio{
+  animation: cambioPregunta .35s ease;
+}
+
+@keyframes cambioPregunta{
+  from{
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* VERDE */
+.btn-verde{
+  background: linear-gradient(135deg,#22c55e,#15803d);
+  box-shadow: 0 10px 25px rgba(34,197,94,.35);
+}
+
+/* MORADO */
+.btn-morado{
+  background: linear-gradient(135deg,#8b5cf6,#6d28d9);
+  box-shadow: 0 10px 25px rgba(139,92,246,.35);
+}
+
+/* DORADO */
+.btn-dorado{
+  background: linear-gradient(135deg,#fbbf24,#d97706);
+  box-shadow: 0 10px 25px rgba(251,191,36,.4);
+}
+
+/* DE LOS QUIZZ */
+<button id="btnSiguiente2"
+  class="btn-siguiente btn-verde"
+  onclick="siguientePregunta2()"
+  style="display:none;">
+  Siguiente ➡
+</button>
+
+/* CONTENEDOR DEL QUIZ3 */
+/* FONDO OSCURO DEL MODAL */
+.quiz-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;          /* JS lo cambia a flex */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* CAJA DEL QUIZ */
+.quiz-box{
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  width: 90%;
+  max-width: 420px;
+  position: relative;
+  box-shadow: 0 25px 70px rgba(0,0,0,.35);
+}
+
+/* BOTÓN CERRAR */
+.cerrar{
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+
+/*= MODAL QUIZ 3===*/
+
+.quiz-overlay{
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.6);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+}
+
+.quiz-box{
+background: #ffffff;
+padding: 24px;
+border-radius: 18px;
+width: 90%;
+max-width: 420px;
+position: relative;
+box-shadow: 0 25px 70px rgba(0,0,0,.35);
+}
+
+
+/* BOTÓN CERRAR */
+.cerrar{
+position: absolute;
+top: 12px;
+right: 14px;
+background: none;
+border: none;
+font-size: 22px;
+cursor: pointer;
+
+}
+
+/* TITULO */
+.quiz-titulo{
+text-align: center;
+margin-bottom: 10px;
+}
+PREGUNTA
+. quiz-pregunta{
+font-weight: bold;
+margin-bottom: 12px;
+
+}
+
+/* OPCIONES */
+.quiz-opciones button{
+display: block;
+width: 100%;
+margin: 8px 0;
+padding: 12px;
+border-radius: 12px;
+border: none;
+cursor: pointer;
+font-size: 15px;
+background: #e5e7eb;
+transition: transform .2s, background .3s;
+
+}
+
+.quiz-opciones button: hover{
+transform: scale(1.03);
+
+/* CORRECTA */
+.quiz-opciones button. correcta{
+background: #22c55e;
+color: white;
+animation: pop 0.3s ease;
+
+}
+
+/* INCORRECTA */
+.quiz-opciones button. incorrecta{
+background: #ef4444;
+color: white;
+animation: shake 0.3s ease;
+
+}
+
+/* FEEDBACK */
+. quiz-feedback{
+margin-top: 10px;
+font-weight: bold;
+text-align: center;
+}
+
+
+
+
+
+
+
+/* ANIMACIONES */
+@keyframes pop{
+0%{ transform: scale(1); }
+50%{ transform: scale(1.1); }
+100%{ transform: scale(1); }
+
+}
+
+@keyframes shake{.mapa-mental{
+  width: 80%;
+0%{ transform: translatex(0); }
+25%{ transform: translatex(-5px); }
+50%{ transform: translateX(5px); }
+75%{ transform: translatex(-5px); }
+100%{ transform: translatex(0); }
+
+}
+
+#btnSiguiente4{
+  background: linear-gradient(135deg, #2b6cff, #1e4ed8);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+#btnSiguiente4:hover{
+  transform: translateX(4px);
+  box-shadow: 0 6px 15px rgba(0,0,0,.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.close{
+  position: absolute;
+  top: 16px;
+  right: 18px;
+
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;        /* 🔥 fondo blanco */
+  color: #1e293b;             /* icono oscuro */
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+  z-index: 100;               /* 🔑 siempre arriba */
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+
+.close:hover{
+  background: #ef4444;
+  color: white;
+  transform: scale(1.15);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* FOOTER */
+footer{
+  background: linear-gradient(135deg, #0f2c3a, #3b82b8);
+  color: white;
+  padding: 24px 20px;
+  text-align: center;
+
+  margin-top: auto;   /* 👈 clave para que quede abajo */
+}
+
+footer p{
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+footer a{
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+footer a:hover{
+  text-decoration: underline;
+}
+
+
+.btn-regresar{
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.btn-regresar:hover{
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.btn-regresar:active{
+  transform: scale(0.95);
+}
+
+
+</style>
+</head>
+
+<body>
+
+<audio id="sonidoCorrecto" src="../Sonido-Correcto.mp3" preload="auto"></audio>
+
+<header>
+  <button onclick="window.location.href='../inicio.html'">← Regresar</button>
+  <h1 class="titulo-seccion">
+  <span class="linea1">Sección 1</span>
+  <span class="linea2">La historia de la humanidad: de la evolución a la igualdad</span>
+</h1>
+</header>
+
+<p id="indicador-tema" style="text-align:center;font-weight:bold;">
+
+</p>
+
+
+<nav class="menu-temas">
+  <button onclick="irATema(0)">Tema 1</button>
+  <button onclick="irATema(1)">Tema 2</button>
+  <button onclick="irATema(2)">Tema 3</button>
+  <button onclick="irATema(3)">Tema 4</button>
+  <button onclick="irATema(4)">Tema 5</button>
+</nav>
+
+
+<main>
+
+
+
+<!-- ================== TEMA 1 ================== -->
+<section class="card tema activo" id="tema-1">
+<button class="btnLeer" onclick="leerTexto(this)">🔊</button>
+
+
+<h1>Tema 1: La Historia</h1>
+
+<p style="font-weight:bold;font-size:20px;text-align:center;">
+La Historia estudia el pasado de la humanidad a través de fuentes históricas.
+</p>
+
+
+<div class="texto-extra">
+📜 La palabra <b>historia</b> proviene del griego <i>historía</i>, que significa investigar, preguntar y buscar información.
+</div>
+
+
+
+<p>
+La Historia es una ciencia social que analiza los acontecimientos del pasado para comprender cómo vivían las personas,
+cómo se organizaban las sociedades y cómo se produjeron los cambios a lo largo del tiempo.
+</p>
+<p>
+Gracias a la historia podemos estudiar desde antiguas civilizaciones hasta procesos recientes,
+analizando hechos políticos, sociales, económicos y culturales.
+</p>
+
+<img src="../IMAGEN/Historia.png" class="img-historia">
+
+
+<p>La ciencia histórica no busca reproducir íntegramente los sucesos del pasado, sino que estudia a los hombres en el tiempo, con el fin de que el historiador ponga énfasis al estudio integral de todas las manifestaciones humanas producidas a lo largo del proceso histórico entendiéndolas de acuerdo al tiempo y también al espacio donde se desarrollaron. También debe tener en cuenta las estrechas relaciones entre el pasado y el presente y su medio en la formulación del conocimiento histórico.</p>
+
+
+<div class="seccion">
+<h2>🏛️Importancia de la Historia</h2>
+<ul  class="lista-dinamica">
+<li> Conocer el pasado de la humanidad</li>
+<li> Comprender leyes y tradiciones</li>
+<li> Analizar la sociedad</li>
+<li>  Aprender de errores y logros</li>
+</ul>
+</div>
+
+
+
+<h2 class="titulo-sombreado">🧠 Conclusión</h2>
+
+<p class="texto-importancia">
+La Historia nos ayuda a comprender el pasado para entender el presente y mejorar el futuro. 
+A través de ella aprendemos de los errores y valoramos los logros de la humanidad.
+</p>
+
+
+<div class="actions">
+<button onclick="abrirMapa()">🧠 Mapa mental</button>
+<button onclick="abrirQuiz()">🎮 Quiz</button>
+</div>
+
+
+<div class="nav" style="display:flex; justify-content:flex-end; margin-top:30px;">
+  <button onclick="siguiente()">Siguiente ➡</button>
+</div>
+
+</section>
+
+
+
+<!-- ================== MODAL QUIZ TEMA 1 ================== -->
+<div id="quiz" class="quiz-overlay">
+  <div class="quiz-box">
+
+    <button class="cerrar" onclick="cerrarQuiz()">✖</button>
+
+    <h2 class="quiz-titulo">🎮 Quiz – Tema 1</h2>
+
+    <p id="pregunta" class="quiz-pregunta"></p>
+
+    <div id="opciones" class="quiz-opciones"></div>
+
+    <div id="feedback" class="quiz-feedback"></div>
+
+   
+
+
+
+ <button id="siguientePregunta" class="btn-siguiente" onclick="siguientePregunta()">
+      Siguiente →
+    </button>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- ================== TEMA 2 ================== -->
+<section class="card tema" id="tema-2">
+
+<button class="btnLeer" onclick="leerTexto(this)">🔊</button>
+
+<h1>Tema 2: Evolución humana</h1>
+
+<p style="font-weight:bold;font-size:20px;text-align:center;">
+La evolución humana explica el origen y desarrollo del ser humano.
+</p>
+
+<div class="texto-extra">
+🦴 La evolución humana u hominización es el nombre que recibe el proceso gradual e histórico de cambio biológico de los ancestros más primitivos (Australopithecus sp.) del ser humano hasta la aparición de nuestra especie tal y como hoy la conocemos (Homo sapiens).
+</div>
+
+
+<img src="../IMAGEN/EVOLUCIONHUMANA.PNG" class="img-historia">     
+  
+
+
+
+<p>
+El origen del hombre, específicamente del Homo sapiens, se encuentra en el contexto más amplio de la evolución de los primates y se centra en África, donde se originaron los primeros antepasados humanos. Este proceso evolutivo involucra una serie de cambios anatómicos, fisiológicos y comportamentales que ocurrieron a lo largo de millones de años. La prehistoria, una época anterior a la invención de la escritura, juega un papel esencial en nuestra comprensión del origen del hombre. Los fósiles y las herramientas de piedra son algunas de las principales fuentes de información que arrojan luz sobre esta etapa temprana de la evolución humana.</p>
+
+<h2>Características de la Evolución Humana</h2>
+
+
+<p style="font-style: italic;">
+Haz clic en los recuadros para ver la información.</p>
+
+
+
+  <ul class="lista-dinamica">
+
+  <li onclick="toggleTarjeta(this)">
+    <h3 class="titulo-item">🚶 Bipedestación</h3>
+    <div class="tarjeta">
+      <p>
+        Capacidad de caminar sobre dos piernas, liberando las manos para
+        fabricar herramientas y transportar objetos.
+      </p>
+    </div>
+  </li>
+
+  <li onclick="toggleTarjeta(this)">
+    <h3 class="titulo-item">✋ Pulgares oponibles</h3>
+    <div class="tarjeta">
+      <p>
+        Facilitaron la manipulación precisa de objetos y el desarrollo tecnológico.
+      </p>
+    </div>
+  </li>
+
+  <li onclick="toggleTarjeta(this)">
+    <h3 class="titulo-item">🧠 Cerebración</h3>
+    <div class="tarjeta">
+      <p>
+        Incremento del tamaño y complejidad del cerebro humano.
+      </p>
+    </div>
+  </li>
+
+</ul>
+
+
+<div class="actions">
+<button onclick="abrirMapa()">🧠 Mapa mental</button>
+<button onclick="abrirQuiz2()">🎮 Quiz</button>
+</div>
+
+
+
+<div class="nav">
+<button onclick="anterior()">⬅ Anterior</button>
+<button onclick="siguiente()">Siguiente ➡</button>
+</div>
+
+
+
+
+<!-- ===== MODAL QUIZ TEMA 2 ===== -->
+
+<div id="quiz2" class="quiz-overlay">
+  <div class="quiz-box">
+    <button class="cerrar" onclick="cerrarQuiz2()">✖</button>
+
+    <h2 class="quiz-titulo">🎮 Quiz – Tema 2</h2>
+
+  <!-- PREGUNTA -->
+  <p id="pregunta2" class="quiz-pregunta"></p>
+
+  <!-- OPCIONES -->
+  <div id="opciones2" class="quiz-opciones"></div>
+
+  <!-- FEEDBACK -->
+  <div id="feedback2" class="quiz-feedback"></div>
+
+  <!-- BOTÓN SIGUIENTE -->
+<button id="btnSiguiente2" class="btn-siguiente" onclick="siguientePregunta2()" style="display:none">
+  Siguiente ➡
+</button>
+
+
+
+
+
+
+ </div>
+</div>
+</section>
+
+
+
+
+
+
+
+<!-- ================== TEMA 3 ================== -->
+
+<section class="card tema" style="display:none">
+<button class="btnLeer" onclick="leerTexto(this)">🔊</button>
+<h1>Tema : Prehistoria</h1>
+
+<p style="font-weight:bold;font-size:20px;text-align:center;">
+La Prehistoria es el periodo más antiguo de la humanidad.
+</p>
+
+<div class="texto-extra">
+🪨 Se divide en Paleolítico, Mesolítico y Neolítico.
+</div>
+
+<img src="../IMAGEN/prehistoria.png" class="img-historia">
+
+<p>
+La Prehistoria se refiere al periodo anterior a la invención de la escritura y abarca desde la aparición de los primeros seres humanos hasta aproximadamente el año 3000 a.C. Durante este tiempo, los humanos vivían en pequeñas comunidades nómadas y dependían de la caza, la recolección y la pesca para sobrevivir.
+</p>
+
+
+
+<p><strong>Cronología de la Prehistoria</strong></p>
+
+<p>Por convención, la Prehistoria comienza con la aparición en Sudáfrica de la primera especie de Homo Sapiens (nosotros) hace unos 200.000 años. Pero en otros casos, se considera que la prehistoria se inicia hace unos 2 millones de años con la aparición del primer homínido que puede utilizar herramientas de trabajo.</p>
+
+<p>La Prehistoria se caracteriza por la falta de testimonios escritos. La investigación histórica se realiza a través del análisis de fósiles y herramientas producidos por el hombre en ese momento. Las ciencias que se ocupan de esta reconstrucción son la arqueología, la física, la antropología, etc.</p>
+
+<p>Alrededor del año 3000 a.C, cuando aparece la escritura, se termina la Prehistoria. Sin embargo, esta cronología debe considerarse general e indicativa. Por ejemplo, desde el punto de vista cronológico, el término neolítico termina primero en Mesopotamia y sólo muchos siglos más tarde en Europa y América. Es decir, la Prehistoria no acaba con el nacimiento de las primeras grandes civilizaciones de la historia, sino que sigue existiendo durante muchos siglos en otras partes del mundo.</p>
+
+
+<div class="seccion horizontal">
+  <h3>📜 Etapas de la Prehistoria</h3>
+
+  <div class="etapas-horizontal">
+    <button onclick="mostrarInfo(0)">🪓 Paleolítico</button>
+    <button onclick="mostrarInfo(1)">🔥 Mesolítico</button>
+    <button onclick="mostrarInfo(2)">🌾 Neolítico</button>
+    <button onclick="mostrarInfo(3)">⚒ Edad de los Metales</button>
+    <button onclick="mostrarInfo(4)">🏛 Edad Antigua</button>
+  </div>
+
+  <div class="info-horizontal" id="info-horizontal">
+    <h4 id="info-titulo">Selecciona una etapa</h4>
+    <p id="info-texto">
+      Haz clic en una etapa para ver la información aquí.
+    </p>
+  </div>
+</div>
+
+<div class="actions">
+<button onclick="abrirMapa()">🧠 Mapa mental</button>
+<button onclick="abrirQuiz3()">🎮 Quiz</button>
+</div>
+
+
+<div class="nav">
+<button onclick="anterior()">⬅ Anterior</button>
+<button onclick="siguiente()">Siguiente ➡</button>
+</div>
+
+
+
+<!-- ================== MODAL QUIZ TEMA 3 ================== -->
+<div id="quiz3" class="quiz-overlay">
+  <div class="quiz-box">
+    <button class="cerrar" onclick="cerrarQuiz3()">✖</button>
+
+    <h2 class="quiz-titulo">🎮 Quiz – Tema 3</h2>
+
+  <!-- PREGUNTA -->
+  <p id="pregunta3" class="quiz-pregunta">x</p>
+
+  <!-- OPCIONES -->
+  <div id="opciones3" class="quiz-opciones">x</div>
+
+  <!-- FEEDBACK -->
+  <div id="feedback3" class="quiz-feedback">x</div>
+
+  <!-- BOTÓN SIGUIENTE -->
+<button id="btnSiguiente3" class="btn-siguiente" onclick="siguientePregunta3()" style="display:none">
+  Siguiente ➡
+</button>
+
+
+
+
+
+
+
+
+ </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- ================== TEMA 4 ================== -->
+<section class="card tema" style="display:none">
+
+<button class="btnLeer" onclick="leerTexto(this)">🔊</button>
+
+<h1>Tema 4: Edad Antigua</h1>
+
+<p style="font-weight:bold;font-size:20px;text-align:center;">
+La Edad Antigua inicia con la invención de la escritura.
+</p>
+
+<div class="texto-extra">
+📜 Surgen las primeras civilizaciones organizadas.
+</div>
+
+
+<img src="../IMAGEN/escritura.png" class="img-historia">     
+
+<p>
+En esta etapa se desarrollaron grandes culturas como
+Egipto, Mesopotamia, Grecia y Roma.
+</p>
+
+<p>La Edad Antigua es el primer periodo de la historia, iniciado alrededor del 3300-3500 a.C. con la invención de la escritura en Mesopotamia y Egipto, lo que marca el fin de la prehistoria. Este periodo destaca por el surgimiento de grandes civilizaciones, ciudades-estado, leyes, el comercio organizado y una sociedad estratificada. </p>
+
+
+
+
+
+<h3>🏛 Civilizaciones antiguas</h3>
+
+<div class="civilizaciones">
+
+  <div class="btn-info" data-text="Civilización del Nilo. Destacó por las pirámides, escritura jeroglífica y el faraón como dios.">
+    EG Egipto
+  </div>
+
+  <div class="btn-info" data-text="Civilización entre los ríos Tigris y Éufrates. Cuna de la escritura cuneiforme y las primeras leyes.">
+    IQ Mesopotamia
+  </div>
+
+  <div class="btn-info" data-text="Civilización que aportó la democracia, la filosofía, el teatro y los Juegos Olímpicos.">
+    GR Grecia
+  </div>
+
+  <div class="btn-info" data-text="Imperio que destacó por el derecho romano, la ingeniería y la expansión territorial.">
+    IT Roma
+  </div>
+
+</div>
+
+
+
+<p><strong>Aspectos clave de la Edad Antigua:</strong></p>
+
+<p><strong class="sin-negrita">• Inicio: Marcado por la invención de la escritura (cuneiforme en Mesopotamia y jeroglífica en Egipto) para el registro de mercancías y administración, hacia el 3000-3300 a.C..</p>
+<p>•  Civilizaciones principales: Incluye a Mesopotamia, Egipto, Grecia y Roma, las cuales desarrollaron los primeros Estados centralizados.</p>
+<p>•  Aportaciones: Creación de las primeras formas de ley, la moneda, el comercio a larga distancia, avances técnicos, religiones organizadas (judaísmo, cristianismo) y el desarrollo del urbanismo.</p>
+<p>•  Final: Se establece con la caída del Imperio Romano de Occidente en el año 476 d.C.. </p>
+La escritura permitió a estas sociedades registrar sus mitos, historias y transacciones, dejando testimonios que permiten a los historiadores estudiar profundamente este periodo. </strong></p>
+
+
+<div class="slider">
+  <button class="slider-btn left" onclick="mover(-1)">‹</button>
+
+  <div class="slider-track" id="sliderTrack">
+    <img src="../IMAGEN/egipto.png">
+    <img src="../IMAGEN/mesopotamia..png">
+    <img src="../IMAGEN/grecia.png">
+    <img src="../IMAGEN/roma.png">
+  </div>
+
+  <button class="slider-btn right" onclick="mover(1)">›</button>
+</div>
+
+
+
+<div class="actions">
+<button onclick="abrirMapa()">🧠 Mapa mental</button>
+<button onclick="abrirQuiz4()">🎮 Quiz</button>
+</div>
+
+<div class="nav">
+<button onclick="anterior()">⬅ Anterior</button>
+<button onclick="siguiente()">Siguiente ➡</button>
+</div>
+
+
+
+
+
+<div id="quiz4" class="quiz-overlay">
+  <div class="quiz-box">
+    <button class="cerrar" onclick="cerrarQuiz4()">✖</button>
+
+    <h2 class="quiz-titulo">🎮 Quiz – Tema 4</h2>
+
+  <!-- PREGUNTA -->
+  <p id="pregunta4" class="quiz-pregunta"></p>
+
+  <!-- OPCIONES -->
+  <div id="opciones4" class="quiz-opciones"></div>
+
+  <!-- FEEDBACK -->
+  <div id="feedback4" class="quiz-feedback"></div>
+
+  <!-- BOTÓN SIGUIENTE -->
+  
+<button id="btnSiguiente4" class="btn-siguiente" onclick="siguientePregunta4()" style="display:none">
+  Siguiente ➡
+</button>
+
+
+
+
+ </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================== TEMA 5 ================== -->
+
+<section class="card tema" style="display:none">
+
+<button class="btnLeer" onclick="leerTexto(this)">🔊</button>
+
+<h1>Tema 5: Edad Media</h1>
+
+<p style="font-weight:bold;font-size:20px;text-align:center;">
+La Edad Media se desarrolló entre los siglos V y XV.
+</p>
+
+<div class="texto-extra">
+🏰 Se caracterizó por el feudalismo y el poder de la Iglesia.
+</div>
+<p>
+La Edad Media se prolongó durante mil años y comenzó con la caída del Imperio romano de Occidente en el año 476 y finalizó con la caída del Imperio bizantino en 1453 o con el descubrimiento europeo de América en 1492.</p>
+
+
+
+
+
+
+
+<img src="../IMAGEN/Edadmedia.png" class="img-historia">     
+
+<p>
+Durante este periodo surgieron castillos, reinos y
+nuevas formas de organización social.
+</p>
+
+
+
+<p>
+El concepto de Edad Media fue creado por los humanistas europeos de los siglos XIV y XV, quienes pensaban su época como un renacer de la antigüedad grecorromana. Según estos pensadores, entre esa antigüedad llamada clásica y su época, la del Humanismo y el Renacimiento, se extendía una edad intermedia que era menospreciada por la influencia que había ejercido la Iglesia cristiana en todos los campos del saber.</p>
+
+<p>La Edad Media recibió su nombre por ser considerada una etapa intermedia entre la Edad Antigua y la Edad Moderna. Durante este período, la sociedad se organizó principalmente de acuerdo a un orden feudal, esencialmente rural o campesino. Sin embargo, también experimentó un resurgimiento de las ciudades a partir del siglo XI y el nacimiento de una nueva clase social: la burguesía.</p>
+
+<p>La vida medieval estuvo lejos de ser estática y uniforme. Fue escenario de numerosos desplazamientos humanos, epidemias (como la peste negra), guerras y nuevas formas políticas, incluida la formación y expansión de imperios más allá de las fronteras de Europa occidental, como los imperios musulmanes o el Imperio bizantino. Esto originó conflictos y conquistas, como la invasión musulmana de la península ibérica, las Cruzadas y la Reconquista española.</p>
+
+
+
+
+<h2 class="titulo-seccion" style="color:#7c2d12; text-shadow:1px 1px 4px rgba(0,0,0,.3);">
+
+
+<h2>⚔️ Características de la Edad Media </h2>
+
+<p class="indicacion">
+  👆 Haz clic en cada punto de la línea de tiempo para ver la información
+</p>
+
+<div class="timeline">
+
+  <div class="evento izq etapa-temprana" data-fecha="Siglo V" onclick="toggleTarjeta(this)">
+    <div class="punto"></div>
+    <span class="fecha">Siglo V</span>
+    <h3>🏰 Feudalismo</h3>
+    <div class="tarjeta">
+      <p>
+Sistema social basado en la posesión de tierras.<br>
+Los señores feudales ofrecían protección a cambio de trabajo y lealtad de campesinos y vasallos.</p>
+
+    </div>
+  </div>
+
+  <div class="evento der etapa-temprana" data-fecha="Siglos V–X" onclick="toggleTarjeta(this)">
+    <div class="punto"></div>
+    <span class="fecha">Siglos V–X</span>
+    <h3>✝️ Poder religioso</h3>
+    <div class="tarjeta">
+      
+<p>
+La Iglesia tuvo gran influencia política y social.<br>
+Controló la educación, la cultura y las creencias durante la Edad Media.
+</p>
+    </div>
+  </div>
+
+  <div class="evento izq etapa-media" data-fecha="Siglos XI–XIII" onclick="toggleTarjeta(this)">
+    <div class="punto"></div>
+    <span class="fecha">Siglos XI–XIII</span>
+    <h3>👑 Reyes y nobles</h3>
+    <div class="tarjeta">
+
+<p>
+Los reyes gobernaban con apoyo de la nobleza.<br>
+Ejercían poder militar, político y controlaban extensos territorios.
+</p>
+
+    </div>
+  </div>
+
+  <div class="evento der etapa-tardia" data-fecha="Siglos XIV–XV" onclick="toggleTarjeta(this)">
+    <div class="punto"></div>
+    <span class="fecha">Siglos XIV–XV</span>
+    <h3>🌾 Campesinos</h3>
+    <div class="tarjeta">
+<p>La mayoría de la población medieval.<br>
+Trabajaban la tierra y pagaban tributos a los señores feudales.</p>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="nav">
+<button onclick="anterior()">⬅ Anterior</button>
+</div>
+
+
+</section>
+
+
+
+<!-- MODALES AQUI LO DE LOS MAPAS IMAGEN-->
+<div class="modal" id="mapa">
+  <div class="modal-content mapa-container">
+    <span class="close" onclick="cerrarMapa()">✖</span>
+    <h3 style="text-align:center;">Mapa Mental del Tema</h3>
+
+    <!-- CONTENEDOR CON DESLIZADO -->
+    <div class="mapa-scroll">
+
+      <img src="../IMAGEN/MAPADEHOMINA.jpg"
+           class="mapa-tema mapa-mental"
+           data-tema="0"> 
+
+      <img src="../IMAGEN/MAPAEVOLUCION.png"
+           class="mapa-tema mapa-mental"
+           data-tema="1">
+
+      <img src="../IMAGEN/MAPAPrehistoria.png"
+           class="mapa-tema mapa-mental"
+           data-tema="2">
+       <img src="../IMAGEN/MAPAedadantigua.png"
+           class="mapa-tema mapa-mental"
+           data-tema="3">
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal" id="quiz">
+  <div class="modal-content">
+    <span class="close" onclick="cerrarQuiz()">✖</span>
+
+    <h3 style="text-align:center;">🎮 Quiz de Historia</h3>
+
+    <div id="quiz-contenido"></div>
+
+    <button onclick="siguientePregunta()" style="
+      margin-top:20px;
+      padding:12px 22px;
+      border:none;
+      border-radius:14px;
+      background:#2563eb;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      display:none;
+    " id="btn-siguiente">
+      Siguiente
+    </button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+let voz = null;
+let leyendo = false;
+let temaActual = null;
+
+function leerTexto(btn){
+  const synth = window.speechSynthesis;
+  const tema = btn.closest(".tema");
+  if(!tema) return;
+
+  // 👉 SI CAMBIASTE DE TEMA, LEE EL NUEVO
+  if(temaActual !== tema){
+    synth.cancel();
+    leyendo = false;
+    temaActual = tema;
+  }
+
+  // 👉 SI NO ESTÁ LEYENDO → EMPEZAR
+  if(!leyendo){
+    const texto = tema.innerText;
+
+    voz = new SpeechSynthesisUtterance(texto);
+    voz.lang = "es-ES";
+    voz.rate = 1;
+    voz.pitch = 1;
+
+    synth.speak(voz);
+    btn.textContent = "⏸";
+    leyendo = true;
+
+  // 👉 SI ESTÁ LEYENDO → PAUSAR / CONTINUAR
+  }else{
+    if(synth.speaking && !synth.paused){
+      synth.pause();
+      btn.textContent = "▶️";
+    }else if(synth.paused){
+      synth.resume();
+      btn.textContent = "⏸";
+    }
+  }
+}
+
+
+const timeline = document.querySelector('.timeline');
+
+const observerLinea = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      timeline.classList.add('visible');
+    }
+  });
+},{ threshold:0.3 });
+
+observerLinea.observe(timeline);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let actual = 0;
+let temas = document.querySelectorAll(".tema");
+const botonesMenu = document.querySelectorAll(".menu-temas button");
+
+
+const datos = [
+  {
+    titulo: "Paleolítico (2.500.000 a.C. -10.000 a.C.)",
+    texto: "El paleolítico es el primero de los períodos considerados como prehistoria, que iría desde la aparición de las primeras herramientas creadas por homínidos. Se trata asimismo del período o etapa más largo. Durante este período gran parte de Europa estaba congelada, estando situada en la etapa glacial. En esta etapa existieron diferentes especies de homínidos además de la nuestra, como el Homo habilis o el Homo neanderthalensis, que terminarían por extinguirse."
+  },
+  {
+    titulo: "Mesolítico (10.000 a.C.- 8.000 a.C.)",
+    texto: "El segundo de los períodos pertenecientes a la edad de Piedra, el período conocido como mesolítico, se corresponde en gran medida con la finalización de la última Edad de Hielo. Por lo general, la humanidad seguía siendo principalmente nómada, a excepción de algunos asentamientos que empiezan a florecer. En efecto, empiezan a aparecer las primeras aldeas. Las herramientas elaboradas tienden a reducir su tamaño y las personas tienen menor tendencia a buscar refugio en cuevas. Otro elemento característico es que empiezan a verse los primeros cementerios."
+  },
+  {
+    titulo: "Neolítico (8.000 a.C.- 6.000 a.C.)",
+    texto: "El neolítico es el último de los periodos de la Edad de Piedra. Esta etapa se caracteriza por el nacimiento, expansión y progresiva mejora de la agricultura y la ganadería. El ser humano ya no precisaba de realizar grandes migraciones en pos de las manadas de los animales a cazar, y empezaron a surgir asentamientos que con el tiempo se convertirían en grandes civilizaciones."
+  },
+  {
+    titulo: "Edad de los Metales (6.000 a.C.- 3.600 a.C.)",
+    texto: "La denominada edad de los metales se corresponde con un período en que el ser humano dejaba de emplear la piedra para utilizar el metal y en que empezarían a aparecer las primeras civilizaciones y culturas."
+  },
+  {
+    titulo: "🏛 Edad Antigua",
+    texto: "Marca el fin de la prehistoria y el comienzo de la historia, permitiendo el registro de datos.Inicia con la escritura. Surgen civilizaciones como Egipto, Grecia y Roma."
+  }
+];
+
+function mostrarInfo(i){
+  document.getElementById("info-titulo").textContent = datos[i].titulo;
+  document.getElementById("info-texto").textContent = datos[i].texto;
+}
+
+
+
+let indice = 0;
+
+function mover(direccion){
+  const track = document.getElementById("sliderTrack");
+  const total = track.children.length;
+
+  indice += direccion;
+
+  if(indice < 0) indice = total - 1;
+  if(indice >= total) indice = 0;
+
+  track.style.transform = `translateX(-${indice * 100}%)`;
+}
+
+
+
+
+
+function mostrarConcepto(elemento){
+  // cerrar los demás
+  document.querySelectorAll('.btn-info').forEach(btn=>{
+    if(btn !== elemento){
+      btn.classList.remove('activo');
+    }
+  });
+
+  // abrir / cerrar el actual
+  elemento.classList.toggle('activo');
+}
+
+
+
+function cambiarTema(btn, num){
+  // quitar activo a todos
+  document.querySelectorAll('.menu-temas button').forEach(b=>{
+    b.classList.remove('activo','cambio');
+  });
+
+  // activar el nuevo
+  btn.classList.add('activo','cambio');
+
+  // quitar la clase de animación para que se pueda repetir
+  setTimeout(()=>{
+    btn.classList.remove('cambio');
+  },450);
+
+  // aquí puedes llamar a tu función real
+  // mostrarTema(num);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mostrarTema(i){
+  temas.forEach(t => {
+    t.style.display = "none";
+    t.classList.remove("slide-in-right","slide-in-left");
+  });
+
+  let direccion = i > actual ? "slide-in-right" : "slide-in-left";
+
+  temas[i].style.display = "block";
+  temas[i].classList.add(direccion);
+
+  botonesMenu.forEach(b => b.classList.remove("activo"));
+  botonesMenu[i].classList.add("activo");
+
+  document.getElementById("indicador-tema").textContent =
+    ` Tema ${i+1} de ${temas.length}`;
+
+  actual = i;
+}
+
+
+
+function toggleTarjeta(elemento){
+  document.querySelectorAll('.evento').forEach(ev=>{
+    if(ev !== elemento){
+      ev.classList.remove('activa');
+    }
+  });
+  elemento.classList.toggle('activa');
+}
+
+/* ANIMACIÓN AL HACER SCROLL */
+const eventos = document.querySelectorAll('.evento');
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{ threshold:0.2 });
+
+eventos.forEach(ev=>observer.observe(ev));
+
+
+
+
+
+function siguiente(){
+  if(actual < temas.length -1){
+    mostrarTema(actual + 1);
+  }
+}
+
+function anterior(){
+  if(actual > 0){
+    mostrarTema(actual - 1);
+  }
+}
+
+
+function irATema(i){
+  mostrarTema(i);
+}
+
+mostrarTema(actual);
+
+
+
+function abrirMapa(){
+  document.getElementById('mapa').style.display = 'flex';
+
+
+
+ // Ocultar todos los mapas
+  document.querySelectorAll('.mapa-tema').forEach(img => {
+    img.style.display = 'none';
+  });
+
+// Mostrar solo el mapa del tema actual
+  const mapaActual = document.querySelector(`.mapa-tema[data-tema="${actual}"]`);
+  if(mapaActual){
+    mapaActual.style.display = 'block';
+  }
+}
+
+function cerrarMapa(){
+  document.getElementById('mapa').style.display = 'none';
+}
+
+
+
+
+
+
+/* ===== QUIZ TEMA 1 ===== */
+
+const preguntas = [
+  {
+    texto: "¿Qué estudia la Historia?",
+    opciones: ["El pasado de la humanidad", "El futuro", "Solo fechas"],
+    correcta: 0
+  },
+  {
+    texto: "¿La Historia es una…?",
+    opciones: ["Ciencia social", "Ciencia exacta", "Materia artística"],
+    correcta: 0
+  },
+  {
+    texto: "¿De dónde proviene la palabra historia?",
+    opciones: ["Latín", "Griego", "Francés"],
+    correcta: 1
+  },
+  {
+    texto: "¿Para qué sirve la Historia?",
+    opciones: ["Memorizar fechas", "Comprender la sociedad", "Solo leer textos"],
+    correcta: 1
+  },
+  {
+    texto: "¿Qué analiza la Historia?",
+    opciones: ["Solo guerras", "Acontecimientos del pasado", "El futuro"],
+    correcta: 1
+  }
+];
+
+let indiceQuiz = 0;
+const feedback = document.getElementById("feedback");
+
+function cargarPregunta(){
+  const p = preguntas[indiceQuiz];
+  document.getElementById("pregunta").innerText = p.texto;
+
+  const opciones = document.getElementById("opciones");
+  opciones.innerHTML = "";
+
+  p.opciones.forEach((op, i) => {
+    const btn = document.createElement("button");
+    btn.innerText = op;
+
+    btn.onclick = () => responder(btn, i === p.correcta);
+
+    opciones.appendChild(btn);
+  });
+
+  feedback.textContent = "";
+  document.getElementById("siguientePregunta").style.display = "none";
+}
+
+
+function responder(btn, esCorrecta){
+  const botones = document.querySelectorAll("#opciones button");
+  botones.forEach(b => b.disabled = true);
+
+  if(esCorrecta){
+    btn.classList.add("correcta", "vibrar");
+
+    // 🔊 sonido
+const audio = document.getElementById("sonidoCorrecto");
+audio.currentTime = 0;
+audio.play().catch(err=>{
+  console.log("Sonido bloqueado:", err);
+});
+    feedback.textContent = "✅ ¡Correcto!";
+  }else{
+    btn.classList.add("incorrecta");
+    feedback.textContent = "❌ Incorrecto";
+  }
+
+  document.getElementById("siguientePregunta").style.display = "block";
+}
+
+function siguientePregunta(){
+  indiceQuiz++;
+  if(indiceQuiz < preguntas.length){
+    cargarPregunta();
+  }else{
+    document.getElementById("pregunta").innerText = "🎉 Quiz terminado";
+    document.getElementById("opciones").innerHTML = "";
+    feedback.textContent = "¡Buen trabajo!";
+    document.getElementById("siguientePregunta").style.display = "none";
+  }
+}
+
+
+
+
+
+
+
+
+/* ===== QUIZ TEMA 2 ===== */
+/* ===== QUIZ TEMA 2 ===== */
+function siguientePregunta2(){
+
+  const pregunta = document.getElementById("pregunta2");
+  const opciones = document.getElementById("opciones2");
+
+  pregunta.classList.remove("animar-cambio");
+  opciones.classList.remove("animar-cambio");
+
+  void pregunta.offsetWidth; // reinicia animación
+
+  pregunta.classList.add("animar-cambio");
+  opciones.classList.add("animar-cambio");
+
+  // 👇 AQUÍ VA TU CÓDIGO ACTUAL DE CAMBIAR PREGUNTA
+}
+const preguntasTema2 = [
+  {
+    pregunta: "¿Qué explica la evolución humana?",
+    opciones: [
+      { texto: "El origen de las guerras", correcta: false },
+      { texto: "El origen y desarrollo del ser humano", correcta: true },
+      { texto: "Solo la Edad Media", correcta: false }
+    ]
+  },
+  {
+    pregunta: "¿Qué característica distingue al ser humano?",
+    opciones: [
+      { texto: "El lenguaje y la cultura", correcta: true },
+      { texto: "La fuerza física", correcta: false },
+      { texto: "La velocidad", correcta: false }
+    ]
+  },
+  {
+    pregunta: "¿Qué permitió el desarrollo de las primeras sociedades?",
+    opciones: [
+      { texto: "La agricultura", correcta: true },
+      { texto: "La televisión", correcta: false },
+      { texto: "Los automóviles", correcta: false }
+    ]
+  },
+  {
+    pregunta: "¿Dónde se originaron los primeros humanos?",
+    opciones: [
+      { texto: "Europa", correcta: false },
+      { texto: "África", correcta: true },
+      { texto: "Asia", correcta: false }
+    ]
+  },
+  {
+    pregunta: "¿Qué nombre recibe el proceso de evolución humana?",
+    opciones: [
+      { texto: "Colonización", correcta: false },
+      { texto: "Hominización", correcta: true },
+      { texto: "Industrialización", correcta: false }
+    ]
+  }
+];
+
+let indiceTema2 = 0;
+
+function abrirQuiz2(){
+  document.getElementById("quiz2").style.display = "flex";
+  indiceTema2 = 0;
+  mostrarPregunta2();
+}
+
+function mostrarPregunta2(){
+  const p = preguntasTema2[indiceTema2];
+  document.getElementById("pregunta2").textContent = p.pregunta;
+
+  const opcionesDiv = document.getElementById("opciones2");
+  opcionesDiv.innerHTML = "";
+
+  p.opciones.forEach(op => {
+    const btn = document.createElement("button");
+    btn.textContent = op.texto;
+    btn.onclick = () => responderQuiz2(btn, op.correcta);
+    opcionesDiv.appendChild(btn);
+  });
+
+  document.getElementById("feedback2").textContent = "";
+  document.getElementById("btnSiguiente2").style.display = "none";
+}
+
+function responderQuiz2(btn, correcta){
+  const feedback = document.getElementById("feedback2");
+
+  if(correcta){
+    btn.classList.add("correcta");
+    feedback.textContent = "✅ Correcto";
+  }else{
+    btn.classList.add("incorrecta");
+    feedback.textContent = "❌ Incorrecto";
+  }
+
+  document.getElementById("btnSiguiente2").style.display = "block";
+}
+
+function siguientePregunta2(){
+  indiceTema2++;
+  if(indiceTema2 < preguntasTema2.length){
+    mostrarPregunta2();
+  }else{
+    document.getElementById("pregunta2").textContent = "🎉 Quiz finalizado";
+    document.getElementById("opciones2").innerHTML = "";
+    document.getElementById("feedback2").textContent = "¡Buen trabajo!";
+    document.getElementById("btnSiguiente2").style.display = "none";
+  }
+}
+function cerrarQuiz2(){
+  document.getElementById("quiz2").style.display = "none";
+}
+
+
+
+
+
+
+
+/* ===== QUIZ TEMA 3 ===== */
+/* ===== QUIZ TEMA 3 ===== */
+
+/* 🔹 PREGUNTAS (ALEATORIAS) */
+const preguntasTema3 = [
+  {
+    pregunta: "¿Qué es la Prehistoria?",
+    opciones: [
+      { texto: "Periodo anterior a la escritura", correcta: true },
+      { texto: "Edad Media", correcta: false },
+      { texto: "Edad Moderna", correcta: false }
+    ]
+  },
+  {
+    pregunta: "¿Cómo vivían los humanos en la Prehistoria?",
+    opciones: [
+      { texto: "En comunidades nómadas", correcta: true },
+      { texto: "En castillos", correcta: false },
+      { texto: "En ciudades modernas", correcta: false }
+    ]
+  },
+  {
+    pregunta: "¿Con qué hecho termina la Prehistoria?",
+    opciones: [
+      { texto: "La invención de la escritura", correcta: true },
+      { texto: "La invención del fuego", correcta: false },
+      { texto: "La rueda", correcta: false }
+    ]
+  },
+  {
+    pregunta: "¿Qué actividad era común en la Prehistoria?",
+    opciones: [
+      { texto: "Caza y recolección", correcta: true },
+      { texto: "Industria moderna", correcta: false },
+      { texto: "Comercio digital", correcta: false }
+    ]
+  }
+];
+
+/* 🔹 MEZCLAR ARRAY (ALEATORIO) */
+function mezclarArray(array){
+  for(let i = array.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+let indiceTema3 = 0;
+
+/* 🔹 ABRIR QUIZ */
+function abrirQuiz3(){
+  mezclarArray(preguntasTema3);
+  document.getElementById("quiz3").style.display = "flex";
+  indiceTema3 = 0;
+  mostrarPregunta3();
+}
+
+/* 🔹 MOSTRAR PREGUNTA */
+function mostrarPregunta3(){
+  const p = preguntasTema3[indiceTema3];
+  document.getElementById("pregunta3").textContent = p.pregunta;
+
+  const opcionesDiv = document.getElementById("opciones3");
+  opcionesDiv.innerHTML = "";
+
+  p.opciones.forEach(op => {
+    const btn = document.createElement("button");
+    btn.textContent = op.texto;
+    btn.onclick = () => responderQuiz3(btn, op.correcta);
+    opcionesDiv.appendChild(btn);
+  });
+
+  document.getElementById("feedback3").textContent = "";
+  document.getElementById("btnSiguiente3").style.display = "none";
+}
+
+/* 🔹 RESPONDER */
+function responderQuiz3(btn, correcta){
+  const feedback = document.getElementById("feedback3");
+  const botones = document.querySelectorAll("#opciones3 button");
+
+  botones.forEach(b => b.disabled = true);
+
+  if(correcta){
+    btn.classList.add("correcta");
+    feedback.textContent = "✅ Correcto";
+  }else{
+    btn.classList.add("incorrecta");
+    feedback.textContent = "❌ Incorrecto";
+  }
+
+  document.getElementById("btnSiguiente3").style.display = "block";
+}
+
+/* 🔹 SIGUIENTE */
+function siguientePregunta3(){
+  indiceTema3++;
+  if(indiceTema3 < preguntasTema3.length){
+    mostrarPregunta3();
+  }else{
+    document.getElementById("pregunta3").textContent = "🎉 Quiz finalizado";
+    document.getElementById("opciones3").innerHTML = "";
+    document.getElementById("feedback3").textContent = "¡Buen trabajo!";
+    document.getElementById("btnSiguiente3").style.display = "none";
+  }
+}
+
+/* 🔹 CERRAR */
+function cerrarQuiz3(){
+  document.getElementById("quiz3").style.display = "none";
+}
+
+
+
+
+
+/* ================= QUIZ 4 ================= */
+
+
+// abrir / cerrar
+function abrirQuiz4(){
+  indicePregunta4 = 0;
+  document.getElementById("quiz4").style.display = "flex";
+  mostrarPregunta4();
+}
+
+function cerrarQuiz4(){
+  document.getElementById("quiz4").style.display = "none";
+}
+
+/* preguntas */
+const preguntasQuiz4 = [
+  {
+    pregunta: "¿Qué hecho marca el inicio de la Edad Antigua?",
+    opciones: [
+      "La aparición del fuego",
+      "La invención de la escritura",
+      "La agricultura",
+      "La rueda"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Cuál fue una de las primeras civilizaciones antiguas?",
+    opciones: [
+      "Egipto",
+      "China medieval",
+      "Imperio Inca",
+      "Edad Media"
+    ],
+    correcta: 0
+  },
+  {
+    pregunta: "¿Qué civilización aportó la democracia?",
+    opciones: [
+      "Roma",
+      "Egipto",
+      "Grecia",
+      "Mesopotamia"
+    ],
+    correcta: 2
+  },
+  {
+    pregunta: "¿Qué hecho marca el fin de la Edad Antigua?",
+    opciones: [
+      "La caída del Imperio Romano de Occidente",
+      "La invención de la imprenta",
+      "El descubrimiento de América",
+      "La revolución agrícola"
+    ],
+    correcta: 0
+  }
+];
+
+let indicePregunta4 = 0;
+
+/* mostrar pregunta */
+function mostrarPregunta4(){
+  const p = preguntasQuiz4[indicePregunta4];
+
+  document.getElementById("pregunta4").textContent = p.pregunta;
+
+  const opciones = document.getElementById("opciones4");
+  opciones.innerHTML = "";
+
+  p.opciones.forEach((opcion, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = opcion;
+    btn.onclick = () => verificarRespuesta4(i);
+    opciones.appendChild(btn);
+  });
+}
+
+/* verificar respuesta */
+function verificarRespuesta4(indice){
+  const feedback = document.getElementById("feedback4");
+  const correcta = preguntasQuiz4[indicePregunta4].correcta;
+
+  if(indice === correcta){
+    feedback.textContent = "✅ Correcto";
+    feedback.style.color = "green";
+  } else {
+    feedback.textContent = "❌ Incorrecto";
+    feedback.style.color = "red";
+  }
+
+  document.getElementById("btnSiguiente4").style.display = "block";
+}
+
+/* siguiente pregunta */
+function siguientePregunta4(){
+  indicePregunta4++;
+  document.getElementById("feedback4").textContent = "";
+  document.getElementById("btnSiguiente4").style.display = "none";
+
+  if(indicePregunta4 < preguntasQuiz4.length){
+    mostrarPregunta4();
+  } else {
+    document.getElementById("pregunta4").textContent = "🎉 Quiz finalizado";
+    document.getElementById("opciones4").innerHTML = "";
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function verificarQuiz(){
+  const respuesta = document.querySelector('input[name="q1"]:checked');
+  const resultado = document.getElementById("resultado");
+
+  if(!respuesta){
+    resultado.textContent = "❗ Elige una respuesta";
+    resultado.style.color = "orange";
+    return;
+  }
+
+  if(respuesta.value === "b"){
+    resultado.textContent = "✅ Correcto";
+    resultado.style.color = "green";
+  }else{
+    resultado.textContent = "❌ Incorrecto";
+    resultado.style.color = "red";
+  }
+}
+
+
+
+
+
+
+
+
+function abrirQuiz(){
+  document.getElementById("quiz").style.display = "flex";
+  indiceQuiz = 0;
+  cargarPregunta();
+}
+
+function cerrarQuiz(){
+  document.getElementById("quiz").style.display = "none";
+}
+</script>
+
+
+
+
+
+<footer class="footer">
+  <p>© 2026 Proyecto educativo digital – Historia. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

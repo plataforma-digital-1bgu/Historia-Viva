@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Historia Digital – 1ero BGU</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<style>
+:root{
+  --azul:#1d3557;
+  --azul2:#457b9d;
+  --verde:#2ecc71;
+  --naranja:#f4a261;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+
+body{
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:#f4f6f9;
+  overflow-x:hidden; /* 🔥 elimina el espacio blanco */
+}
+.botones{
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+
+
+
+/* ================= BIENVENIDA PLUS (SIN FUMINACIÓN) ================= */
+.bienvenida{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, #4facfe, transparent 40%),
+    linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+.bienvenida .box{
+  padding:60px;
+  border-radius:35px;
+  background:rgba(255,255,255,0.20); /* sólido, sin blur */
+  text-align:center;
+  color:white;
+  animation:entradaPlus 1.3s ease, pulso 3s infinite;
+  box-shadow:0 0 40px rgba(79,172,254,.6);
+}
+@keyframes entradaPlus{
+  from{opacity:0;transform:scale(.6) translateY(40px);}
+  to{opacity:1;transform:scale(1) translateY(0);}
+}
+@keyframes pulso{
+  0%,100%{box-shadow:0 0 35px rgba(79,172,254,.5);}
+  50%{box-shadow:0 0 60px rgba(79,172,254,.9);}
+}
+.bienvenida button{
+  margin-top:30px;
+  padding:18px 45px;
+  border:none;
+  border-radius:40px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(135deg,#43e97b,#38f9d7);
+}
+
+/* ================= HEADER ================= */
+header{
+  background: linear-gradient(135deg, #1d3557, #3F88C3, #457b9d);
+  color:white;
+  text-align:center;
+  padding:15px;
+}
+
+/* ================= BANNER ================= */
+.banner{
+  position:relative;
+  width:100%;
+  max-width:1500px;
+  height:70–40vh;
+  margin:0 auto;
+  overflow:hidden; 
+
+}
+.banner img.fondo{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+/* ================= LOGO PRINCIPAL ================= */
+.logo{
+  position:absolute;
+  top:90px;
+  left:60%;
+  transform:translateX(-250%);
+  width:200px;
+  z-index:5;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =================================================
+   LOGO HISTORIA (CENTRADO + AJUSTABLE)
+   - top   : subir / bajar
+   - width : agrandar / encoger
+================================================== */
+.logohistoria{
+  position:absolute;
+  top:140px;                     /* baja o sube un poco */
+  left:62%;
+  transform:translateX(-50%);
+  width:250px;                   /* grande */
+  z-index:6;
+opacity:0.9;
+
+}
+
+
+/* ================= AJUSTE TABLET ================= */
+@media (max-width:1024px){
+  .logohistoria{
+    top:160px;
+    width:150px;
+  }
+}
+
+/* ================= AJUSTE CELULAR ================= */
+@media (max-width:768px){
+  .logohistoria{
+    top:120px;
+    width:120px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= NIÑOS ================= */
+.nino{
+  position:absolute;
+  bottom:0;
+  left:280px;
+  width:150px;
+  z-index:10;
+}
+.nina{
+  position:absolute;
+  bottom:0;
+  right:20px;
+  width:150px;
+  z-index:10;
+}
+
+/* ================= BOTONES ================= */
+.botones{
+  position:absolute;
+  inset:0;
+  top:-120px;
+  left:40%;
+  transform:translateX(-50%);
+
+  display:grid;
+  grid-template-columns:repeat(2, auto);
+  justify-content:space-between;
+  column-gap:80px;   /* ⬅️➡️ separación lateral */
+
+  row-gap:70px;
+  padding:500px 300px;
+  z-index:5;
+}
+
+.btn{
+  padding:30px 200px;
+  font-size:22px;
+  font-weight:700;
+  border-radius:45px;
+  width:420px;
+  color:white;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.inicio{background:linear-gradient(135deg,#4facfe,#00f2fe);}
+.videos{background:linear-gradient(135deg,#f4a261,#ffd166);color:#000;}
+.juegos{background:linear-gradient(135deg,#2ecc71,#80ed99);}
+.certificado{background:linear-gradient(135deg,#9b5de5,#f15bb5);}
+
+
+
+/* ================= TABLET ================= */
+@media (max-width:1024px){
+  .botones{
+    left:50%;
+    transform:translateX(-50%);
+    top:-40px;
+
+    grid-template-columns:repeat(2, 1fr); /* 🔥 2 por fila */
+    column-gap:40px;
+    row-gap:50px;
+
+    padding:460px 120px;
+  }
+
+  .btn{
+    width:100%;
+    max-width:100%;
+    padding:30px 0;
+    font-size:20px;
+    border-radius:45px;
+  }
+}
+
+
+/* ================= CELULAR ================= */
+
+@media (max-width:768px){
+
+  .botones{
+    top:0;
+    padding:380px 20px;
+    flex-direction:column; /* 🔥 uno debajo del otro */
+    gap:16px;
+  }
+
+  .boton{
+    width:160px;
+    height:160px;
+    font-size:18px;
+  }
+
+}
+
+
+
+
+/* ================= CERTIFICADO ================= */
+.certificado-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+.certificado-box{
+  background:white;
+  padding:50px;
+  border-radius:25px;
+  text-align:center;
+  width:450px;
+  box-shadow:0 0 40px rgba(0,0,0,.4);
+}
+.certificado-box h2{color:#1d3557;}
+.certificado-box p{margin:15px 0;font-size:18px;}
+.certificado-box button{
+  margin-top:20px;
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#1d3557;
+  color:white;
+  cursor:pointer;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background: linear-gradient(135deg, #1d3557, #3F88C3, #457b9d);
+  color:white;
+  text-align:center;
+  padding:10px;
+}
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<audio id="sonidoClick" src="Sonido/SonidodeSeleccionar.mp3" preload="auto"></audio>
+
+<!-- BIENVENIDA PLUS -->
+<div class="bienvenida" id="bienvenida">
+  <div class="box">
+    <h1>📜 HISTORIA VIVA – 1ero BGU</h1>
+    <p>Plataforma Digital de Historia</p>
+    <button onclick="sonidoClick(); cerrarBienvenida()">🚀 Comenzar</button>
+  </div>
+</div>
+
+<header>
+  <h1>Historia Digital – 1ero BGU</h1>
+</header>
+
+<section class="banner">
+  <img src="INICIO.png" class="fondo">
+
+  <!-- TUS LOGOS -->
+  <img src="Logo1.png" class="logo">
+  <img src="LOGOHISTORIA.png" class="logohistoria">
+
+  <img src="niño.png" class="nino">
+  <img src="niña.png" class="nina">
+
+  <div class="botones">
+    <div class="btn inicio" onclick="sonidoClick(); location.href='inicio.html'">Inicio</div>
+    <div class="btn videos" onclick="sonidoClick(); location.href='Sonido/VIDEOS/VIDEO.html'">Videos</div>
+    <div class="btn juegos" onclick="sonidoClick(); window.open('Juego.html','_blank')">Juegos</div>
+    <div class="btn certificado" onclick="sonidoClick(); generarCertificado()">Certificado</div>
+  </div>
+</section>
+
+<footer>© 2026 – Historia Digital</footer>
+
+
+
+
+
+
+<!-- CERTIFICADO -->
+<div class="certificado-modal" id="certificado">
+  <div class="certificado-box">
+    <p id="datosCertificado"></p>
+    <button onclick="cerrarCertificado()">Cerrar</button>
+  </div>
+</div>
+
+<script>
+function sonidoClick(){
+  const audio=document.getElementById("sonidoClick");
+  audio.currentTime=0;
+  audio.play();
+}
+function cerrarBienvenida(){
+  document.getElementById("bienvenida").style.display="none";
+}
+
+
+
+
+
+
+
+// ================= CONTROL DE ACCESO de certificado=================
+// ================= CONTROL DE ACCESO CERTIFICADO =================
+document.addEventListener("DOMContentLoaded", function(){
+
+  if(!localStorage.getItem("entroInicio")){
+    localStorage.setItem("entroInicio","false");
+  }
+  if(!localStorage.getItem("entroVideos")){
+    localStorage.setItem("entroVideos","false");
+  }
+  if(!localStorage.getItem("entroJuegos")){
+    localStorage.setItem("entroJuegos","false");
+  }
+
+  const btnInicio = document.querySelector(".inicio");
+  const btnVideos = document.querySelector(".videos");
+  const btnJuegos = document.querySelector(".juegos");
+
+  if(btnInicio){
+    btnInicio.addEventListener("click",()=>{
+      localStorage.setItem("entroInicio","true");
+    });
+  }
+
+  if(btnVideos){
+    btnVideos.addEventListener("click",()=>{
+      localStorage.setItem("entroVideos","true");
+    });
+  }
+
+  if(btnJuegos){
+    btnJuegos.addEventListener("click",()=>{
+      localStorage.setItem("entroJuegos","true");
+    });
+  }
+
+});
+
+
+function generarCertificado(){
+
+  let inicio = localStorage.getItem("entroInicio");
+  let videos = localStorage.getItem("entroVideos");
+  let juegos = localStorage.getItem("entroJuegos");
+
+  if(inicio !== "true" || videos !== "true" || juegos !== "true"){
+    alert("⚠️ Debes ingresar a Inicio, Videos y Juegos antes de generar tu certificado.");
+    return;
+  }
+
+  const nombre = prompt("Ingrese el nombre del estudiante:");
+  if(!nombre) return;
+
+  const curso = prompt("Ingrese el curso:");
+  if(!curso) return;
+
+
+
+ document.getElementById("datosCertificado").innerHTML=
+`
+<div style="
+  width:700px;
+  max-width:95%;
+  border:10px double #1d3557;
+  padding:40px;
+  background:#fdfdfd;
+  border-radius:15px;
+  text-align:center;
+">
+
+  <h1 style="color:#1d3557; font-size:28px; margin-bottom:20px;">
+    📜 CERTIFICADO DE LOGRO
+  </h1>
+
+  <p style="font-size:18px;">
+    Se otorga el presente certificado a:
+  </p>
+
+  <h2 style="
+    margin:20px 0;
+    font-size:30px;
+    color:#1d3557;
+    letter-spacing:1px;
+  ">
+    ${nombre}
+  </h2>
+
+  <p style="font-size:18px;">
+    Curso: <strong>${curso}</strong>
+  </p>
+
+  <p style="margin-top:20px; font-size:17px;">
+    Por completar satisfactoriamente todas las actividades de la plataforma
+    <strong>Historia Digital</strong>.
+  </p>
+
+  <p style="margin-top:25px; font-style:italic; color:#555;">
+    “El conocimiento de la historia nos permite construir un mejor futuro.”
+  </p>
+
+  <button onclick="window.print()"
+    style="
+    margin-top:25px;
+    padding:10px 30px;
+    border:none;
+    border-radius:25px;
+    background:#1d3557;
+    color:white;
+    cursor:pointer;
+    ">
+    🖨 Imprimir
+  </button>
+
+</div>
+`;
+
+  document.getElementById("certificado").style.display="flex";
+}
+function cerrarCertificado(){
+  document.getElementById("certificado").style.display="none";
+}
+
+
+</script>
+
+</body>
+</html>

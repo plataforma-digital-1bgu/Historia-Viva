@@ -1,0 +1,152 @@
+
+/* ===== RESET GENERAL ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    text-align: center;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: #2c3e50;
+    color: white;
+    padding: 30px 20px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+/* ======================================================
+   BANNER
+====================================================== */
+.banner {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    overflow: visible;
+    border-radius: 15px;
+
+    
+}
+
+/* FONDO */
+.fondo-banner {
+    width: 100%;
+    display: block;
+    border-radius: 15px;
+}
+
+/* TEXTO */
+.banner-texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.45);
+    padding: 30px 40px;
+    border-radius: 15px;
+    color: white;
+    z-index: 5;
+    max-width: 90%;
+}
+
+/* BOTÓN */
+.btn-inicio {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #1d8cf8, #3358f4);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: transform 0.2s;
+}
+
+.btn-inicio:hover {
+    transform: scale(1.08);
+}
+
+/* ======================================================
+   PERSONAJES (NIÑOS)
+====================================================== */
+.personaje {
+    position: absolute;
+    bottom: -15px;
+    width: 120px;      /* PC */
+    height: auto;
+    max-width: 20vw;   /* evita gigantismo */
+    z-index: 10;
+}
+
+.personaje-izq {
+    left: -40px;
+}
+
+.personaje-der {
+    right: -40px;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+.footer {
+    margin: 30px 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .personaje {
+        width: 100px;
+    }
+
+    .personaje-izq { left: -30px; }
+    .personaje-der { right: -30px; }
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 22px;
+    }
+
+    .banner-texto {
+        padding: 18px;
+        font-size: 14px;
+    }
+
+    .personaje {
+        width: 80px;
+        bottom: -10px;
+    }
+
+    .personaje-izq { left: -15px; }
+    .personaje-der { right: -15px; }
+}
+
+/* CELULAR PEQUEÑO */
+@media (max-width: 480px) {
+    .personaje {
+        width: 65px;
+        bottom: -5px;
+    }
+
+    .banner-texto h2 {
+        font-size: 17px;
+    }
+}

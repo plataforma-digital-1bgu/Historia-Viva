@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sección 3 - América Latina</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --azul1:#1e3c72;
+  --azul2:#2a5298;
+  --gris:#f4f6f9;
+  --texto:#1f2d3d;
+  --maya1:#1b5e20;
+  --maya2:#43a047;
+  --inca1:#bf8b00;
+  --inca2:#ffb703;
+--rojo1:#8b0000;
+--rojo2:#c1121f;
+}
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:#f4f6f9;
+}
+
+header{
+  background:linear-gradient(135deg, #5f3dc4 0%, #4c6ef5 50%, #5f3dc4 100%);
+  color:white;
+  padding:25px 20px; 
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
+header::after{header{
+  background:linear-gradient(135deg, #6a11cb 0%, #4a00e0 100%);
+  color:white;
+  padding:50px 20px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(to bottom, rgba(255,255,255,0.15), transparent 60%);
+  pointer-events:none;
+}
+
+header h1{
+  font-weight:bold;
+  letter-spacing:1px;
+  margin-bottom:10px;
+}
+
+header p{
+  font-size:18px;
+  opacity:0.9;
+}
+
+
+
+header h1::after{
+  content:"";
+  display:block;
+  width:100px;
+  height:5px;
+  margin:14px auto 0;
+  background:linear-gradient(to right, transparent, #d4af37, transparent);
+  border-radius:10px;
+}
+
+
+
+/* MENU TEMAS */
+.menu-temas{
+  display:flex;
+  justify-content:center;
+  gap:35px;
+  padding:35px 0;
+  background:#f4f6fa; /* fondo más limpio */
+}
+.boton-tema{
+  padding:14px 38px;
+  border-radius:50px;
+  font-weight:600;
+ background:linear-gradient(135deg, #6a11cb 0%, #4a00e0 100%)
+  color:#1e3c72;
+  border:none;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  transition:all .3s ease;
+}
+
+.boton-tema:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+
+
+
+
+.boton-tema.activo{
+  background:linear-gradient(135deg, #5f3dc4 0%, #4c6ef5 50%, #5f3dc4 100%);
+  color:white;
+  box-shadow:0 12px 30px rgba(0,0,0,0.25);
+  transform:translateY(-3px);
+}
+
+
+
+
+}
+/* Animación suave tipo latido/brillo */
+@keyframes brilloActivo{
+  0%{
+    box-shadow:0 0 15px rgba(42,157,143,.5);
+  }
+  50%{
+    box-shadow:0 0 30px rgba(42,157,143,.9);
+  }
+  100%{
+    box-shadow:0 0 15px rgba(42,157,143,.5);
+  }
+}
+
+
+
+
+
+.tema{
+  display:none;
+}
+
+.tema.activo{
+  display:block;
+}
+
+
+.contenedor{
+  position:relative;
+
+  max-width:1100px;
+  margin:40px auto;
+  padding:30px;
+  background:white;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.08);
+}
+
+h2{text-align:center;}
+
+.concepto-destacado{
+  background:#eef2ff;
+  border-left:6px solid var(--azul2);
+  padding:18px;
+  border-radius:12px;
+  margin:25px 0;
+  font-style:italic;
+}
+
+.imagen-central{
+  width:45%;
+  display:block;
+  margin:20px auto;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+/* BOTONES CULTURA */
+.bloques-principales{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin:30px 0;
+}
+
+.boton-cultura{
+  padding:15px 30px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.3s;
+  background:linear-gradient(135deg,var(--azul1),var(--azul2));
+  color:white;
+}
+
+.boton-cultura.activo.maya-btn{
+  background:linear-gradient(135deg,var(--maya1),var(--maya2));
+}
+
+.boton-cultura.activo.inca-btn{
+  background:linear-gradient(135deg,var(--inca1),var(--inca2));
+}
+
+.boton-cultura:hover{ transform:scale(1.07); }
+
+.contenido-cultura{
+  max-height:0;
+  overflow:hidden;
+  transition:all .6s ease;
+  opacity:0;
+  transform:translateY(20px);
+}
+
+.contenido-cultura.activo{
+  max-height:900px;
+  opacity:1;
+  transform:translateY(0);
+  margin-bottom:25px;
+}
+
+.tarjetas{
+  display:none;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  margin-top:40px;
+}
+
+.tarjetas.activo{ display:grid; }
+
+.tarjeta{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  transition:.4s;
+  border-top:6px solid transparent;
+  opacity:0;
+  transform:translateY(30px);
+}
+
+.tarjeta.mostrar{
+  animation:entrada .6s ease forwards;
+}
+
+@keyframes entrada{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.tarjeta:hover{ transform:translateY(-8px); }
+
+.tarjeta img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  transition:.4s;
+}
+
+.tarjeta:hover img{ transform:scale(1.08); }
+
+.tarjeta .contenido{ padding:20px; }
+
+.tarjeta.maya{ border-top:6px solid var(--maya2); }
+.tarjeta.maya h3{ color:var(--maya1); }
+
+.tarjeta.inca{ border-top:6px solid var(--inca2); }
+.tarjeta.inca h3{ color:#9c6f00; }
+
+@media(max-width:768px){
+  .imagen-central{width:80%;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ====== MEJORAS SOLO TEMA 2 ====== */
+
+.detalle-evento{
+  background:#ffffff;
+  border-left:6px solid #c1121f;
+  box-shadow:0 15px 35px rgba(193,18,31,.15);
+}
+
+/* ===== LINEA DE TIEMPO HORIZONTAL PRO ===== */
+.linea-tiempo{
+  position:relative;
+  max-width:1000px;
+  margin:80px auto;
+  padding-top:60px;
+}
+
+/* Línea negra horizontal */
+.linea-tiempo::before{
+  content:"";
+  position:absolute;
+  top:30px;
+  left:0;
+  width:0;
+  height:4px;
+background: linear-gradient(90deg, #b0b7c3, #d8dee9);
+  transition:width 1.2s ease;
+}
+
+/* Animación de la línea */
+.linea-tiempo.animar::before{
+  width:100%;
+}
+
+
+
+
+.evento{
+  position:relative;
+  display:inline-block;
+  width:30%;
+  text-align:center;
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .7s ease;
+  cursor:pointer;
+
+}
+
+.evento{
+  cursor:pointer;
+  transition:.4s;
+}
+
+
+
+.evento:hover h4{
+  transform:scale(1.1);
+  transition:.3s;
+}
+
+.evento:hover::before{
+  box-shadow:0 0 25px rgba(255,0,0,1);
+}
+
+
+
+
+.evento.activo::before{
+  background:#ff0000;
+  box-shadow:0 0 25px rgba(255,0,0,.9);
+  animation:latido 1s infinite;
+}
+
+@keyframes latido{
+  0%{ transform:translateX(-50%) scale(1); }
+  50%{ transform:translateX(-50%) scale(1.3); }
+  100%{ transform:translateX(-50%) scale(1); }
+}
+
+.detalle-evento{
+  max-height:0;
+  overflow:hidden;
+  transition:.6s ease;
+  background:#fff8f8;
+  border-radius:15px;
+  margin-top:15px;
+  padding:0 20px;
+}
+
+.detalle-evento.activo{
+  max-height:500px;
+  padding:20px;
+}
+
+.detalle-evento img{
+  width:100%;
+  max-width:400px;
+  display:block;
+  margin:15px auto;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.evento.mostrar{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.evento::before{
+  content:"";
+  position:absolute;
+  top:32px;
+  left:50%;
+  transform:translateX(-50%);
+  width:18px;
+  height:18px;
+  background:var(--rojo2);
+  border-radius:50%;
+  box-shadow:0 0 15px rgba(193,18,31,.7);
+}
+
+.evento h4{
+  margin-top:60px;
+  font-size:1.4em;
+  color:var(--rojo1);
+}
+
+.evento h4::after{
+  content:"";
+  display:block;
+  width:40px;
+  height:3px;
+  background:var(--rojo2);
+  margin:5px auto;
+  border-radius:3px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .evento{
+    display:block;
+    width:100%;
+    margin-bottom:50px;
+  }
+
+  .linea-tiempo::before{
+    display:none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tarjetas-conquista{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.card-conquista{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  border-top:5px solid var(--rojo2);
+  transition:.3s;
+}
+
+.card-conquista:hover{
+  transform:translateY(-6px);
+}
+
+
+
+
+
+.boton-dato{
+  margin-top:30px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,var(--rojo1),var(--rojo2));
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 8px 20px rgba(193,18,31,.4);
+  transition:.3s;
+}
+
+.boton-dato:hover{
+  transform:scale(1.08);
+  box-shadow:0 12px 25px rgba(193,18,31,.6);
+}
+
+.dato-oculto{
+  max-height:0;
+  overflow:hidden;
+  transition:.5s;
+  margin-top:10px;
+  background:#fff5f5;
+  padding:0 15px;
+  border-radius:10px;
+}
+
+.dato-oculto.activo{
+  max-height:200px;
+  padding:15px;
+}
+
+@media(max-width:768px){
+  .imagen-central{width:80%;}
+}
+
+
+
+
+
+/* ===================== TARJETAS TEMA 3 ===================== */
+
+.tarjetas-tema3{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
+  border-left: 5px solid #1e3c72;
+}
+
+.tarjeta:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.tarjeta h3{
+  margin-bottom: 10px;
+  color: #1e3c72;
+  font-size: 18px;
+}
+
+.tarjeta p{
+  font-size: 14px;
+  color: #444;
+}
+
+
+
+/* CONTENEDOR */
+
+.mapa-conceptual{
+  position: relative;
+  width: 100%;
+  height: 650px;
+  margin: 60px 0;
+}
+
+/* CENTRO */
+
+.centro{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ff8fa3;
+  padding: 25px 45px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+/* NODOS */
+
+.nodo{
+  position: absolute;
+  width: 220px;
+  padding: 18px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.nodo h4{
+  margin-bottom: 8px;
+  color: #1e3c72;
+}
+
+/* POSICIONES */
+
+.arriba{ top: 5%; left: 50%; transform: translateX(-50%); }
+.izquierda{ top: 50%; left: 5%; transform: translateY(-50%); }
+.derecha{ top: 50%; right: 5%; transform: translateY(-50%); }
+.abajo-izq{ bottom: 5%; left: 20%; }
+.abajo-der{ bottom: 5%; right: 20%; }
+
+/* FLECHAS (LÍNEAS) */
+.mapa-central {
+  background: linear-gradient(135deg, #ff7b8a, #ff4d6d);
+  color: white;
+  padding: 25px 40px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+
+.mapa-central:hover{
+  transform: scale(1.05);
+}
+
+.tarjeta-mapa{
+  background: #f8f9fb;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.tarjeta-mapa:hover{
+  transform: translateY(-5px);
+}
+
+.mapa-conceptual::before,
+.mapa-conceptual::after{
+  content: "";
+  position: absolute;
+  background: #1e3c72;
+  z-index: 1;
+}
+
+/* Línea vertical arriba */
+.mapa-conceptual::before{
+  width: 3px;
+  height:  35%;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Línea vertical abajo */
+.mapa-conceptual::after{
+  width: 3px;
+  height:  35%;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.linea-horizontal-izq,
+.linea-horizontal-der{
+  position: absolute;
+  height: 3px;
+  width: 180px;
+  background: #1e3c72;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.linea-horizontal-izq{
+  left: 20%;
+background: linear-gradient(to right, #1e3c72, #2a5298);
+
+}
+
+.linea-horizontal-der{
+background: linear-gradient(to right, #1e3c72, #2a5298);
+  right: 20%;
+}
+
+
+
+/* ===================== SUBTÍTULOS ===================== */
+
+
+
+.titulo-quiz{
+  text-align:center;
+  font-size:26px;
+  margin-bottom:25px;
+  background:linear-gradient(135deg,#1e3c72,#2a5298);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:bold;
+}
+
+.lista-puntos li{
+  background: #eef1f7;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.lista-puntos li:hover{
+  background: #dbe6ff;
+  transform: translateX(5px);
+}
+.separador{
+  width: 80px;
+  height: 4px;
+  background: #1e3c72;
+  margin: 40px auto;
+  border-radius: 10px;
+}
+
+.analisis {
+  background: linear-gradient(to right, #eaf2ff, #f7f9ff);
+  padding: 25px;
+  border-left: 6px solid #1e3c72;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.contexto {
+  background: #f8f9fc;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px auto;
+  line-height: 1.6;
+  text-align: justify;
+  max-width: 850px;
+}
+
+#tema3 h3{
+  margin-top: 35px;
+  color: #1e3c72;
+  border-left: 5px solid #2a5298;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.bloque-tema3{
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 18px;
+  margin-bottom: 30px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+.bloque-tema3::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6px;
+  background: linear-gradient(to bottom, #1e3c72, #2a5298);
+}
+
+.bloque-tema3:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+}
+
+.bloque-tema3 h3{
+  margin-bottom: 12px;
+  color: #1e3c72;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.bloque-tema3 p{
+  color: #444;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+
+/* ===================== IMAGEN CENTRAL ===================== */
+
+.imagen-central{
+  display: block;
+  margin: 30px auto;
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.imagen-tema img {
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.imagen-tema img:hover {
+  transform: scale(1.03);
+}
+
+
+
+/* ===================== RESUMEN PARA ESTUDIAR (VERSIÓN MEJORADA) ===================== */
+.instruccion{
+  text-align: center;
+  font-style: italic;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #1e3c72;
+}
+
+
+.resumen-estudio{
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 18px;
+  margin-top: 40px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  border: 2px solid #1e3c72;
+  position: relative;
+}
+
+.resumen-estudio h3{
+  color: #1e3c72;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.resumen-estudio ul{
+  list-style: none;
+  padding: 0;
+}
+
+.resumen-estudio li{
+  margin-bottom: 12px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background: #f4f7fc;
+  transition: 0.3s;
+}
+
+.resumen-estudio li:hover{
+  background: #e6eefc;
+  transform: translateX(5px);
+}
+
+.resumen-estudio li::before{
+  content: "✔ ";
+  color: #1e3c72;
+  font-weight: bold;
+}
+
+/* Transición suave */
+.nodo,
+.nodo-central{
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+/* Hover nodos laterales */
+.nodo:hover{
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(30,60,114,0.25);
+  border: 2px solid #2a5298;
+  background: #ffffff;
+}
+
+/* Hover nodo central */
+.nodo-central:hover{
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(233,114,137,0.4);
+  background: linear-gradient(135deg, #ff8fa3, #e97289);
+}
+
+/* Icono más brillante */
+.nodo:hover h3,
+.nodo-central:hover h3{
+  color: #1e3c72;
+}
+
+/* Pequeño efecto de brillo */
+.nodo::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent
+  );
+  transition:0.6s;
+}
+
+.nodo:hover::after{
+  left:100%;
+}
+
+
+
+
+
+
+/* ===== CUADRO COMPARATIVO TEMA 4 ===== */
+
+
+
+/* Animación del cuadro completo */
+.cuadro-comparativo{
+  margin-top:40px;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+  opacity:0;
+  transform:translateY(40px);
+  transition:.6s ease;
+}
+
+/* Cuando se activa Tema 4 */
+.cuadro-comparativo.animar{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Animación individual por fila */
+.cuadro-comparativo .fila{
+  display:grid;
+  grid-template-columns: 1.2fr 2fr 2fr 1.5fr;
+  opacity:0;
+  transform:translateY(25px);
+}
+
+/* Cuando se activa */
+.cuadro-comparativo.animar .fila{
+  animation:aparecerFila .6s forwards;
+}
+
+.cuadro-comparativo.animar .fila:nth-child(1){animation-delay:.1s;}
+.cuadro-comparativo.animar .fila:nth-child(2){animation-delay:.2s;}
+.cuadro-comparativo.animar .fila:nth-child(3){animation-delay:.3s;}
+.cuadro-comparativo.animar .fila:nth-child(4){animation-delay:.4s;}
+.cuadro-comparativo.animar .fila:nth-child(5){animation-delay:.5s;}
+.cuadro-comparativo.animar .fila:nth-child(6){animation-delay:.6s;}
+.cuadro-comparativo.animar .fila:nth-child(7){animation-delay:.7s;}
+
+@keyframes aparecerFila{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.cuadro-comparativo .fila .celda:first-child{
+  font-weight:bold;
+  color:#134e5e;
+}
+
+
+
+
+
+
+.cuadro-comparativo .encabezado{
+  background:linear-gradient(135deg, #134e5e, #71b280);
+  color:white;
+  font-weight:bold;
+  text-align:center;
+ 
+}
+
+.cuadro-comparativo .celda{
+  padding:18px;
+  border:1px solid #eee;
+  font-size:14px;
+}
+
+.cuadro-comparativo .fila:nth-child(even):not(.encabezado){
+  background:#EAF7EE;
+}
+
+.cuadro-comparativo .fila:not(.encabezado){
+  transition:all .3s ease;
+}
+
+.cuadro-comparativo .fila:not(.encabezado):hover{
+  background:linear-gradient(135deg,#f1f8f6,#d8f3dc);
+  transform:scale(1.01);
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .cuadro-comparativo .fila{
+    grid-template-columns:1fr;
+  }
+}
+
+
+
+/* Cuando el tema está activo */
+.cuadro-comparativo.animar{
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+
+.cuadro-comparativo .encabezado .celda:first-child{
+color:white;
+  background:#0f3057;
+}
+
+
+
+
+
+/* ===== QUIZ MODAL ===== */
+
+.boton-quiz{
+  padding:18px 45px;
+  font-size:18px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(135deg,#ffd60a,#ffb703);
+  color:#3a2e00;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 12px 30px rgba(193,18,31,.4);
+}
+
+.boton-quiz:hover{
+  transform:scale(1.08);
+  box-shadow:0 18px 40px rgba(255,183,3,.6);
+}
+.quiz-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.quiz-modal.activo{
+display:flex;
+}
+
+
+.quiz-contenido{
+  background:linear-gradient(145deg,#ffffff,#f4f7fc);
+  padding:40px;
+  border-radius:30px;
+  width:95%;
+  max-width:750px;
+  max-height:90vh;
+  overflow-y:auto;
+  position:relative;
+  animation:aparecer .4s ease;
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+@keyframes aparecer{
+  from{ transform:scale(.8); opacity:0; }
+  to{ transform:scale(1); opacity:1; }
+}
+
+.cerrar-quiz{
+  position:absolute;
+  right:15px;
+  top:10px;
+  cursor:pointer;
+  font-size:20px;
+}
+
+.pregunta{
+  margin-bottom:25px;
+  padding:15px;
+  background:#f4f7fc;
+  border-radius:15px;
+}
+
+
+.pregunta label{
+  display:block;
+  margin:5px 0;
+  cursor:pointer;
+}
+
+
+
+
+.correcta{
+  background:#d4edda !important;
+  border:2px solid #28a745;
+  border-radius:8px;
+  padding:5px;
+}
+
+.incorrecta{
+  background:#f8d7da !important;
+  border:2px solid #dc3545;
+  border-radius:8px;
+  padding:5px;
+}
+
+
+
+
+
+
+.boton-enviar{
+  margin-top:15px;
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(135deg,#8b0000,#c1121f);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.boton-enviar:hover{
+  transform:scale(1.05);
+}
+
+.resultado{
+  margin-top:20px;
+  font-weight:bold;
+  text-align:center;
+}
+
+</style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+<header style="position:relative;">
+
+<button onclick="RegresarInicio()" 
+  style="
+    position:absolute;
+    left:20px;
+    top:35px;
+    padding:10px 22px;
+    border:none;
+    border-radius:30px;
+    background:rgba(255,255,255,0.25);
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    font-size:16px;
+    backdrop-filter:blur(6px);
+    transition:all .3s ease;
+  ">
+  ← Regresar
+</button>
+
+
+  <h1>SECCIÓN 3</h1>
+  <p>América Latina: de las culturas precolombinas a la herencia colonial</p>
+
+</header>
+
+
+
+
+<div class="menu-temas">
+  <div class="boton-tema activo" onclick="cambiarTema('tema1',this)">Tema 1</div>
+  <div class="boton-tema" onclick="cambiarTema('tema2',this)">Tema 2</div>
+  <div class="boton-tema" onclick="cambiarTema('tema3',this)">Tema 3</div>
+  <div class="boton-tema" onclick="cambiarTema('tema4',this)">Tema 4</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===================== TEMA 1 COMPLETO ORIGINAL ===================== -->
+<div id="tema1" class="tema activo">
+<div class="contenedor">
+
+<button onclick="toggleLectura(this)" class="btnLectura" style="
+  position:absolute;
+  right:20px;
+  top:20px;
+  padding:8px 18px;
+  border:none;
+  border-radius:25px;
+  background:rgba(0,0,0,0.4);
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.3s;
+">
+🔊 Leer
+</button>
+
+<h2>Tema 1: Los Mayas e Incas</h2>
+
+<div class="concepto-destacado">
+Las civilizaciones maya e inca fueron culturas avanzadas.
+</div>
+
+<p>Antes de la llegada de los europeos, América estaba habitada por civilizaciones muy avanzadas, entre las que destacaron los mayas y los incas. Los mayas, ubicados en Mesoamérica, desarrollaron grandes conocimientos en astronomía, matemáticas y un sistema de escritura jeroglífica. Construyeron ciudades ceremoniales con pirámides y templos que demostraban su alto nivel científico y arquitectónico.</p>
+
+<img src="../IMAGEN/t34.png" class="imagen-central">
+
+<div class="bloques-principales">
+<div id="btn-maya" class="boton-cultura maya-btn" onclick="mostrarCultura('maya')">Cultura Maya</div>
+<div id="btn-inca" class="boton-cultura inca-btn" onclick="mostrarCultura('inca')">Cultura Inca</div>
+</div>
+
+<div id="maya" class="contenido-cultura">
+<p>La cultura maya fue una de las civilizaciones más avanzadas de América antes de la llegada de los europeos. Se destacó por sus grandes conocimientos en astronomía, ya que podían predecir eclipses y crear calendarios muy precisos. También desarrollaron un sistema matemático avanzado, donde usaron el número cero mucho antes que otras culturas del mundo. Además, construyeron impresionantes ciudades ceremoniales, templos y pirámides en lugares como Tikal, Palenque y Chichén Itzá. Su escritura jeroglífica, su arte y su arquitectura muestran el alto nivel cultural que alcanzaron.</p>
+</div>
+
+<div id="inca" class="contenido-cultura">
+<p>La cultura inca fue una de las civilizaciones más importantes de América del Sur antes de la llegada de los españoles. Se desarrolló en los Andes y creó un gran imperio llamado Tahuantinsuyo, que se extendía por Perú, Ecuador, Bolivia, Chile y Argentina. Los incas destacaron por su excelente organización política, su sistema de caminos (el Qhapaq Ñan), y su capacidad para construir ciudades y templos de piedra con gran precisión, como Machu Picchu y Cuzco. También desarrollaron una agricultura avanzada con terrazas y sistemas de riego, y usaron el quipu, un sistema de cuerdas con nudos para llevar registros. Su sociedad estaba muy organizada y dirigida por el Inca, considerado hijo del Sol.</p>
+</div>
+
+
+
+
+
+
+<!-- TARJETAS MAYA -->
+
+<div id="tarjetas-maya" class="tarjetas">
+  
+
+
+<div class="tarjeta maya">
+<img src="../IMAGEN/calendario.jpg">
+<div class="contenido">
+<h3>Calendario Maya</h3>
+<p>Sistema astronómico extremadamente preciso basado en ciclos solares y rituales.</p>
+</div>
+</div>
+
+<div class="tarjeta maya">
+<img src="../IMAGEN/chichen.jpg">
+<div class="contenido">
+<h3>Ciudades-Estado</h3>
+<p>Centros como Tikal y Chichén Itzá con gobierno independiente.</p>
+</div>
+</div>
+
+<div class="tarjeta maya">
+<img src="../IMAGEN/piramide.jpg">
+<div class="contenido">
+<h3>Arquitectura Maya</h3>
+<p>Pirámides escalonadas alineadas con fenómenos astronómicos.</p>
+</div>
+</div>
+
+</div>
+
+<!-- TARJETAS INCA -->
+<div id="tarjetas-inca" class="tarjetas">
+
+<div class="tarjeta inca">
+<img src="../IMAGEN/quipu.jpg">
+<div class="contenido">
+<h3>El Quipu</h3>
+<p>Sistema de cuerdas y nudos para organizar información del imperio.</p>
+</div>
+</div>
+
+<div class="tarjeta inca">
+<img src="../IMAGEN/andenes.jpg">
+<div class="contenido">
+<h3>Andenes</h3>
+<p>Terrazas agrícolas que evitaban erosión y mejoraban la producción.</p>
+</div>
+</div>
+
+<div class="tarjeta inca">
+<img src="../IMAGEN/machu.jpg">
+<div class="contenido">
+<h3>Ingeniería Inca</h3>
+<p>Construcciones con bloques de piedra encajados sin mortero, resistentes a terremotos. Machu Picchu es su máximo ejemplo.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+<!-- TEMAS NUEVOS -->
+<!-- ===================== TEMA 2 ===================== -->
+<div id="tema2" class="tema">
+<div class="contenedor">
+
+<button onclick="toggleLectura(this)" class="btnLectura" style="
+  position:absolute;
+  right:20px;
+  top:20px;
+  padding:8px 18px;
+  border:none;
+  border-radius:25px;
+  background:rgba(0,0,0,0.4);
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.3s;
+">
+🔊 Leer
+</button>
+
+
+<h2>Tema 2: La conquista y la colonización de América Latina</h2>
+
+<div class="concepto-destacado">
+La llegada de los europeos transformó profundamente la organización política, social y cultural del continente.
+</div>
+
+
+
+<p>La conquista y colonización de América Latina fue un proceso extenso, complejo y profundamente transformador que involucró a numerosos personajes, instituciones, pueblos indígenas y potencias europeas. Todo comenzó a finales del siglo XV, cuando Cristóbal Colón, navegante genovés al servicio de los Reyes Católicos, llegó al continente en 1492. Su viaje abrió la puerta a una serie de expediciones encabezadas por figuras como Américo Vespucio, Juan Ponce de León, Vasco Núñez de Balboa quien avistó por primera vez el océano Pacífico desde Panamá, y Pedro Álvares Cabral, quien llegó a las costas de Brasil en 1500. Estas exploraciones iniciales marcaron el inicio del contacto permanente entre Europa y América, un encuentro que transformó radicalmente la vida de ambos continentes.</p>
+
+
+<img src="../IMAGEN/conquista.jpg" class="imagen-central">
+
+
+
+
+<p>Durante el siglo XVI, los españoles lograron conquistar grandes imperios de América aprovechando que muchos pueblos indígenas estaban divididos o enfrentados entre sí. En México, Hernán Cortés derrotó al Imperio azteca porque se unió con pueblos enemigos de los mexicas, como los tlaxcaltecas, y porque las enfermedades europeas debilitaron a la población. En los Andes, Francisco Pizarro conquistó el Imperio inca aprovechando la guerra civil entre Huáscar y Atahualpa y capturando a este último por sorpresa. Aunque hubo fuertes resistencias indígenas como los mapuches en Chile y líderes como Anacaona y Hatuey en el Caribe, los españoles lograron imponerse gracias a alianzas, armas desconocidas para los indígenas y la devastación causada por las enfermedades.</p>
+
+<div class="concepto-destacado">
+<p>Tras la caída de los imperios azteca e inca, se establecieron virreinatos que organizaron el territorio bajo control europeo.
+</p></div>
+
+
+
+
+
+
+
+
+
+<p>
+Durante la colonización se implantó el sistema de encomiendas, se difundió el cristianismo y surgió una nueva estructura social basada en castas.
+</p>
+
+
+
+<p>En conjunto, la conquista y colonización de América Latina fue un proceso marcado por encuentros violentos, intercambios culturales, transformaciones profundas y resistencias persistentes. Los nombres, hechos y actores involucrados muestran la complejidad de un periodo que definió el rumbo histórico del continente y cuyas consecuencias siguen presentes en la identidad latinoamericana.</p>
+
+
+
+<p class="instruccion">
+  👇 <em>Haz clic en cada fecha para descubrir más información</em> 👇
+</p>
+
+<div class="linea-tiempo">
+
+  <div class="evento" onclick="activarEvento(this)">
+    <h4>1492</h4>
+    <p>Llegada de Cristóbal Colón a América.</p>
+
+    <div class="detalle-evento">
+      <img src="../IMAGEN/colon.jpg">
+      <p>Este acontecimiento marcó el inicio del contacto permanente entre Europa y América.</p>
+    </div>
+  </div>
+
+  <div class="evento" onclick="activarEvento(this)">
+    <h4>1521</h4>
+    <p>Caída del Imperio Azteca.</p>
+
+    <div class="detalle-evento">
+      <img src="../IMAGEN/azteca.jpg">
+      <p>Hernán Cortés logró conquistar Tenochtitlán tras alianzas y conflictos.</p>
+    </div>
+  </div>
+
+  <div class="evento" onclick="activarEvento(this)">
+    <h4>1533</h4>
+    <p>Caída del Imperio Inca.</p>
+
+    <div class="detalle-evento">
+      <img src="../IMAGEN/inca.jpg">
+      <p>Francisco Pizarro capturó a Atahualpa y debilitó el poder imperial.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+
+<!-- ===================== TEMA 3 ===================== -->
+
+<div id="tema3" class="tema">
+<div class="contenedor">
+<button onclick="toggleLectura(this)" class="btnLectura" style="
+  position:absolute;
+  right:20px;
+  top:20px;
+  padding:8px 18px;
+  border:none;
+  border-radius:25px;
+  background:rgba(0,0,0,0.4);
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.3s;
+">
+🔊 Leer
+</button>
+
+
+
+<h2>Tema 3: La expansión portuguesa en América</h2>
+
+<div class="concepto-destacado">
+La expansión portuguesa en América estuvo marcada por la colonización del vasto territorio que hoy es Brasil, la economía agrícola y el uso de mano de obra esclava africana, lo que transformó profundamente la sociedad y la cultura de la región.
+</div>
+
+<!-- ===================== TARJETAS RESUMEN ===================== -->
+
+
+<!-- Imagen central -->
+<img src="../IMAGEN/brasil-colonial.jpg" class="imagen-central" alt="Mapa colonial de Brasil">
+
+<p>La expansión portuguesa en América se desarrolló dentro del proceso de exploraciones marítimas impulsadas por Portugal en el siglo XV, motivadas por la búsqueda de nuevas rutas comerciales hacia Asia y el control del comercio de especias. Aunque el objetivo inicial no era colonizar América, el descubrimiento accidental de Brasil en 1500 llevó a Portugal a consolidar su presencia en el territorio para evitar la ocupación por otras potencias europeas.</p>
+
+
+<p>A lo largo del siglo XVI, la colonización se organizó mediante el sistema de capitanías hereditarias, otorgadas a particulares con la responsabilidad de poblar y explotar las tierras. Sin embargo, muchas fracasaron, lo que llevó a la creación de un gobierno general para centralizar la administración.</p>
+
+
+<p>La economía colonial se basó principalmente en el monocultivo de la caña de azúcar, utilizando mano de obra esclava africana tras la disminución de la población indígena. Este modelo económico integró a Brasil en el comercio atlántico, fortaleciendo la economía portuguesa.</p>
+<p>La expansión portuguesa no solo transformó el territorio, sino que también produjo un profundo impacto social y cultural, dando origen a una sociedad mestiza y jerarquizada que marcaría la identidad brasileña y latinoamericana.</p>
+
+
+<h3> Mapa Mental</h3>
+
+
+<!-- ===================== CONTENIDO ORGANIZADO ===================== -->
+<div class="mapa-conceptual">
+
+  <div class="centro">
+    Expansión portuguesa<br>en América
+  </div>
+
+<!-- 👇 AQUÍ VAN LAS LÍNEAS -->
+  <div class="linea-horizontal-izq"></div>
+  <div class="linea-horizontal-der"></div>
+
+
+  <div class="nodo arriba">
+    <h4>📅 Origen</h4>
+    <p>1500: Llegada de Pedro Álvares Cabral.</p>
+  </div>
+
+  <div class="nodo izquierda">
+    <h4>📜 Organización</h4>
+    <p>Tratado de Tordesillas y capitanías hereditarias.</p>
+  </div>
+
+  <div class="nodo derecha">
+    <h4>🌱 Economía</h4>
+    <p>Caña de azúcar y exportación.</p>
+  </div>
+
+  <div class="nodo abajo-izq">
+    <h4>⛓ Sociedad</h4>
+    <p>Mano de obra indígena y esclava africana.</p>
+  </div>
+
+  <div class="nodo abajo-der">
+    <h4>🏛 Independencia</h4>
+    <p>Brasil se independiza en 1822.</p>
+  </div>
+
+</div>
+
+<!-- ===================== ANÁLISIS ===================== -->
+
+<h3>🔎 Análisis histórico</h3>
+<p>
+La expansión portuguesa no solo fue un proceso territorial, sino también económico y social. Sentó las bases de una sociedad jerarquizada y dependiente del comercio exterior, cuyas consecuencias todavía influyen en la estructura social y cultural de Brasil actual.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- ===================== TEMA 4 ===================== -->
+<div id="tema4" class="tema">
+<div class="contenedor">
+
+
+<button onclick="toggleLectura(this)" class="btnLectura" style="
+  position:absolute;
+  right:20px;
+  top:20px;
+  padding:8px 18px;
+  border:none;
+  border-radius:25px;
+  background:rgba(0,0,0,0.4);
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.3s;
+">
+🔊 Leer
+</button>
+
+<h2>Tema 4: La herencia artística de Hispanoamérica</h2>
+
+<div class="concepto-destacado">
+La mezcla de culturas indígenas, europeas y africanas dio origen a una identidad artística única en América Latina.
+</div>
+
+
+
+<p>La herencia artística de Hispanoamérica es el conjunto de expresiones culturales que surgieron en América Latina a partir de la mezcla entre pueblos indígenas, europeos (especialmente españoles) y africanos durante la época colonial. Esta combinación dio origen a un estilo artístico único, donde se mezclan técnicas europeas con símbolos, colores y tradiciones propias de las culturas americanas.</p>
+
+<img src="../IMAGEN/arte-colonial.jpg" class="imagen-central">
+
+
+<p>Durante la colonia se desarrolló el barroco americano, un arte muy decorado y religioso que se refleja en iglesias ornamentadas, retablos dorados, esculturas y pinturas que incorporan elementos indígenas. También la música y la arquitectura muestran este mestizaje cultural, convirtiéndose en una de las características principales de la identidad latinoamericana.</p>
+
+
+<p>La herencia artística de Hispanoamérica no solo representa una mezcla de culturas, sino también un proceso de adaptación y resistencia cultural. A través del arte, los pueblos indígenas y africanos lograron conservar parte de sus símbolos, creencias y formas de expresión dentro de un contexto dominado por la influencia europea. De esta manera, el arte colonial se convirtió en un espacio donde convergieron distintas visiones del mundo, dando lugar a manifestaciones originales que hoy forman parte esencial del patrimonio cultural latinoamericano.</p>
+
+
+
+
+<div class="concepto-destacado">
+La arquitectura, la pintura y la música colonial reflejan el mestizaje cultural que define la identidad latinoamericana.
+</div>
+
+<div id="visorImagen" class="visor-imagen">
+  <img id="imagenTema" src="" alt="">
+</div>
+
+
+
+
+
+<h2 class="titulo-seccion">
+  Manifestaciones Culturales en la América Colonial
+</h2>
+
+
+<div class="cuadro-comparativo">
+
+<div class="fila encabezado">
+  <div class="celda">Manifestación</div>
+  <div class="celda">Características</div>
+  <div class="celda">Ejemplos</div>
+  <div class="celda">Aporte Cultural</div>
+</div>
+
+<div class="fila">
+  <div class="celda">Arte Barroco Americano</div>
+  <div class="celda">Estilo europeo adaptado con creatividad indígena y africana. Decoración recargada y dorada.</div>
+  <div class="celda">Iglesia de San Francisco (Quito), Catedral de Puebla, Santa Prisca (México).</div>
+  <div class="celda">Refleja el mestizaje artístico y religioso.</div>
+</div>
+
+<div class="fila">
+  <div class="celda">Arquitectura Colonial</div>
+  <div class="celda">Técnicas europeas combinadas con materiales locales.</div>
+  <div class="celda">Plazas mayores, balcones de madera, conventos.</div>
+  <div class="celda">Organización urbana y legado arquitectónico actual.</div>
+</div>
+
+<div class="fila">
+  <div class="celda">Pintura Colonial</div>
+  <div class="celda">Temas religiosos con rasgos indígenas y colores intensos.</div>
+  <div class="celda">Escuela Quiteña, Virgen del Cerro.</div>
+  <div class="celda">Identidad artística mestiza.</div>
+</div>
+
+<div class="fila">
+  <div class="celda">Música Colonial</div>
+  <div class="celda">Mezcla de instrumentos europeos, ritmos africanos e indígenas.</div>
+  <div class="celda">Villancicos coloniales, música jesuítica.</div>
+  <div class="celda">Base de la música latinoamericana.</div>
+</div>
+
+<div class="fila">
+  <div class="celda">Artesanías Indígenas</div>
+  <div class="celda">Técnicas tradicionales aplicadas al arte colonial.</div>
+  <div class="celda">Tallado en madera, tejidos andinos, platería.</div>
+  <div class="celda">Conservación cultural indígena.</div>
+</div>
+
+<div class="fila">
+  <div class="celda">Mestizaje Cultural</div>
+  <div class="celda">Fusión indígena, europea y africana.</div>
+  <div class="celda">Elementos combinados en arquitectura, pintura y música.</div>
+  <div class="celda">Base de la identidad latinoamericana.</div>
+</div>
+
+</div>
+
+
+
+
+
+
+<div style="text-align:center; margin-top:40px;">
+  <button type="button" class="boton-quiz" onclick="abrirQuiz()">
+    📝 Iniciar Quiz
+  </button>
+</div>
+
+<div id="quizModal" class="quiz-modal">
+  <div class="quiz-contenido">
+    <span class="cerrar-quiz" onclick="cerrarQuiz()">✖</span>
+
+<h2 class="titulo-quiz"> Quiz de Evaluación</h2>
+
+    <div class="pregunta">
+      <p>1. ¿Quién llegó a Brasil en 1500?</p>
+      <label><input type="radio" name="q1" value="a"> Cristóbal Colón</label>
+      <label><input type="radio" name="q1" value="b"> Pedro Álvares Cabral</label>
+      <label><input type="radio" name="q1" value="c"> Hernán Cortés</label>
+    </div>
+
+    <div class="pregunta">
+      <p>2. ¿Cuál fue el principal cultivo?</p>
+      <label><input type="radio" name="q2" value="a"> Café</label>
+      <label><input type="radio" name="q2" value="b"> Maíz</label>
+      <label><input type="radio" name="q2" value="c"> Caña de azúcar</label>
+    </div>
+
+    <div class="pregunta">
+      <p>3. ¿En qué año se independiza Brasil?</p>
+      <label><input type="radio" name="q3" value="a"> 1822</label>
+      <label><input type="radio" name="q3" value="b"> 1810</label>
+      <label><input type="radio" name="q3" value="c"> 1800</label>
+    </div>
+
+  <div class="pregunta">
+  <p>4. ¿Qué tratado dividió América entre España y Portugal?</p>
+  <label><input type="radio" name="q4" value="a"> Tratado de Madrid</label>
+  <label><input type="radio" name="q4" value="b"> Tratado de Tordesillas</label>
+  <label><input type="radio" name="q4" value="c"> Tratado de Sevilla</label>
+</div>
+
+<div class="pregunta">
+  <p>5. ¿Qué sistema utilizó Portugal para administrar Brasil?</p>
+  <label><input type="radio" name="q5" value="a"> Capitanías hereditarias</label>
+  <label><input type="radio" name="q5" value="b"> Virreinatos</label>
+  <label><input type="radio" name="q5" value="c"> Encomiendas</label>
+</div>
+
+
+
+    <button type="button" class="boton-enviar" onclick="corregirQuiz()">Enviar</button>
+
+    <div id="resultadoQuiz" class="resultado"></div>
+
+  </div>
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+function mostrarCultura(cultura){
+
+  document.querySelectorAll('.boton-cultura')
+  .forEach(btn=>btn.classList.remove('activo'));
+
+  document.getElementById('maya').classList.remove('activo');
+  document.getElementById('inca').classList.remove('activo');
+  document.getElementById('tarjetas-maya').classList.remove('activo');
+  document.getElementById('tarjetas-inca').classList.remove('activo');
+
+  document.getElementById(cultura).classList.add('activo');
+  document.getElementById('tarjetas-'+cultura).classList.add('activo');
+  document.getElementById('btn-'+cultura).classList.add('activo');
+
+  const tarjetas = document.querySelectorAll('#tarjetas-'+cultura+' .tarjeta');
+  tarjetas.forEach((tarjeta,i)=>{
+    tarjeta.classList.remove('mostrar');
+    setTimeout(()=>{
+      tarjeta.classList.add('mostrar');
+    }, i*200);
+  });
+}
+
+
+
+function cambiarTema(id, boton){
+
+  // 🛑 DETENER cualquier lectura activa
+  speechSynthesis.cancel();
+  leyendo = false;
+  pausado = false;
+
+  // Resetear texto de botones
+  document.querySelectorAll(".btnLectura").forEach(b=>{
+    b.innerHTML = "🔊 Leer";
+  });
+
+  // Cambiar tema visualmente
+  document.querySelectorAll('.tema').forEach(t=>t.classList.remove('activo'));
+  document.querySelectorAll('.boton-tema').forEach(b=>b.classList.remove('activo'));
+
+  document.getElementById(id).classList.add('activo');
+  boton.classList.add('activo');
+
+  /* ===== ANIMACIÓN TEMA 2 ===== */
+  if(id === "tema2"){
+    const linea = document.querySelector('.linea-tiempo');
+    if(linea){
+      linea.classList.remove("animar");
+      void linea.offsetWidth; 
+      linea.classList.add("animar");
+    }
+
+    document.querySelectorAll('#tema2 .evento').forEach((ev,i)=>{
+      ev.classList.remove('mostrar');
+      setTimeout(()=>{
+        ev.classList.add('mostrar');
+      }, i*400);
+    });
+  }
+
+  /* ===== ANIMACIÓN TEMA 4 ===== */
+  if(id === "tema4"){
+    const cuadro = document.querySelector('#tema4 .cuadro-comparativo');
+    if(cuadro){
+      cuadro.classList.remove("animar");
+      setTimeout(()=>{
+        cuadro.classList.add("animar");
+      }, 50);
+    }
+  }
+}
+
+
+
+
+function toggleDato(){
+  document.getElementById("datoExtra").classList.toggle("activo");
+}
+
+function activarEvento(elemento){
+
+  // Cerrar otros eventos
+  document.querySelectorAll('#tema2 .evento').forEach(ev=>{
+    if(ev !== elemento){
+      ev.classList.remove("activo");
+      ev.querySelector(".detalle-evento").classList.remove("activo");
+    }
+ });
+
+  // Activar actual
+  elemento.classList.toggle("activo");
+  elemento.querySelector(".detalle-evento").classList.toggle("activo");
+
+  // Sonido suave
+  let sonido = new Audio("../Sonido/Sonidodeseleccionar.mp3");
+  sonido.volume = 0.4;
+  sonido.play();
+}
+
+
+function RegresarInicio(){
+  window.location.href = "../inicio.html";
+}
+
+
+
+
+
+// ================= ABRIR / CERRAR =================
+
+function abrirQuiz(){
+  document.getElementById("quizModal").classList.add("activo");
+}
+
+function cerrarQuiz(){
+
+  document.getElementById("quizModal").classList.remove("activo");
+  document.getElementById("resultadoQuiz").style.display="none";
+
+  document.querySelectorAll('input[type="radio"]').forEach(r=>r.checked=false);
+  document.querySelectorAll('.pregunta label').forEach(l=>{
+    l.classList.remove('correcta','incorrecta');
+  });
+}
+// ================= CORREGIR =================
+
+const sonidoCorrecto = new Audio("../Sonido/Sonido-correcto.mp3");
+const sonidoIncorrecto = new Audio("../Sonido/incorrecto.mp3");
+
+sonidoCorrecto.volume = 0.5;
+sonidoIncorrecto.volume = 0.5;
+
+
+function corregirQuiz(){
+  let puntaje = 0;
+
+const respuestas = {
+    q1: "b",
+    q2: "c",
+    q3: "a",
+    q4: "b",
+    q5: "a"
+  };
+
+
+ // limpiar colores anteriores
+  document.querySelectorAll('.pregunta label').forEach(l=>{
+    l.classList.remove('correcta','incorrecta');
+  });
+
+  for(let pregunta in respuestas){
+
+    let opciones = document.querySelectorAll(`input[name="${pregunta}"]`);
+    let seleccion = document.querySelector(`input[name="${pregunta}"]:checked`);
+
+    opciones.forEach(op=>{
+      if(op.value === respuestas[pregunta]){
+        op.parentElement.classList.add("correcta");
+      }
+    });
+
+    if(seleccion){
+      if(seleccion.value === respuestas[pregunta]){
+        puntaje++;
+      }else{
+        seleccion.parentElement.classList.add("incorrecta");
+      }
+    }
+  }
+ let resultado = document.getElementById("resultadoQuiz");
+  resultado.style.display="block";
+
+
+
+
+if(puntaje === 5){
+    sonidoCorrecto.play();
+    resultado.style.background="#d4edda";
+    resultado.style.color="#155724";
+    resultado.innerHTML="🎉 Perfecto 5/5 ¡Dominaste el tema!";
+}
+else if(puntaje >= 3){
+    sonidoCorrecto.play();
+    resultado.style.background="#fff3cd";
+    resultado.style.color="#856404";
+    resultado.innerHTML="🙂 "+puntaje+"/5 Buen trabajo, revisa las rojas.";
+}
+else{
+    sonidoIncorrecto.play();
+    resultado.style.background="#f8d7da";
+    resultado.style.color="#721c24";
+    resultado.innerHTML="💪 "+puntaje+"/5 Necesitas repasar un poco más.";
+    }
+   }
+
+
+
+
+
+// ================= LECTOR DE TEXTO =================
+// ================= LECTOR DE TEXTO =================
+
+let leyendo = false;
+let pausado = false;
+let vozActual = null;
+
+function toggleLectura(boton){
+
+  const temaActivo = document.querySelector(".tema.activo");
+  if(!temaActivo) return;
+
+  if(!leyendo){
+
+    let texto = temaActivo.innerText;
+
+    vozActual = new SpeechSynthesisUtterance(texto);
+    vozActual.lang = "es-ES";
+    vozActual.rate = 0.95;
+    vozActual.pitch = 1;
+    vozActual.volume = 1;
+
+    speechSynthesis.speak(vozActual);
+
+    leyendo = true;
+    pausado = false;
+    boton.innerHTML = "⏸ Pausar";
+
+    vozActual.onend = function(){
+      leyendo = false;
+      pausado = false;
+      boton.innerHTML = "🔊 Leer";
+    };
+
+  } else {
+
+    if(!pausado){
+      speechSynthesis.pause();
+      pausado = true;
+      boton.innerHTML = "▶ Reanudar";
+    } else {
+      speechSynthesis.resume();
+      pausado = false;
+      boton.innerHTML = "⏸ Pausar";
+    }
+
+  }
+}
+
+</script>
+
+</body>
+</html>

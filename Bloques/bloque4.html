@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Historia Interactiva</title>
+
+<style>
+
+/* SLIDE ENTRE TEMAS */
+.tema{
+  animation-duration:0.6s;
+  animation-fill-mode:both;
+}
+.card.tema{
+  display:none;
+}
+
+.tema.activo{
+  display: block;
+}
+.tema.slide-in-right{
+  animation-name:slideInRight;
+}
+
+
+@keyframes slideInRight{
+  from{
+    opacity:0;
+    transform:translateX(60px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes slideInLeft{
+  from{
+    opacity:0;
+    transform:translateX(-60px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+
+/* LOS BOTONES DE TEMAS DE ARRIBA */
+
+.menu-temas{
+  display:flex;
+  gap:22px; /* más separación */
+  justify-content:center;
+  margin:35px 0 45px;    
+  flex-wrap:wrap;
+}
+
+/* BOTONES */
+.menu-temas button{
+  background:linear-gradient(135deg,#2bb673,#7ed957);
+  color:white;
+  border:none;
+  padding:20px 28px;      /* MÁS GRANDES */
+  font-size:18px;
+  min-width:150px;
+  border-radius:22px;
+  cursor:pointer;
+  font-weight:700;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  animation: aparecer .6s ease forwards;
+}
+
+
+/* ENTRADA SUAVE */
+@keyframes aparecer{
+  from{
+    opacity:0;
+    transform:translateY(-20px) scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+
+
+/* HOVER */
+.menu-temas button:hover{
+  transform:translateY(-8px) scale(1.08);
+  box-shadow:0 18px 38px rgba(0,0,0,.35);
+  background:linear-gradient(135deg,#239a5c,#5fce45);
+}
+
+
+
+/* BOTÓN ACTIVO (el que está seleccionado) */
+
+
+.menu-temas button.activo{
+background: linear-gradient(to right, #3BE000, #1FAF00, #0F7A3A);
+  box-shadow:0 22px 45px rgba(0,0,0,.45);
+  animation:pulso 1.6s infinite;
+}
+
+
+/* PULSO PRO */
+@keyframes pulso{
+  0%{
+    transform:scale(1.05);
+    box-shadow:0 0 0 0 rgb(59, 224, 0);
+  }
+  70%{
+    transform:scale(1.1);
+    box-shadow:0 0 0 18px rgba(59,130,246,0);
+  }
+  100%{
+    transform:scale(1.05);
+    box-shadow:0 0 0 0 rgba(59,130,246,0);
+  }
+}
+
+
+
+/* LOS COLORES DE LAS HOJA AÑADIDOS*/
+
+
+:root{
+  --principal:#2563eb;
+  --secundario:#1e3a8a;
+  --fondo:#3b6ea5;
+  --tarjeta:#ffffff;
+  --texto:#1f2937;
+  --azul:#0f3d5e;
+  --azul-suave:#e6f0f7;
+  --gris:#f9fafb;
+}
+
+
+
+
+
+body{
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:  #f1f5f9 ;
+
+}
+
+p{
+  margin-bottom:18px;
+  line-height:2;
+}
+
+
+
+.seccion-tema h1{
+  font-size:32px;
+  margin-bottom:8px;
+  text-align:center;
+
+}
+
+
+
+
+
+.seccion h2{
+  text-align:center;
+  display:inline-block;
+  border-bottom:3px solid #3f6fa3;
+  padding-bottom:8px;
+}
+
+.seccion{
+  text-align:center;
+}
+
+
+
+
+.seccion-tema .subtitulo{
+  font-size:22px;
+  margin-bottom:30px;
+  line-height:1.5;
+  font-weight:600;
+  text-align:center;
+
+}
+
+
+/* HEADER */
+header{
+  background: linear-gradient(135deg, #2bb673, #7ed957);
+  color:white;
+  padding:25px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+  justify-content:center; /* 🔥 centrado real */
+  position:relative;      /* necesario para el botón */
+
+
+}
+
+
+
+/* LETRA DEL TITULO */
+
+header h1{
+  text-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+
+header span{
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+
+
+
+
+.titulo-seccion{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  margin:0;
+}
+
+.titulo-seccion .sec{
+  font-size:18px;
+  font-weight:80px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.titulo-seccion .tema{
+  font-size:30px;
+  font-weight:bold;
+  opacity:0.95;
+  margin-top:4px;
+}
+
+
+
+
+header button{
+  position:absolute;
+  left:20px;
+  border:none;
+  color:white;
+  cursor:pointer;
+  top:35px;
+  transition:background .3s;
+  padding:10px 22px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.25);
+  font-weight:600;
+  font-size:16px;
+  backdrop-filter:blur(6px);
+}
+
+
+header button:hover{
+  background:rgba(255,255,255,.35); 
+}
+
+/* CONTENEDOR o lo que une todo en una hoja */
+main{
+  max-width:1000px;
+  margin:30px auto 60px;
+  padding:1px;
+}
+
+
+
+.card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:var(--tarjeta);
+  border-radius:20px;
+  padding:36px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+  margin-bottom:50px;
+  animation:entrada .6s ease;
+}
+
+
+
+
+
+@media (max-width: 600px){
+    .card{
+    margin-bottom: 15px;
+  }
+ }
+
+
+
+/* IMÁGENES EÑ MANEJO DE TODOS LOS IMAGENES PRINCIPALES */
+img{
+  max-width:360px;
+  display:block;
+  margin:28px auto;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transition:transform .3s;
+}
+
+img:hover{
+  transform:scale(1.03);
+}
+
+
+.img-historia{
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+
+.img-historia:hover{
+  transform: scale(1.03);
+}
+
+
+/* TEXTO DESTACADO */
+.texto-extra{
+  background:#e8f5e9;          /* verde muy suave */
+  border-left:6px solid #2bb673; /* verde principal */
+  padding:20px;
+  border-radius:14px;
+  color:#1f2937;
+  box-shadow:0 6px 20px rgba(34,197,94,0.15);
+  margin:20px 0;
+}
+
+
+/* BOTONES de mapa mental y quiz */
+
+/* CONTENEDOR */
+.actions{
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:150px;
+}
+
+/* BOTONES */
+.actions button{
+  width:240px;        /* 👈 mismo ancho exacto */
+  height:58px;        /* 👈 mismo alto */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:linear-gradient(135deg,#2563eb,#38bdf8);
+  border:3px solid #1e40af;
+  border-radius:18px;
+  color:white;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+
+  transition:all .3s ease;
+}
+
+/* EFECTO LUZ */
+.actions button::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.4),
+    transparent
+  );
+  transition: left .6s;
+}
+
+/* HOVER */
+.actions button:hover{
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(37,99,235,.45);
+  background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+}
+
+.actions button:hover::before{
+  left:100%;
+}
+
+/* CLICK */
+.actions button:active{
+  transform: scale(0.96);
+  box-shadow: 0 6px 14px rgba(0,0,0,.3);
+}
+
+
+
+
+.quiz-btn{
+  width:100%;
+  margin:10px 0;
+  padding:14px;
+  border:none;
+  border-radius:15px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(135deg,#2563eb,#38bdf8);
+  color:white;
+  transition:all .3s ease;
+  box-shadow:0 8px 20px rgba(37,99,235,.3);
+}
+
+.quiz-btn:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:0 15px 35px rgba(37,99,235,.45);
+}
+
+.correcto{
+  color:#16a34a;
+  animation:pop .3s ease;
+}
+
+.incorrecto{
+  color:#dc2626;
+  animation:pop .3s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.8);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+
+
+
+
+
+/* VARIANTE QUIZ (opcional) */
+.actions button.quiz{
+  background: linear-gradient(135deg, #16a34a, #4ade80);
+  border-color: #14532d;
+}
+
+.actions button.quiz:hover{
+  background: linear-gradient(135deg, #15803d, #22c55e);
+}
+
+
+/* ===== NAVEGACIÓN ===== */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  gap:22px;
+  margin-top:40px;
+}
+
+.nav button{
+  background:#f1f5f9;           /* gris claro */
+  border:2px solid #94a3b8;     /* borde suave */
+  padding:14px 26px;
+  border-radius:18px;
+
+  color:#1f2933;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  transition:all .3s ease;
+}
+
+/* 🌱 Hover */
+.nav button:hover{
+  background:#ecfeff;
+  border-color:#14b8a6;
+  color:#065f46;
+  transform:translateY(-3px);
+  box-shadow:0 12px 26px rgba(20,184,166,0.25);
+}
+
+/* ✔ Activo */
+.nav button:active{
+  transform:scale(0.96);
+}
+
+
+/* ===== MODAL de lo qu e tiene dentro el boton de mapa mental  ===== */
+
+
+/* ===== MODAL MAPA MENTAL – NIVEL PREMIUM ===== */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(59,130,246,.15), rgba(2,6,23,.85));
+  backdrop-filter: blur(12px);
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+/* CAJA DEL MODAL */
+.modal-content{
+  background:
+    linear-gradient(145deg,#ffffff,#f1f5f9);
+  padding:34px;
+  border-radius:28px;
+  max-width:600px;
+  width:80%;
+
+  border:none;
+
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.35),
+    0 0 0 1px rgba(255,255,255,.6) inset;
+
+  animation:entradaPremium .55s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+
+/* ===== QUIZ DISEÑO PRO ===== */
+
+#quiz .modal-content{
+  max-width:500px;
+  text-align:center;
+  border-radius:25px;
+  padding:35px;
+  background:linear-gradient(145deg,#ffffff,#eaf3ff);
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+
+#quiz h3{
+  font-size:24px;
+  margin-bottom:20px;
+  color:#1e3a8a;
+}
+
+#quiz-pregunta p{
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:20px;
+}
+
+
+
+
+
+
+
+
+
+
+/* CONTENEDOR DEL MAPA */
+.mapa-container{
+  background:
+    linear-gradient(135deg,#eef2ff,#e0e7ff,#f8fafc);
+  padding:24px;
+  border-radius:24px;
+  margin:24px auto;
+  max-width:900px;
+
+  box-shadow:
+    0 22px 45px rgba(0,0,0,.22);
+}
+
+/* IMAGEN */
+.mapa-container img{
+  width:100%;
+  max-width:780px;
+  height:auto;
+  display:block;
+  margin:auto;
+
+  border-radius:22px;
+  background:
+    linear-gradient(180deg,#ffffff,#f8fafc);
+  padding:14px;
+
+  border:1px solid rgba(148,163,184,.6);
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.22),
+    0 0 0 6px rgba(99,102,241,.08);
+}
+
+/* ANIMACIÓN */
+@keyframes entradaPremium{
+  from{
+    opacity:0;
+    transform:scale(.94) translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+
+/* ===== LISTA BASE ===== */
+list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+
+
+/* ===== TÍTULO ARRIBA ===== */
+.lista-dinamica li::before{
+  content: attr(data-title);
+  display:block;
+  font-weight:700;
+  font-size:18px;
+  letter-spacing:.4px;
+  color:#334155;
+  margin-bottom:14px;
+  text-align:center;
+  transition:all .35s ease;
+}
+
+/* ===== TARJETA ===== */
+.tarjeta{
+  background:#f3f4f6;
+  padding:20px;
+  border-radius:15px;
+}
+
+.definicion{
+  margin-bottom:12px;
+}
+
+.mini-lista{
+  padding-left:18px;
+}
+
+.mini-lista li{
+  margin-bottom:8px;
+  line-height:1.5;
+}
+
+
+
+
+
+
+/* ===== LISTA ===== */
+.lista-dinamica{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  list-style:none;
+  padding:0;
+}
+
+/* ===== ITEM (TARJETA) ===== */
+.lista-dinamica li{
+  position:relative;
+  cursor:pointer;
+
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 28px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  transition: all .35s ease;
+}
+
+
+
+/* ===== BORDE DEGRADADO SUTIL ===== */
+.lista-dinamica li::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:2px;
+  border-radius:20px;
+  background:linear-gradient(
+    135deg,
+    #22c55e,
+    #3b82f6
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+       
+}
+
+/* ===== HOVER ===== */
+.lista-dinamica li:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,.12);
+}
+
+
+/* ===== ACTIVA ===== */
+.lista-dinamica li.activa{
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 55px rgba(34,197,94,0.35);
+}
+
+/* ===== BORDE ACTIVO ===== */
+.lista-dinamica li.activa::before{
+  opacity:0.6;
+}
+
+
+
+
+
+
+/* ===== TEMA 3 HORIZONTAL ===== */
+
+
+p strong{
+  font-size:20px;   /* tamaño mediano */
+
+}
+
+.seccion.horizontal{
+  max-width:900px;
+  padding-top:10px;
+
+  text-align:center;      /* lo centra */
+
+  margin:auto;
+}
+
+
+.seccion.horizontal h3{
+  text-align:center;      /* lo centra */
+  margin-top:40px;        /* espacio arriba */
+  margin-bottom:25px;     /* espacio abajo */
+  font-size:22px;
+  display:inline-block;
+ border-bottom:3px solid #3f6fa3;
+  padding-bottom:8px;
+ 
+}
+
+
+
+
+
+.seccion h2{
+  text-align:center;
+  display:inline-block;
+  border-bottom:3px solid #3f6fa3;
+  padding-bottom:8px;
+}
+
+.seccion{
+  text-align:center;
+}
+
+
+/* BOTONES */
+.etapas-horizontal{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:25px;
+
+}
+
+.etapas-horizontal button{
+  background::#1f2937;
+  border:2px solid #dbe4ee;
+  padding:14px 18px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:600;
+  transition:all .3s ease;
+}
+
+.etapas-horizontal button:hover{
+   background: linear-gradient(135deg, #f8e7b0, #e4c86e);
+  border: 2px solid #caa63a;
+  color: :#1f2937;
+  box-shadow: 0 8px 20px rgba(202,166,58,0.35);
+  transform:translateY(-4px);
+}
+
+
+
+/* CUADRO HORIZONTAL */
+.info-horizontal{
+  display:flex;
+  gap:20px;
+  align-items:center;
+ background: linear-gradient(135deg, #e6f4ea, #d4edda);
+border-left: 6px solid #2e8b57;
+
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.1);
+  animation:aparecer .4s ease;
+}
+
+.info-horizontal h4{
+  min-width:180px;
+  margin:0;
+  color:black;
+}
+
+.info-horizontal p{
+  margin:0;
+  line-height:1.6;
+  color:#1f2937;
+}
+
+/* 📱 CELULAR */
+@media(max-width:700px){
+  .info-horizontal{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .info-horizontal h4{
+    min-width:auto;
+  }
+}
+
+
+.mapa-tema[data-tema="2"]{
+  max-width: 550px;
+  width: 85%;
+}
+
+
+.mapa-mental{
+  width: 80%;
+  max-width: 850px;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.mapa-mental:hover{
+  transform: scale(1.2);
+}
+
+
+/* ================= ANIMACIÓN ================= */
+@keyframes abrir{
+  from{
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= ICONO ROTACIÓN ================= */
+.lista-dinamica li span{
+  display: inline-block;
+  transition: transform .35s ease;
+}
+
+.lista-dinamica li.activo span{
+  transform: rotate(90deg);
+}
+
+/* ================= CELULAR ================= */
+@media(max-width:600px){
+  .lista-dinamica{
+    grid-template-columns: 1fr;
+  }
+
+  .lista-dinamica li{
+    padding: 16px;
+  }
+}
+
+/* ===== SLIDER ===== */
+.slider{
+  position: relative;
+  max-width: 500px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,.2);
+  background: #fff;
+}
+
+.slider-track{
+  display: flex;
+  transition: transform .5s ease;
+}
+
+.slider-track img{
+  width: 100%;
+  flex-shrink: 0;
+  border-radius: 18px;
+}
+
+/* BOTONES */
+.slider-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(31,78,121,.85);
+  color: white;
+  border: none;
+  font-size: 28px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.slider-btn.left{ left: 12px; }
+.slider-btn.right{ right: 12px; }
+
+.slider-btn:hover{
+  background: #1f4e79;
+}
+
+/* 📱 CELULAR */
+@media(max-width:600px){
+  .slider{
+    max-width: 90%;
+  }
+}
+
+
+
+
+
+
+/* ===== CONCEPTOS INTERACTIVOS ===== */
+/* ================= TOOLTIP LATERAL ================= */
+
+
+/* ANIMACIÓN AL PASAR EL MOUSE */
+.conceptos .btn-info:hover::after{
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+.close{
+  float:right;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* FOOTER */
+.footer{
+  width:100%;
+  padding:25px 15px;
+  text-align:center;
+  font-size:14px;
+  color:#334155;
+  background:#f8fafc;
+  border-top:1px solid #e2e8f0;
+  margin-top:auto;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <button onclick="window.location.href='../inicio.html'">← Regresar</button>
+
+  <h1 class="titulo-seccion">
+    <span class="sec">SECCIÓN 4</span>
+    <span class="tema">Transformaciones sociales y políticas en América Latina</span>
+  </h1>
+</header>
+
+
+
+<p id="indicador-tema" style="text-align:center;font-weight:bold;">
+
+</p>
+
+<nav class="menu-temas">
+  <button onclick="irATema(0)">Tema 1</button>
+  <button onclick="irATema(1)">Tema 2</button>
+  <button onclick="irATema(2)">Tema 3</button>
+
+  
+</nav>
+
+
+<main>
+
+<!-- ================== TEMA 1 ================== -->
+<section class="card seccion-tema">
+<h1>Tema 1</h1>
+<h2 class="subtitulo"> Los movimientos sociales y las revoluciones en Latinoamérica: de la resistencia indígena
+a la lucha por la igualdad</h2>
+
+
+<div class="texto-extra">
+La palabrar revolución proviene del <b>latín</b> revolutio, revolutionis, que significa dar la vuelta, retorno o cambio profundo.
+</div>
+
+<p>
+Los movimientos sociales y las revoluciones en Latinoamérica surgieron como respuesta a la desigualdad, la explotación y la falta de derechos políticos y sociales. A lo largo de la historia, campesinos, obreros, indígenas y estudiantes se organizaron para exigir justicia, libertad y mejores condiciones de vida frente a sistemas opresivos.
+</p>
+<p>
+Estas luchas provocaron importantes transformaciones políticas, económicas y sociales en la región, influyendo en la independencia, la reforma agraria y la ampliación de derechos ciudadanos. Aunque muchos procesos fueron conflictivos, dejaron como legado la participación popular y la búsqueda constante de sociedades más justas e inclusivas.
+</p>
+
+<img src="../IMAGEN/tema14.jpg" class="img-historia">
+
+<p>Los movimientos sociales y las revoluciones en Latinoamérica representan procesos históricos complejos que surgieron como consecuencia de profundas desigualdades económicas, sociales y políticas heredadas desde la época colonial y reforzadas durante la formación de los Estados nacionales. Estos movimientos fueron impulsados por diversos sectores de la población, como campesinos, trabajadores, pueblos indígenas, mujeres y estudiantes, quienes enfrentaron la concentración de la riqueza, la exclusión política y la falta de acceso a derechos básicos. A través de protestas, levantamientos y organizaciones colectivas, estos grupos buscaron transformar estructuras de poder injustas y construir sociedades más equitativas.</p>
+
+<div class="seccion">
+<h2>🏛️Orígenes, luchas y transformaciones sociales en Latinoamérica</h2>
+
+<p>
+Estos procesos sociales se han manifestado a través de diversas formas de organización y lucha, entre las que destacan:</p>
+<ul  class="lista-dinamica">
+<li> Lucha contra la desigualdad social y económica</li>
+<li> Participación de campesinos, indígenas y trabajadores</li>
+<li> Organización colectiva y protesta social</li>
+<li> Búsqueda de justicia, derechos y cambios estructurales</li>
+</ul>
+</div>
+
+<div class="actions">
+<button onclick="abrirMapa()">🧠 Mapa mental</button>
+</div>
+
+<div class="nav" style="display:flex; justify-content:flex-end; margin-top:30px;">
+  <button onclick="siguiente()">Siguiente ➡</button>
+</div>
+
+</section>
+
+<!-- ================== TEMA 2 ================== -->
+<section class="card seccion-tema">
+<h1>Tema 2</h1>
+<h2 class="subtitulo">Crisis, migración y desarrollo en América Latina</h2>
+
+
+<p>
+La crisis, la migración y el desarrollo en América Latina evidencian cómo la falta de oportunidades impulsa a las personas a desplazarse en busca de bienestar, transformando tanto a los países de origen como a los de destino.
+</p>
+
+<div class="texto-extra">
+🦴 La crisis en América Latina impulsa la migración como una respuesta a la falta de empleo, la pobreza y la inseguridad. Este proceso impacta el desarrollo, generando tanto oportunidades, como las remesas, como desafíos sociales y económicos para los países de la región.
+</div>
+
+
+<img src="../IMAGEN/tema24.jpg" class="img-historia">     
+  
+<p>
+La crisis, la migración y el desarrollo en América Latina conforman un fenómeno interrelacionado que refleja las profundas desigualdades estructurales de la región. Factores como la pobreza, el desempleo, la inestabilidad política, la violencia y los efectos del cambio climático han provocado que millones de personas migren dentro y fuera de sus países en busca de mejores condiciones de vida. Este desplazamiento humano tiene un impacto significativo en el desarrollo, ya que, por un lado, las remesas contribuyen al sostenimiento económico de muchas familias y comunidades, pero, por otro, la migración masiva genera desafíos como la pérdida de fuerza laboral, la presión sobre los servicios públicos y la necesidad de garantizar los derechos humanos de los migrantes. Frente a esta realidad, los Estados latinoamericanos enfrentan el reto de implementar políticas que promuevan un desarrollo sostenible, reduzcan las desigualdades y creen oportunidades que disminuyan la migración forzada.</p>
+
+ <h2>Características de la migración en América Latina</h2>
+
+<ul class="lista-dinamica">
+
+  <li onclick="toggleTarjeta(this)">
+    <h3 class="titulo-item">🚶 Movilidad</h3>
+    <div class="tarjeta">
+      <p>
+       Se refiere al desplazamiento de personas dentro de un mismo país o hacia otros países en busca de mejores condiciones de vida.
+      </p>
+    </div>
+  </li>
+
+  <li onclick="toggleTarjeta(this)">
+    <h3 class="titulo-item">✋ Desplazamiento</h3>
+    <div class="tarjeta">
+      <p>
+        Es el movimiento de personas desde su lugar de origen hacia otro territorio, ya sea dentro del mismo país o hacia el extranjero.
+      </p>
+    </div>
+  </li>
+
+  <li onclick="toggleTarjeta(this)">
+    <h3 class="titulo-item">🧠 Migración</h3>
+    <div class="tarjeta">
+      <p>
+Proceso en el que las personas se trasladan temporal o permanentemente, dentro del país o al extranjero, por motivos económicos, sociales, políticos o ambientales.
+     </p>
+    </div>
+  </li>
+
+</ul>
+
+
+<div class="actions">
+<button onclick="abrirMapa()">🧠 Mapa mental</button>
+</div>
+
+<div class="nav">
+<button onclick="anterior()">⬅ Anterior</button>
+<button onclick="siguiente()">Siguiente ➡</button>
+</div>
+
+</section>
+
+<!-- ================== TEMA 3 ================== -->
+
+<section class="card seccion-tema">
+<h1>Tema 3</h1>
+<h2 class="subtitulo">Ecuador en el siglo XXI: un país en transformación</h2>
+
+<p>
+ Durante el siglo XXI, Ecuador ha experimentado importantes transformaciones en su estructura política, económica y social, influenciadas por procesos de modernización, participación ciudadana y búsqueda de mayor inclusión social. Estos cambios han estado acompañados de desafíos como la desigualdad, la migración, la sostenibilidad ambiental y la adaptación a un mundo globalizado, lo que ha impulsado al país a redefinir su modelo de desarrollo y su identidad nacional.
+
+</p>
+
+<div class="texto-extra">
+Ecuador en el siglo XXI es un país en transformación, marcado por cambios políticos, sociales y económicos que reflejan los desafíos y las oportunidades de su desarrollo.
+
+</div>
+
+
+
+
+
+
+<img src="../IMAGEN/tema34.jpg" class="img-historia">
+
+<p>
+En el siglo XXI, Ecuador ha atravesado un proceso continuo de transformación marcado por cambios políticos, sociales y económicos que han influido directamente en la vida de la población. El país ha buscado fortalecer la participación ciudadana, ampliar derechos y modernizar sus instituciones, al mismo tiempo que enfrenta desafíos persistentes como la desigualdad social, la migración, la inseguridad y la necesidad de un desarrollo sostenible. Estos procesos reflejan la búsqueda de un equilibrio entre crecimiento económico, justicia social y preservación del medio ambiente, en un contexto nacional e internacional cada vez más complejo.
+</p>
+
+<p class="titulo-cronologia">
+  <strong>Cronología del Ecuador en el siglo XXI</strong>
+</p>
+
+<p>En el año 2000, Ecuador inició el siglo XXI enfrentando una profunda crisis económica que llevó a la dolarización, una medida clave para estabilizar la economía y controlar la inflación. Este hecho marcó un punto de inflexión en la historia del país, influyendo en el sistema financiero, el comercio y la vida cotidiana de la población, así como en los procesos de migración hacia otros países.</p>
+
+<p>Entre 2007 y 2017, el país vivió un periodo de importantes transformaciones políticas y sociales, destacándose la aprobación de la Constitución de 2008, que amplió derechos y fortaleció la participación ciudadana. Durante estos años se impulsaron inversiones en educación, salud e infraestructura, buscando reducir la pobreza y promover un mayor rol del Estado en el desarrollo nacional.</p>
+
+<p>Desde 2020 hasta la actualidad, Ecuador ha enfrentado nuevos y complejos desafíos, como el impacto de la pandemia del COVID-19, el aumento de la inseguridad, la migración y la necesidad de un desarrollo sostenible. Estos procesos reflejan que el país continúa en constante transformación, buscando estabilidad, crecimiento económico y mejores condiciones de vida para su población.</p>
+
+
+<div class="seccion horizontal">
+  <h3>📜 Etapas del Ecuador en el siglo XXI</h3>
+
+  <div class="etapas-horizontal">
+<button onclick="mostrarInfo(0)">🪓 Etapa de crisis y estabilización</button>
+    <button onclick="mostrarInfo(1)">🔥 Etapa de transformación y reformas</button>
+    <button onclick="mostrarInfo(2)">🌾 Etapa de ajustes y desafíos actuales</button>
+   
+  </div>
+
+  <div class="info-horizontal" id="info-horizontal">
+    <h4 id="info-titulo">Selecciona una etapa</h4>
+    <p id="info-texto">
+      Haz clic en una etapa para ver la información aquí.
+    </p>
+  </div>
+</div>
+
+<div class="actions">
+<button onclick="abrirMapa()">🧠 Mapa mental</button>
+<button onclick="abrirQuiz()">🎮 Quiz</button>
+</div>
+
+<div class="nav">
+<button onclick="anterior()">⬅ Anterior</button>
+</div>
+</section>
+
+
+<!-- MODALES AQUI LO DE LOS MAPAS IMAGEN-->
+<div class="modal" id="mapa">
+  <div class="modal-content mapa-container">
+    <span class="close" onclick="cerrarMapa()">✖</span>
+    <h3 style="text-align:center;">Mapa Mental del Tema</h3>
+
+    <!-- CONTENEDOR CON DESLIZADO -->
+    <div class="mapa-scroll">
+
+      <img src="../IMAGEN/mapa3.png"
+           class="mapa-tema mapa-mental"
+           data-tema="0"> 
+
+      <img src="../IMAGEN/mapa2.png"
+           class="mapa-tema mapa-mental"
+           data-tema="1">
+
+      <img src="../IMAGEN/mapa1.png"
+           class="mapa-tema mapa-mental"
+           data-tema="2">
+
+    </div>
+
+  </div>
+</div>
+
+<div class="modal" id="quiz">
+  <div class="modal-content">
+    <span class="close" onclick="cerrarQuiz()">✖</span>
+    <h3 id="quiz-titulo">Quiz</h3>
+    <div id="quiz-pregunta"></div>
+    <div id="quiz-opciones" style="margin-top:15px;"></div>
+    <div id="quiz-feedback" style="margin-top:12px;font-weight:bold;"></div>
+  </div>
+</div>
+
+<script>
+
+let voz = null;
+
+function leerTexto(){
+  // si ya está hablando, no repetir
+  if(window.speechSynthesis.speaking) return;
+
+  // leer SOLO el tema visible
+const temaActivo = document.querySelector(".seccion-tema[style*='block']");
+  if(!temaActivo) return;
+
+  const texto = temaActivo.innerText;
+
+  voz = new SpeechSynthesisUtterance(texto);
+
+  // idioma español
+  voz.lang = "es-ES";
+
+  // velocidad y tono
+  voz.rate = 1;     // 0.8 más lento | 1 normal | 1.2 rápido
+  voz.pitch = 1;
+
+  window.speechSynthesis.speak(voz);
+}
+
+function pausarLectura(){
+  if(window.speechSynthesis.speaking){
+    window.speechSynthesis.pause();
+  }
+}
+
+function reanudarLectura(){
+  if(window.speechSynthesis.paused){
+    window.speechSynthesis.resume();
+  }
+}
+
+function detenerLectura(){
+  window.speechSynthesis.cancel();
+}
+
+const timeline = document.querySelector('.timeline');
+
+const observerLinea = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      timeline.classList.add('visible');
+    }
+  });
+},{ threshold:0.3 });
+
+if(timeline){
+  observerLinea.observe(timeline);
+}
+
+let actual = 0;
+let temas = document.querySelectorAll(".seccion-tema");
+const botonesMenu = document.querySelectorAll(".menu-temas button");
+const datos = [
+  {
+    titulo: "Etapa de crisis y estabilización (2000–2006)",
+    texto: "Marcada por la crisis económica y la adopción de la dolarización, que permitió estabilizar la economía, aunque provocó altos niveles de migración y dificultades sociales."
+  },
+  {
+    titulo: "Etapa de transformación y reformas (2007–2017)",
+    texto: "Caracterizada por cambios políticos profundos, la nueva Constitución de 2008 y una mayor inversión social en educación, salud e infraestructura."
+  },
+  {
+    titulo: "Etapa de ajustes y desafíos actuales (2018–actualidad)",
+    texto: "Se distingue por la desaceleración económica, la pandemia, el aumento de la inseguridad y los retos relacionados con la migración, el empleo y el desarrollo sostenible."
+  },
+    ];
+
+function mostrarInfo(i){
+  document.getElementById("info-titulo").textContent = datos[i].titulo;
+  document.getElementById("info-texto").textContent = datos[i].texto;
+}
+
+let indice = 0;
+
+function mover(direccion){
+  const track = document.getElementById("sliderTrack");
+  const total = track.children.length;
+
+  indice += direccion;
+
+  if(indice < 0) indice = total - 1;
+  if(indice >= total) indice = 0;
+
+  track.style.transform = `translateX(-${indice * 100}%)`;
+}
+
+function mostrarConcepto(elemento){
+  // cerrar los demás
+  document.querySelectorAll('.btn-info').forEach(btn=>{
+    if(btn !== elemento){
+      btn.classList.remove('activo');
+    }
+  });
+
+  // abrir / cerrar el actual
+  elemento.classList.toggle('activo');
+}
+
+function cambiarTema(btn, num){
+  // quitar activo a todos
+  document.querySelectorAll('.menu-temas button').forEach(b=>{
+    b.classList.remove('activo','cambio');
+  });
+
+  // activar el nuevo
+  btn.classList.add('activo','cambio');
+
+  // quitar la clase de animación para que se pueda repetir
+  setTimeout(()=>{
+    btn.classList.remove('cambio');
+  },450);
+
+  // aquí puedes llamar a tu función real
+  // mostrarTema(num);
+}
+
+function mostrarTema(i){
+  temas.forEach(t => {
+    t.style.display = "none";
+    t.classList.remove("slide-in-right","slide-in-left");
+  });
+
+  let direccion = i > actual ? "slide-in-right" : "slide-in-left";
+
+  temas[i].style.display = "block";
+  temas[i].classList.add(direccion);
+
+  botonesMenu.forEach(b => b.classList.remove("activo"));
+  botonesMenu[i].classList.add("activo");
+
+  document.getElementById("indicador-tema").textContent =
+    ` Tema ${i+1} de ${temas.length}`;
+
+  actual = i;
+}
+
+function toggleTarjeta(elemento){
+  document.querySelectorAll('.lista-dinamica li').forEach(ev=>{
+    if(ev !== elemento){
+      ev.classList.remove('activa');
+    }
+  });
+  elemento.classList.toggle('activa');
+}
+
+
+/* ANIMACIÓN AL HACER SCROLL */
+const eventos = document.querySelectorAll('.evento');
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{ threshold:0.2 });
+
+eventos.forEach(ev=>observer.observe(ev));
+
+function siguiente(){
+  if(actual < temas.length -1){
+    mostrarTema(actual + 1);
+  }
+}
+
+function anterior(){
+  if(actual > 0){
+    mostrarTema(actual - 1);
+  }
+}
+
+function irATema(i){
+  mostrarTema(i);
+}
+
+mostrarTema(actual);
+
+function abrirMapa(){
+  document.getElementById('mapa').style.display = 'flex';
+
+ // Ocultar todos los mapas
+  document.querySelectorAll('.mapa-tema').forEach(img => {
+    img.style.display = 'none';
+  });
+
+// Mostrar solo el mapa del tema actual
+  const mapaActual = document.querySelector(`.mapa-tema[data-tema="${actual}"]`);
+  if(mapaActual){
+    mapaActual.style.display = 'block';
+  }
+}
+
+function cerrarMapa(){
+  document.getElementById('mapa').style.display = 'none';
+}
+
+
+function abrirQuiz() {
+  preguntaActual = 0;   // 🔥 MUY IMPORTANTE
+  document.getElementById("quiz").style.display = "flex";
+  mostrarPregunta();
+}
+
+
+
+// ===================== QUIZ =====================
+
+// Preguntas
+const preguntasPorTema = [
+  // ================= TEMA 1 =================
+  [
+    {
+      pregunta: "¿Cuál fue la causa principal de las revoluciones en Latinoamérica?",
+      opciones: [
+        "Injusticia social",
+        "Fiebre amarilla",
+        "Cambio climático",
+        "Invasión extranjera"
+      ],
+      respuesta: 0
+    }
+  ],
+
+  // ================= TEMA 2 =================
+  [
+    {
+      pregunta: "La migración en América Latina se debe principalmente a:",
+      opciones: [
+        "Falta de oportunidades",
+        "Vacaciones",
+        "Turismo",
+        "Competencias deportivas"
+      ],
+      respuesta: 0
+    }
+  ],
+
+  // ================= TEMA 3 (AQUÍ 5 PREGUNTAS) =================
+  [
+    {
+      pregunta: "¿Qué medida económica se adoptó en Ecuador en el año 2000?",
+      opciones: ["Dolarización", "Euroización", "Privatización total", "Libre comercio"],
+      respuesta: 0
+    },
+    {
+      pregunta: "¿Qué Constitución se aprobó en 2008?",
+      opciones: ["Nueva Constitución", "Constitución colonial", "Constitución militar", "Reforma bancaria"],
+      respuesta: 0
+    },
+    {
+      pregunta: "Uno de los desafíos actuales del Ecuador es:",
+      opciones: ["Inseguridad", "Colonización", "Imperio", "Monarquía"],
+      respuesta: 0
+    },
+    {
+      pregunta: "¿Qué afectó fuertemente al país desde 2020?",
+      opciones: ["Pandemia COVID-19", "Guerra mundial", "Descubrimiento de oro", "Independencia"],
+      respuesta: 0
+    },
+    {
+      pregunta: "El Ecuador busca equilibrio entre crecimiento y:",
+      opciones: ["Justicia social", "Imperialismo", "Conquista", "Colonización"],
+      respuesta: 0
+    }
+  ]
+];
+
+
+let preguntaActual = 0;
+
+// Mostrar pregunta
+function mostrarPregunta() {
+  const q = preguntasPorTema[actual][preguntaActual];
+  const contPregunta = document.getElementById("quiz-pregunta");
+  const contOpciones = document.getElementById("quiz-opciones");
+  const feedback = document.getElementById("quiz-feedback");
+
+  contPregunta.innerHTML = `<p>${q.pregunta}</p>`;
+  contOpciones.innerHTML = "";
+  feedback.innerText = "";
+
+  q.opciones.forEach((opcion, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = opcion;
+    btn.classList.add("quiz-btn");
+
+    btn.onclick = () => {
+
+      if (index === q.respuesta) {
+        feedback.innerText = "✅ ¡Correcto!";
+      } else {
+        feedback.innerText = "❌ Incorrecto";
+      }
+
+      setTimeout(() => {
+        preguntaActual++;
+
+        if (preguntaActual < preguntasPorTema[actual].length) {
+          mostrarPregunta();
+        } else {
+          contPregunta.innerHTML = "<h3>🎉 ¡Has terminado el quiz!</h3>";
+          contOpciones.innerHTML = "";
+          feedback.innerText = "";
+
+          setTimeout(() => {
+            cerrarQuiz();
+            preguntaActual = 0;
+          }, 1500);
+        }
+
+      }, 1000);
+    };
+
+    contOpciones.appendChild(btn);
+  });
+}
+
+
+// Cerrar quiz
+function cerrarQuiz() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("quiz-feedback").innerText = "";
+}
+
+
+
+
+</script>
+
+<footer class="footer">
+  <p>© 2026 Proyecto educativo digital – Historia. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

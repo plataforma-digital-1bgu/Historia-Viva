@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Desafío Histórico PRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+ --neon1:#ff7b00;
+ --neon2:#ff0066;
+ --neon3:#00f7ff;
+ --bg1:#14002c;
+ --bg2:#0a0015;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+ font-family:Segoe UI, sans-serif;
+ background:radial-gradient(circle at center,var(--bg1),var(--bg2));
+ color:white;
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ overflow:hidden;
+}
+
+.wrapper{
+ width:95%;
+ max-width:1200px;
+ position:relative;
+ padding:40px;
+ border-radius:25px;
+ background:rgba(20,0,44,0.6);
+ backdrop-filter:blur(10px);
+ border:3px solid var(--neon3);
+ box-shadow:
+   0 0 20px var(--neon3),
+   0 0 40px rgba(0,247,255,0.4),
+   inset 0 0 20px rgba(255,255,255,0.05);
+}
+
+/* BOTONES SUPERIORES */
+.top-buttons{
+ position:absolute;
+ top:20px;
+ right:25px;
+ display:flex;
+ gap:15px;
+ align-items:center;
+}
+
+.music-btn{
+ width:45px;
+ height:45px;
+ border-radius:50%;
+ border:2px solid var(--neon3);
+ background:transparent;
+ color:white;
+ font-size:20px;
+ cursor:pointer;
+ transition:.3s;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+.music-btn:hover{
+ box-shadow:0 0 15px var(--neon3);
+ transform:scale(1.1);
+}
+
+.volver-btn{
+ background:linear-gradient(90deg,#ff512f,#ff1744);
+ border:none;
+ padding:10px 18px;
+ border-radius:12px;
+ color:white;
+ font-weight:600;
+ cursor:pointer;
+ transition:.3s;
+ font-size:14px;
+ display:flex;
+ align-items:center;
+ gap:6px;
+}
+
+.volver-btn:hover{
+ transform:scale(1.08);
+ box-shadow:0 0 15px rgba(255,23,68,0.8);
+}
+
+.pregunta{
+ text-align:center;
+ font-size:26px;
+ margin-bottom:30px;
+}
+
+.container{
+ display:grid;
+ grid-template-columns:1.2fr 1fr;
+ gap:40px;
+}
+
+.panel-img{
+ padding:8px;
+ background:linear-gradient(135deg,var(--neon1),var(--neon2));
+ border-radius:20px;
+ overflow:hidden;
+}
+
+.panel-img img{
+ width:100%;
+ height:400px;
+ object-fit:cover;
+ border-radius:15px;
+ display:block;
+}
+
+.panel-opciones{
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ gap:20px;
+}
+
+.opcion{
+ padding:18px;
+ background:#1a1a2e;
+ border:2px solid #333;
+ color:white;
+ cursor:pointer;
+ transition:.3s;
+ border-radius:12px;
+}
+
+.opcion:hover{
+ border-color:var(--neon3);
+ box-shadow:0 0 15px var(--neon3);
+ transform:translateX(8px);
+}
+
+.correcta{
+ background:linear-gradient(90deg,#00ff88,#00ffaa);
+ color:black;
+}
+
+.incorrecta{
+ background:linear-gradient(90deg,#ff0044,#ff3355);
+}
+
+.btn-final{
+ background:linear-gradient(90deg,#00f7ff,#00c3ff);
+ border:none;
+ padding:12px 22px;
+ border-radius:12px;
+ color:#000;
+ font-weight:600;
+ cursor:pointer;
+ transition:.3s;
+}
+
+.btn-final:hover{
+ transform:scale(1.08);
+ box-shadow:0 0 15px var(--neon3);
+}
+
+.final{
+ text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper" id="game">
+
+<div class="top-buttons">
+  <button class="music-btn" onclick="toggleMusica()" id="btnMusic">🎵</button>
+  <button class="volver-btn" onclick="volverMenu()">← Volver</button>
+</div>
+
+<div class="pregunta" id="pregunta"></div>
+
+<div class="container">
+<div class="panel-img">
+  <img id="imagenPregunta">
+</div>
+<div class="panel-opciones" id="opciones"></div>
+</div>
+
+</div>
+
+<!-- AUDIOS -->
+<audio id="ok" src="../Sonido/Sonido-Correcto.mp3"></audio>
+<audio id="bad" src="../Sonido/incorrecto.mp3"></audio>
+<audio id="ambiente" src="../Sonido/ambiente.mp3" loop></audio>
+
+<script>
+
+/* ELEMENTOS */
+const preguntaEl = document.getElementById("pregunta");
+const imagenEl = document.getElementById("imagenPregunta");
+const opcionesDiv = document.getElementById("opciones");
+const game = document.getElementById("game");
+const sonidoOk = document.getElementById("ok");
+const sonidoBad = document.getElementById("bad");
+const sonidoAmbiente = document.getElementById("ambiente");
+const botonMusica = document.getElementById("btnMusic");
+
+/* BANCO DE PREGUNTAS */
+const bancoPreguntas = [
+{p:"¿Qué civilización construyó Machu Picchu?",img:"../IMAGEN/machu.png",c:"Los Incas",o:["Los Aztecas","Los Mayas","Los Romanos"]},
+
+{p:"¿En qué año comenzó la Segunda Guerra Mundial?",img:"../IMAGEN/segundaguerramundial.png",c:"1939",o:["1945","1914","1920"]},
+
+{p:"¿Qué muro cayó en 1989?",img:"../IMAGEN/muro.png",c:"Muro de Berlín",o:["Muro romano","Muro chino","Muro egipcio"]},
+
+{p:"¿Quién pintó la Mona Lisa?",img:"../IMAGEN/mona.png",c:"Leonardo da Vinci",o:["Miguel Ángel","Picasso","Van Gogh"]},
+
+{p:"¿Qué civilización creó las pirámides de Giza?",img:"../IMAGEN/egipto.png",c:"Egipcios",o:["Mayas","Romanos","Griegos"]},
+{p:"¿En qué año comenzó la Revolución Francesa?",img:"../IMAGEN/revolucionfrancesa.png",c:"1789",o:["1776","1804","1812"]},
+
+{p:"¿Cuál es la construcción defensiva más larga del mundo?",img:"../IMAGEN/china.png",c:"La Muralla China",o:["El Machu Picchu","La Acrópolis de Atenas"," El Stonehenge"]},
+
+{p:"¿Qué concepto pertenece al sistema jurídico de la antigua Roma?",img:"../IMAGEN/derechoromano.png",c:"Derecho Romano",o:["Código Hammurabi","Leyes de Manu","Carta Magna"]},
+
+{p:"¿En qué etapa surgió el capitalismo moderno?",img:"../IMAGEN/capitalismo.png",c:"Edad Moderna",o:["Edad Antigua","Neolítico","Prehistoria"]},
+
+{p:"¿Qué periodo marca el inicio de la agricultura?",img:"../IMAGEN/neolitico.png",c:"Neolítico",o:["Paleolítico","Edad de los Metales","Mesolítico"]},
+
+
+{p:"¿Quién se proclamó emperador de Francia?",img:"../IMAGEN/napoleonbonaparte.png",c:"Napoleón Bonaparte",o:["Luis XIV","Pedro el Grande","Julio César"]},
+
+
+{p:"¿Qué ríos hicieron posible la vida en Mesopotamia?",img:"../IMAGEN/mesopotamia.png",c:"Tigris y Éufrates",
+o:["Nilo y Jordán","Indo y Ganges","Danubio y Rin"]}
+
+
+];
+
+/* VARIABLES */
+let actual = 0;
+let puntos = 0;
+
+/* FUNCIONES */
+
+function mezclar(arr){
+ return arr.sort(() => Math.random() - 0.5);
+}
+
+function iniciarMusica(){
+ sonidoAmbiente.volume = 0;
+ sonidoAmbiente.play().catch(()=>{});
+ let volumen = 0;
+ let fade = setInterval(()=>{
+   if(volumen < 0.4){
+     volumen += 0.02;
+     sonidoAmbiente.volume = volumen;
+   } else {
+     clearInterval(fade);
+   }
+ },100);
+}
+
+function toggleMusica(){
+ if(sonidoAmbiente.paused){
+   iniciarMusica();
+   botonMusica.textContent = "🎵";
+ } else {
+   sonidoAmbiente.pause();
+   botonMusica.textContent = "🔇";
+ }
+}
+
+function volverMenu(){
+ sonidoAmbiente.pause();
+ sonidoAmbiente.currentTime = 0;
+ window.location.href = "../Juego.html";
+}
+
+function cargar(){
+ let q = bancoPreguntas[actual];
+
+ preguntaEl.textContent = q.p;
+ imagenEl.src = q.img;
+
+ let opciones = mezclar([q.c, ...q.o]);
+ opcionesDiv.innerHTML = "";
+
+ opciones.forEach(op=>{
+   let btn = document.createElement("button");
+   btn.className = "opcion";
+   btn.textContent = op;
+   btn.onclick = ()=> responder(btn, op === q.c);
+   opcionesDiv.appendChild(btn);
+ });
+}
+
+function responder(btn, correcto){
+ document.querySelectorAll(".opcion").forEach(b=> b.disabled = true);
+
+ if(correcto){
+   btn.classList.add("correcta");
+   sonidoOk.play();
+   puntos++;
+ } else {
+   btn.classList.add("incorrecta");
+   sonidoBad.play();
+ }
+
+ setTimeout(()=>{
+   actual++;
+   if(actual < bancoPreguntas.length){
+     cargar();
+   } else {
+     mostrarFinal();
+   }
+ },1200);
+}
+
+function mostrarFinal(){
+ sonidoAmbiente.pause();
+
+ game.innerHTML = `
+ <div class="final">
+   <h1>🏆 Juego Terminado</h1>
+   <p>Tu puntaje fue: <strong>${puntos} / ${bancoPreguntas.length}</strong></p>
+   <div style="margin-top:25px; display:flex; gap:20px; justify-content:center;">
+     <button class="volver-btn" onclick="volverMenu()">← Volver al menú</button>
+     <button class="btn-final" onclick="location.reload()">🔄 Jugar otra vez</button>
+   </div>
+ </div>
+ `;
+}
+
+/* INICIO */
+document.addEventListener("DOMContentLoaded", ()=>{
+ mezclar(bancoPreguntas);
+ iniciarMusica();
+ cargar();
+});
+
+</script>
+</body>
+</html>

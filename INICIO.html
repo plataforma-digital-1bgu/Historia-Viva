@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Aprende Historia Digital</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* ================== ESTILO BASE ================== */
+body{
+    margin:0;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ================== BOTÓN INICIO ================== */
+.btn-inicio{
+    position:absolute;
+    top:20px;
+    left:20px;
+    padding:12px 26px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#0f2a44,#1d3557,#457b9d);
+    color:white;
+    font-weight:600;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+.btn-inicio:hover{ transform:translateY(-3px) scale(1.05); }
+.btn-inicio:active{ transform:scale(.95); }
+
+/* ================== CONTENEDOR DE BLOQUES ================== */
+.bloques-container{
+    display:grid;
+    grid-template-columns: repeat(3, 260px);
+    gap:40px 70px;
+    justify-content:center;
+}
+
+/* ================== AJUSTE FILA 2 (BLOQUES 4 Y 5) ================== */
+/* 👉 AQUÍ PUEDES MOVERLOS A IZQUIERDA O DERECHA */
+.bloques-container a:nth-child(4),
+.bloques-container a:nth-child(5){
+    transform: translateX(140px); /* cambia este valor */
+}
+
+/* ================== BOTONES BLOQUES 1CAMBIO================== */
+.bloque{
+    width:260px;
+    height:155px;
+    border-radius:24px;
+    font-size:16px;
+    font-weight:600;
+    text-align:center;
+    padding-top:35px;
+    text-decoration:none;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(0,0,0,.25);
+    transition: all .35s ease;
+    letter-spacing:.5px;
+}
+
+/* Efecto hover PRO */
+.bloque:hover{
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(0,0,0,.35);
+}
+
+/* Efecto brillo animado */
+.bloque::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.3),transparent);
+    transition:.6s;
+}
+.bloque:hover::before{
+    left:100%;
+}
+
+/* ================== BOQUES DECORADOS AÑADIDO 1CAMBIO================== */
+
+.b1{
+    background: linear-gradient(135deg,#1e3c72,#2a5298);
+    color:white;
+}
+
+.b2{
+    background: linear-gradient(135deg,#f7971e,#ffd200);
+    color:#222;
+}
+
+.b3{
+    background:  linear-gradient(135deg,#5f2c82,#3f51b5);
+    color:white;
+}
+.b4{
+    background: linear-gradient(135deg,#00b09b,#96c93d);
+    color:white;
+}
+.b5{
+    background: linear-gradient(135deg,#7b1e1e,#c62828);
+    color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================== SUBIR BLOQUES AL BANNER ================== */
+header.banner{
+    position:relative;
+}
+section.bloques{
+    position:absolute;
+    top:50px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:5;
+}
+
+/* ================== RESPONSIVE ================== */
+@media(max-width:768px){
+    section.bloques{
+        position:static;
+        transform:none;
+        padding:30px 0;
+    }
+    .bloques-container{
+        grid-template-columns:1fr;
+    }
+    .bloque{
+        width:90%;
+        margin:auto;
+    }
+    img{
+        width:100% !important;
+        height:auto !important;
+    }
+}
+
+/* ================== FOOTER ================== */
+footer{
+    background: linear-gradient(135deg, #1d3557, #3F88C3, #457b9d);
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<header style="background: linear-gradient(135deg, #1d3557, #3F88C3, #457b9d);
+;color:white;text-align:center;padding:30px; position:relative;">
+
+    <a href="index.html" class="btn-inicio" id="btnInicio">🏠 Inicio</a>
+
+    <h1>Asignatura de Historia Digital</h1>
+    <p>Fortalecer el aprendizaje significativo de la Historia mediante el uso de recursos digitales interactivos.</p>
+</header>
+
+<header class="banner" style="text-align:center;">
+<img src="INICIO.jpg" alt="Historia" style="width:1500px;height:500px;">
+
+<section class="bloques">
+<div class="bloques-container">
+
+<a href="Bloques/bloque1.html" target="_blank" class="bloque b1">
+🪨<br>Bloque 1<br>Los Orígenes y Evolución
+</a>
+
+<a href="Bloques/bloque2.html" target="_blank" class="bloque b2">
+🏺<br>Bloque 2<br>Civilizaciones Antiguas
+</a>
+
+<a href="Bloques/bloque3.html" target="_blank" class="bloque b3">
+⚔️<br>Bloque 3<br>Edad Media
+</a>
+
+<a href="Bloques/bloque4.html" target="_blank" class="bloque b4">
+🎥<br>Bloque 4<br>Sistemas Económicos
+</a>
+
+<a href="Bloques/bloque5.html" target="_blank" class="bloque b5">
+🎮<br>Bloque 5<br>Transformaciones sociales y políticas en América Latina
+</a>
+
+</div>
+</section>
+</header>
+
+<footer>
+<p>© 2026 · Plataforma Educativa de Historia</p>
+</footer>
+
+<!-- ================== SONIDO ================== -->
+<audio id="clickSound" src="Sonido/Sonidodeseleccionar.mp3" preload="auto"></audio>
+
+<script>
+const sonido = document.getElementById("clickSound");
+
+document.querySelectorAll(".bloque, .btn-inicio").forEach(boton=>{
+    boton.addEventListener("click", ()=>{
+        sonido.currentTime = 0;
+        sonido.volume = 0.3;
+        sonido.play();
+    });
+});
+
+document.getElementById("btnInicio").addEventListener("click", ()=>{
+    if(!document.fullscreenElement){
+        document.documentElement.requestFullscreen().catch(()=>{});
+    }
+});
+</script>
+
+</body>
+</html>
