@@ -79,6 +79,15 @@
   }
 }
 
+
+
+
+
+
+
+
+
+
 /* LOS BOTONES DE TEMAS DE ARRIBA */
 
 .menu-temas{
@@ -164,6 +173,26 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* LOS COLORES DE LAS HOJA AÑADIDOS*/
 
 
@@ -191,6 +220,9 @@ body{
 
 }
 
+
+
+
 /*0 HEADER */
 
 header{
@@ -208,6 +240,12 @@ header{
 
 
 }
+
+
+
+
+  
+
 header button{
   background:#ffffff25;
   border:none;
@@ -423,6 +461,16 @@ img:hover{
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* ===== NAVEGACIÓN ===== */
 .nav{
   display:flex;
@@ -548,6 +596,46 @@ top: 26px;
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===== LISTA BASE ===== */
 .lista-dinamica{
   list-style:none;
@@ -653,6 +741,8 @@ top: 26px;
   }
 }
 
+
+
 :root{
   --azul:#0f3d5e;
   --azul-suave:#e6f0f7;
@@ -666,6 +756,11 @@ top: 26px;
   color:var(--azul);
   margin-bottom:30px;
 }
+
+
+
+
+
 
 
 /* ===== LISTA ===== */
@@ -761,6 +856,11 @@ top: 26px;
   margin:0 0 8px;
   color:var(--azul);
 }
+
+
+
+
+
 
 /* ===== MODAL QUIZ TEMA 1 ===== */
 /* ===== QUIZ MODAL ===== */
@@ -872,6 +972,58 @@ top: 26px;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===== TEMA 3 HORIZONTAL ===== */
 .seccion.horizontal{
   max-width:900px;
@@ -940,10 +1092,18 @@ top: 26px;
   }
 }
 
+
+
+
+
 .mapa-tema[data-tema="2"]{
   max-width: 550px;
   width: 85%;
 }
+
+
+
+
 
 
 .mapa-mental{
@@ -956,6 +1116,21 @@ top: 26px;
 .mapa-mental:hover{
   transform: scale(1.2);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ================= ANIMACIÓN ================= */
@@ -1087,6 +1262,12 @@ top: 26px;
   color:white;
   transform:translateY(-4px);
 }
+
+
+
+
+
+
 
 .btn-info{
   position:relative;
@@ -1677,6 +1858,16 @@ text-align: center;
   transform: translateX(4px);
   box-shadow: 0 6px 15px rgba(0,0,0,.2);
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3173,6 +3364,86 @@ function siguientePregunta4(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function verificarQuiz(){
+  const respuesta = document.querySelector('input[name="q1"]:checked');
+  const resultado = document.getElementById("resultado");
+
+  if(!respuesta){
+    resultado.textContent = "❗ Elige una respuesta";
+    resultado.style.color = "orange";
+    return;
+  }
+
+  if(respuesta.value === "b"){
+    resultado.textContent = "✅ Correcto";
+    resultado.style.color = "green";
+  }else{
+    resultado.textContent = "❌ Incorrecto";
+    resultado.style.color = "red";
+  }
+}
+
+
+
+
+
+
+
+
+function abrirQuiz(){
+  document.getElementById("quiz").style.display = "flex";
+  indiceQuiz = 0;
+  cargarPregunta();
+}
+
+function cerrarQuiz(){
+  document.getElementById("quiz").style.display = "none";
+}
+</script>
+
+
+
+
+
+<footer class="footer">
+  <p>© 2026 Proyecto educativo digital – Historia. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
 
 
 
