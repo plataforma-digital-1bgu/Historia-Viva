@@ -6,6 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root{
+  --azul:#1d3557;
+  --azul2:#457b9d;
+  --verde:#2ecc71;
+  --naranja:#f4a261;
+}
+
 *{
   margin:0;
   padding:0;
@@ -15,118 +22,242 @@
 body{
   font-family:'Segoe UI',Arial,sans-serif;
   background:#f4f6f9;
+  overflow-x:hidden;
+}
+
+/* ================= BIENVENIDA PRO PLUS ================= */
+.bienvenida{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top,#4facfe,transparent 40%),
+    linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:99999;
+}
+
+.bienvenida .box{
+  padding:70px;
+  border-radius:35px;
+  background:rgba(255,255,255,0.15);
+  text-align:center;
+  color:white;
+  animation:entrada 1.2s ease;
+  box-shadow:0 0 60px rgba(79,172,254,.8);
+}
+
+@keyframes entrada{
+  from{opacity:0; transform:scale(.6);}
+  to{opacity:1; transform:scale(1);}
+}
+
+.bienvenida button{
+  margin-top:30px;
+  padding:20px 50px;
+  border:none;
+  border-radius:50px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(135deg,#43e97b,#38f9d7);
 }
 
 /* ================= HEADER ================= */
 header{
-  background: linear-gradient(135deg,#1d3557,#3F88C3,#457b9d);
+  background:linear-gradient(135deg,#1d3557,#3F88C3,#457b9d);
   color:white;
   text-align:center;
-  padding:20px;
+  padding:15px;
 }
 
 /* ================= BANNER ================= */
 .banner{
   position:relative;
   width:100%;
+  height:120vh;
   overflow:hidden;
 }
 
 .banner img.fondo{
   width:100%;
-  display:block;
+  height:100%;
+  object-fit:cover; /* 🔥 AJUSTA PERFECTO */
 }
 
-/* ================= BOTONES SOBRE EL BANNER ================= */
+/* ================= LOGOS ================= */
+
+/* 🔥 MOVER LOGO IZQUIERDO */
+.logo{
+  position:absolute;
+  top:50px;   /* ⬆ subir / bajar */
+  left:380px;  /* ➡ mover derecha / izquierda */
+  width:200px; /* 🔍 tamaño */
+}
+
+/* 🔥 MOVER LOGO DERECHO */
+.logohistoria{
+  position:absolute;
+  top:150px;
+  right:580px;
+  left:750px;
+  width:250px;
+}
+
+/* ================= PERSONAJES ================= */
+.nino{
+  position:absolute;
+  bottom:0;
+  left:5%;
+  width:150px;
+}
+
+.nina{
+  position:absolute;
+  bottom:0;
+  right:5%;
+  width:150px;
+}
+
+/* ================= BOTONES ENCIMA DEL BANNER ================= */
+
+/* 🔥 AQUI SE MUEVEN LOS BOTONES */
 .botones{
   position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
+  top:70%;              /* ⬆ subir o bajar botones */
+  left:50%;             /* centrar horizontal */
+  transform:translate(-30%,-100%);
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:30px;
-  z-index:5;
-  width:60%;
+  grid-template-columns:repeat(2,280px);
+  gap:60px;
+  z-index:10;
 }
 
+
+/* BOTONES CERTIFICADO */
+.botones-certificado{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.btn-imprimir,
+.btn-cerrar{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.btn-imprimir{
+  background:linear-gradient(135deg,#2ecc71,#80ed99);
+  color:white;
+}
+
+.btn-imprimir:hover{
+  transform:translateY(-3px);
+}
+
+.btn-cerrar{
+  background:linear-gradient(135deg,#e63946,#ff6b6b);
+  color:white;
+}
+
+.btn-cerrar:hover{
+  transform:translateY(-3px);
+}
+
+
 .btn{
-  padding:18px;
+  padding:20px;
   font-size:20px;
   font-weight:bold;
-  border-radius:40px;
+  border-radius:45px;
   text-align:center;
   color:white;
   cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  box-shadow:0 15px 30px rgba(0,0,0,.4);
   transition:.3s;
 }
 
 .btn:hover{
-  transform:scale(1.08);
+  transform:scale(1.05);
 }
 
-/* Colores */
 .inicio{background:linear-gradient(135deg,#4facfe,#00f2fe);}
 .videos{background:linear-gradient(135deg,#f4a261,#ffd166); color:#000;}
 .juegos{background:linear-gradient(135deg,#2ecc71,#80ed99);}
 .certificado{background:linear-gradient(135deg,#9b5de5,#f15bb5);}
 
-/* ================= LOGOS Y PERSONAJES ================= */
-.logo,
-.logohistoria,
-.nino,
-.nina{
-  position:absolute;
+/* ================= CERTIFICADO ================= */
+.certificado-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999999;
 }
 
-.logo{
-  top:20px;
-  left:20px;
-  width:110px;
-}
-
-.logohistoria{
-  top:20px;
-  right:20px;
-  width:140px;
-}
-
-.nino{
-  bottom:0;
-  left:5%;
-  width:110px;
-}
-
-.nina{
-  bottom:0;
-  right:5%;
-  width:110px;
+.certificado-box{
+  background:white;
+  padding:50px;
+  border-radius:20px;
+  width:700px;
+  max-width:95%;
+  text-align:center;
+  border:10px double #1d3557;
+  box-shadow:0 0 40px rgba(0,0,0,.5);
 }
 
 /* ================= FOOTER ================= */
 footer{
-  background: linear-gradient(135deg,#1d3557,#3F88C3,#457b9d);
+  background:linear-gradient(135deg,#1d3557,#3F88C3,#457b9d);
   color:white;
   text-align:center;
-  padding:15px;
+  padding:10px;
+
 }
 
 /* ================= RESPONSIVE ================= */
-@media(max-width:768px){
+
+@media(max-width:1024px){
+  .banner{height:70vh;}
   .botones{
-    width:90%;
-    gap:15px;
-  }
-  .btn{
-    font-size:16px;
-    padding:12px;
+    grid-template-columns:repeat(2,180px);
   }
 }
+
+@media(max-width:768px){
+  .banner{height:65vh;}
+  .botones{
+    grid-template-columns:1fr;
+    top:55%;
+  }
+  .logo,.logohistoria{width:90px;}
+  .nino,.nina{width:90px;}
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="bienvenida" id="bienvenida">
+  <div class="box">
+    <h1>📜 HISTORIA VIVA – 1ero BGU</h1>
+    <p>Plataforma Digital Interactiva</p>
+    <button onclick="cerrarBienvenida()">🚀 Comenzar</button>
+  </div>
+</div>
 
 <header>
   <h1>Historia Digital – 1ero BGU</h1>
@@ -134,28 +265,30 @@ footer{
 
 <section class="banner">
   <img src="INICIO.png" class="fondo">
+  <img src="Logo1.png" class="logo">
+  <img src="LOGOHISTORIA.png" class="logohistoria">
+  <img src="nino.png" class="nino">
+  <img src="nina.png" class="nina">
 
-  <!-- BOTONES ENCIMA -->
   <div class="botones">
     <div class="btn inicio" onclick="location.href='INICIO.html'">Inicio</div>
     <div class="btn videos" onclick="location.href='Sonido/VIDEOS/VIDEO.html'">Videos</div>
     <div class="btn juegos" onclick="window.open('Juego.html','_blank')">Juegos</div>
     <div class="btn certificado" onclick="generarCertificado()">Certificado</div>
   </div>
-
-  <!-- Logos y personajes -->
-  <img src="Logo1.png" class="logo">
-  <img src="LOGOHISTORIA.png" class="logohistoria">
-  <img src="nino.png" class="nino">
-  <img src="nina.png" class="nina">
-
 </section>
 
-<footer>
-  © 2026 – Historia Digital
-</footer>
+<footer>© 2026 – Historia Digital</footer>
+
+<div class="certificado-modal" id="certificado">
+  <div class="certificado-box" id="datosCertificado"></div>
+</div>
 
 <script>
+function cerrarBienvenida(){
+  document.getElementById("bienvenida").style.display="none";
+}
+
 function generarCertificado(){
   const nombre = prompt("Ingrese el nombre del estudiante:");
   if(!nombre) return;
@@ -163,7 +296,29 @@ function generarCertificado(){
   const curso = prompt("Ingrese el curso:");
   if(!curso) return;
 
-  alert("Certificado generado para " + nombre + " - " + curso);
+  document.getElementById("datosCertificado").innerHTML = `
+    <h1 style="color:#1d3557;">📜 CERTIFICADO DE LOGRO</h1>
+    <p>Se reconoce a:</p>
+    <h2 style="margin:20px 0; color:#1d3557;">${nombre}</h2>
+    <p>Curso: <strong>${curso}</strong></p>
+    <p style="margin-top:20px;">
+    Por completar exitosamente la plataforma Historia Digital.
+    </p>
+    <p style="margin-top:20px; font-style:italic; color:#555;">
+    “El conocimiento de la historia nos permite construir un mejor futuro.”
+    </p>
+
+    <div class="botones-certificado">
+      <button class="btn-imprimir" onclick="window.print()">🖨 Imprimir</button>
+      <button class="btn-cerrar" onclick="cerrarCertificado()">Cerrar</button>
+    </div>
+  `;
+
+  document.getElementById("certificado").style.display="flex";
+}
+
+function cerrarCertificado(){
+  document.getElementById("certificado").style.display="none";
 }
 </script>
 
