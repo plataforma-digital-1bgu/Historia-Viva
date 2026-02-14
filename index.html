@@ -268,7 +268,96 @@ footer{
   <img src="Logo1.png" class="logo">
   <img src="LOGOHISTORIA.png" class="logohistoria">
   <img src="nino.png" class="nino">
-  <img src="nina.png" class="nina">
+  <img src=/* ================= RESPONSIVE PRO ================= */
+
+/* 💻 Laptop grande */
+@media(max-width:1200px){
+  .logo{
+    left:50px;
+    width:150px;
+  }
+
+  .logohistoria{
+    left:auto;
+    right:50px;
+    width:180px;
+  }
+
+  .botones{
+    transform:translate(-50%,-100%);
+    grid-template-columns:repeat(2,240px);
+    gap:40px;
+  }
+}
+
+/* 📲 Tablet */
+@media(max-width:992px){
+
+  .banner{
+    height:90vh;
+  }
+
+  .logo{
+    top:30px;
+    left:20px;
+    width:120px;
+  }
+
+  .logohistoria{
+    top:30px;
+    right:20px;
+    width:140px;
+    left:auto;
+  }
+
+  .botones{
+    top:65%;
+    left:50%;
+    transform:translate(-50%,-100%);
+    grid-template-columns:repeat(2,200px);
+    gap:30px;
+  }
+
+  .nino,.nina{
+    width:100px;
+  }
+}
+
+/* 📱 Teléfono */
+@media(max-width:600px){
+
+  header h1{
+    font-size:18px;
+  }
+
+  .banner{
+    height:85vh;
+  }
+
+  .logo,
+  .logohistoria{
+    display:none; /* 🔥 se ocultan en celular para que no se amontonen */
+  }
+
+  .botones{
+    top:60%;
+    left:50%;
+    transform:translate(-50%,-100%);
+    grid-template-columns:1fr; /* 🔥 uno debajo del otro */
+    gap:20px;
+  }
+
+  .btn{
+    font-size:18px;
+    padding:18px;
+  }
+
+  .nino,.nina{
+    width:80px;
+  }
+
+}
+"nina.png" class="nina">
 
   <div class="botones">
     <div class="btn inicio" onclick="location.href='INICIO.html'">Inicio</div>
