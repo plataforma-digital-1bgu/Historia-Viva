@@ -3246,4 +3246,3252 @@ observer.observe(document.querySelector('.timeline'));
 </script>
 
 </body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Historia de las Civilizaciones</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+
+body{
+  font-family:"Segoe UI",sans-serif;
+  background:linear-gradient(135deg,#eef2f7,#e3edf3);
+}
+
+html, body{
+  overflow-x:hidden;
+}
+
+
+
+
+/* HEADER */
+header{
+  position:relative;
+  background: linear-gradient(135deg,#f7971e,#ffd200);
+  color:#1a1a1a;
+  padding:35px 20px;
+  text-align:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+
+
+
+header h1{font-size:26px;margin:0}
+header p{font-size:15px;margin-top:6px;opacity:.9}
+
+/* SECCIÓN */
+.seccion-pro{
+  max-width:1050px;
+  margin:100px auto;
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 25px 60px rgba(0,0,0,.15);
+}
+
+/* TABS */
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  margin-top:-100px; /* 👈 esto los sube */
+  margin-bottom:30px;
+  position:relative;
+  z-index:5;
+}
+
+.tabs button{
+  background: linear-gradient(135deg,#f7971e,#ffb347);
+  color:#1a1a1a;
+  border:none;
+  padding:12px 25px;
+  border-radius:25px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s ease;
+  box-shadow:0 6px 15px rgba(0,0,0,.2);
+
+}
+
+/* HOVER */
+.tabs button:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+
+/* CLICK */
+.tabs button:active{
+  transform:scale(0.95);
+}
+
+/* 🔥 BOTÓN ACTIVO ILUMINADO */
+.tabs button.activo-btn{
+  background: linear-gradient(135deg,#ffd200,#ff8c00);
+  box-shadow: 0 8px 20px rgba(255,140,0,.4);
+  transform: translateY(-3px) scale(1.08);
+
+  animation:latido 2s infinite;
+}
+
+/* LATIDO SUAVE */
+@keyframes latido{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.06)}
+}
+
+/* TEMAS */
+.tema{display:none}
+.tema.activo{
+  display:block;
+  animation:flotar .8s ease;
+}
+
+/* ENTRADA */
+@keyframes flotar{
+  from{opacity:0;transform:translateY(15px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* 🃏 TARJETA FLOTANTE */
+@keyframes flotacion{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+
+.tema h2{
+  text-align:center;
+  color:#1f3c4a;
+  font-size:22px;
+  margin-bottom:12px;
+}
+
+
+.descripcion-tema{
+  text-align: center;
+  max-width: 700px;
+  margin: 20px auto 40px auto; /* arriba | lados | abajo */
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+
+
+
+
+
+/* IMAGEN */
+.tema img{
+  width:95%;
+  max-height:420px;
+  object-fit:cover;
+  border-radius:18px;
+
+  display:block;        /* 👈 clave */
+  margin:20px auto;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+/* TEXTO */
+.texto-cuadro{
+background:#ffffff;
+  padding:22px 26px;
+  border-radius:20px;
+
+  font-size:16px;
+  line-height:1.7;
+  color:#1f3c4a;
+  /* detalle pro */
+  border-left:6px solid #8aa6b5;
+
+box-shadow:0 4px 12px rgba(0,0,0,.06);
+
+  max-width:900px;
+  margin:20px auto;
+  position:relative;
+
+}
+
+
+
+
+
+
+/* detalle visual tipo tarjeta */
+.texto-cuadro::before{
+  /* detalle*/
+
+  position:absolute;
+  top:-12px;
+  left:22px;
+  background:#ffffff;
+  padding:4px 8px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+
+
+
+/* DEL TEMA 2*/
+
+.monasterios {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+
+.titulo-seccion{
+  text-align: center;
+  color: white;
+}
+
+.titulo-seccion span{
+  display: block;
+}
+
+.linea1{
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.linea-horizontal{
+  position:absolute;
+  top:95px;
+  left:50%;
+  width:64%;
+  height:2px;
+background: rgba(245, 158, 11, 0.5);
+transform: translateX(-50%);
+height: 2px;
+
+
+}
+
+
+
+.linea2{
+  font-size: 32px;
+  font-weight: 700;
+}
+
+
+
+.intro {
+  margin: 15px 0 25px;
+  font-size: 16px;
+  color: #555;
+}
+
+.imagenes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.imagenes img {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.separador {
+  width: 60%;
+  margin: 35px auto;
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #aaa, transparent);
+}
+
+.texto {
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+
+
+
+
+
+
+
+
+/* BOTÓN VOZ */
+.boton-voz{
+  display:block;
+  margin:15px auto;
+  background:#9e9e9e;
+  color:white;
+  border:none;
+  padding:12px 28px;
+  border-radius:30px;
+  font-weight:600;
+  cursor:pointer;
+  transition: all .35s ease;
+  box-shadow:0 6px 15px rgba(0,0,0,.15);
+
+
+}
+
+
+
+.boton-voz:hover{
+  background:#8a8a8a;
+  transform:translateY(-2px);
+}
+
+
+.btn-voz.pausando{
+  background:#6f6f6f;
+}
+/* animación sutil */
+.boton-voz{
+  animation: pulsoGlass 3s infinite;
+}
+
+
+
+
+
+/* MAPA */
+.centro{
+  text-align:center;
+  background:linear-gradient(135deg,#1f3c4a,#355f73);
+  color:white;
+  padding:16px;
+  border-radius:18px;
+  font-size:18px;
+  margin-bottom:30px;
+}
+
+.mapa{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+  justify-content:center;
+  max-width:1100px;
+  margin:40px auto;
+  animation: fadeInMap .8s ease;
+  position:relative;
+
+}
+
+.mapa::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:3px;
+  height:100%;
+  background:linear-gradient(to bottom,#f59e0b,#fbbf24);
+  opacity:.3;
+}
+
+
+
+
+.mapa-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 20px 0 30px;
+  position: relative;
+  top:15px;
+}
+
+.mapa-title::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #ffb703, #fb8500);
+  display: block;
+  margin: 12px auto 0;
+  border-radius: 10px;
+}
+
+.mapa .card:last-child {
+  grid-column: 2 / 3;
+}
+
+
+.caja{
+  background: linear-gradient(135deg,#f8fafc,#eef2f7);
+  padding:22px;
+  border-radius:18px;
+  border-left:6px solid #EEBA4A;
+  box-shadow:0 10px 35px rgba(0,0,0,.08);
+  font-size:14px;
+  transition: all .3s ease;
+  cursor:pointer;
+  animation:aparecerCaja .6s ease forwards;
+  opacity:0;
+  transform:translateY(20px);
+  width:100%;
+}
+@keyframes aparecerCaja{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+.caja:hover{
+  transform:translateY(-8px);
+  box-shadow:0 25px 50px rgba(0,0,0,.15);
+  transition:.3s ease;
+
+}
+
+
+
+@media(min-width:768px){
+  .caja:last-child{
+    transform:scale(1.05);
+  }
+}
+
+
+
+
+
+
+.caja .extra{
+  display:block;
+  font-size:13px;
+  color:#555;
+  margin-top:8px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+}
+
+/* Cuando está activa */
+.caja.activa .extra{
+  max-height:80px;
+}
+
+.centro{
+  transition:all .3s ease;
+}
+
+.mapa:hover ~ .centro,
+.caja:hover ~ .centro{
+  box-shadow:0 0 0 4px rgba(59,130,246,.25);
+}
+
+
+
+/* Hover dinámico */
+
+.caja:hover{
+ transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 18px 35px rgba(0,0,0,.15);
+  border-color:#3b82f6;
+}
+
+/* Animación de aparición */
+@keyframes fadeInMap{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+
+
+
+.centro{
+  background:#1f2937;
+  color:white;
+  padding:14px 26px;
+  border-radius:30px;
+  font-weight:700;
+  width:max-content;
+  margin:0 auto 50px;
+  position:relative;
+}
+
+/* BOTÓN REGRESAR */
+.btn-regresar{
+  position:absolute;
+  top:40px;
+  left:20px;
+  background:rgba(255,255,255,.2);
+  color:white;
+  text-decoration:none;
+  padding:10px 18px;
+  border-radius:10px;
+  font-weight:600;
+  font-size:14px;
+  transition:.3s ease;
+  border:2px solid white;           /* elimina borde */
+  cursor:pointer;
+
+}
+.btn-regresar:focus{
+  outline:none;
+}
+
+
+
+.btn-regresar:hover{
+  background:rgba(255,255,255,.35);
+}
+
+@media(max-width:600px){
+  .btn-regresar{
+    top:15px;
+    left:15px;
+    padding:8px 14px;
+    font-size:12px;
+  }
+}
+
+
+
+
+
+
+
+/* QUIZZ  */
+
+.quiz-btn{
+  margin-top:30px;
+ padding: 12px 24px;
+  font-size: 16px;
+}
+
+
+
+.quiz{
+  background:#f0f6fa;
+  padding:18px;
+  border-radius:16px;
+  margin-top:25px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.quiz p{
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+
+
+.quiz button{
+  background:#3b82b6;
+  color:white;
+  border:none;
+  padding:8px 16px;
+  margin:6px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.quiz button:hover{
+  background:#1f3c4a;
+}
+
+.resultado{
+  margin-top:10px;
+  font-weight:700;
+color:#b91c1c;
+}
+
+
+
+
+
+
+/* MODAL QUIZ */
+.modal{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,.6);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.modal-contenido{
+  background:white;
+  width:90%;
+  max-width:520px;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+  animation:aparecer .4s ease;
+}
+
+@keyframes aparecer{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.modal h3{
+  text-align:center;
+  margin-bottom:15px;
+  background:linear-gradient(135deg,#f8fbff,#eef5ff);
+  border-radius:16px;
+  padding:14px;
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+  margin-bottom:18px;
+  transition:transform .3s ease;
+}
+
+
+
+/* TARJETA DE PREGUNTA */
+.pregunta button{
+  padding:8px 18px;
+  border-radius:25px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+  transition:all .3s ease;
+  margin: 0 12px;
+}
+
+
+.pregunta{
+  text-align:center;
+}
+
+.pregunta:hover{
+  transform:translateY(-4px);
+}
+
+/* NÚMERO DE PREGUNTA */
+.pregunta p{
+  font-size:15px;
+  font-weight:600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.btn-quiz{
+  background: linear-gradient(135deg,#3b82f6,#2563eb);
+  color:white;
+  border:none;
+  padding:14px 26px;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(59,130,246,.45);
+  transition:.3s ease;
+}
+
+.btn-quiz:hover{
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 16px 35px rgba(59,130,246,.6);
+}
+
+/* Click */
+.btn-quiz:active{
+  transform:scale(.95);
+}
+
+/* Animación suave */
+.btn-quiz{
+  animation: latidoSuave 2.5s infinite;
+}
+
+@keyframes latidoSuave{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.04)}
+}
+
+
+
+
+
+
+
+
+
+/* ===== BOTONES QUIZ PRO ===== */
+
+.pregunta button{
+  padding:10px 22px;
+  border-radius:30px;
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  background:#f9fafb;
+  color:#1f2937;
+  border:2px solid #e5e7eb;
+  transition:all .25s ease;
+  margin:8px 14px;
+}
+
+/* Verdadero */
+.pregunta button:first-of-type{
+  border-color:#3b82f6;
+}
+
+/* Falso */
+.pregunta button:last-of-type{
+  border-color:#f43f5e;
+}
+
+/* Hover elegante */
+.pregunta button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+}
+
+/* Correcto */
+.btn-correcto{
+  background:#eff6ff;
+  border-color:#2563eb;
+  color:#1e40af;
+}
+
+/* Incorrecto */
+.btn-incorrecto{
+  background:#fff1f2;
+  border-color:#be123c;
+  color:#9f1239;
+}
+
+/* Deshabilitado */
+.pregunta button:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+
+.cerrar{
+  display:block;
+  margin:15px auto 0;
+  background:#ccc;
+  border:none;
+  padding:8px 16px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+
+
+
+/* ===== ANIMACIONES QUIZ ===== */
+
+/* Correcto */
+.btn-correcto{
+  background: linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:white;
+  animation: acierto .4s ease;
+  box-shadow: 0 6px 14px rgba(59,130,246,.35);
+}
+
+
+
+
+/* Incorrecto */
+.btn-incorrecto{
+ background: linear-gradient(135deg,#f87171,#fca5a5);
+  color:white;
+  animation: error .4s ease;
+  box-shadow: 0 6px 14px rgba(248,113,113,.35);
+}
+
+
+
+
+
+
+/* Botones deshabilitados */
+.pregunta button:disabled{
+  opacity:.75;
+  filter:saturate(.8);
+}
+
+/* Animación acierto */
+@keyframes acierto{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
+/* Animación error */
+@keyframes error{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
+  100%{transform:translateX(0)}
+}
+
+
+
+
+
+/* Estados dinámicos */
+
+/* Resultado final del quiz */
+.resultado-final{
+ margin-top:18px;
+  padding:16px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#eef6ff,#e0ecff);
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.resultado-final h4{
+  margin:6px 0;
+  color:#1f3c4a;
+}
+
+
+
+
+
+.caja img{
+  width:50px;
+  margin-bottom:8px;
+}
+
+.caja h3{
+  margin:6px 0 4px;
+  font-size:15px;
+}
+
+.caja p{
+  font-size:13px;
+  color:#555;
+}
+
+
+
+
+
+
+
+/* LINEA DE TIEMPO EN EL TEMA 1 */
+
+.timeline{
+ position: relative;
+  padding: 120px 0;
+}
+
+
+/* SVG */
+.timeline-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+
+.grid-historia{
+   display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+
+
+
+
+
+
+
+.timeline::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(
+    to bottom,
+    #4f8cff,
+    #6a5cff,
+    #8e44ff
+  );
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+/* ====== EVENTOS BASE ====== */
+.evento{
+  display:flex;
+  margin-bottom:40px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:.6s ease;
+}
+
+.evento.mostrar{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.evento:nth-child(even){
+  flex-direction:row-reverse;
+}
+
+/* ====== FECHA ====== */
+.fecha{
+  width:130px;
+  text-align:center;
+  font-weight:700;
+  font-size:15px;
+  color:#1e40af;
+}
+
+/* ====== CONTENIDO BASE ====== */
+.contenido{
+  width:45%;
+  padding:20px 24px;
+  border-radius:18px;
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.6);
+box-shadow: 0 25px 50px rgba(0,0,0,.15);
+  transition:.35s ease;
+  border-left:6px solid transparent;
+}
+
+
+
+
+/* ===== SECCIÓN HISTORIA PRO ===== */
+.timeline-pro{
+  margin:60px auto;
+  text-align:center;
+}
+
+.timeline-pro h3{
+ font-size:22px;
+  color:#1f3c4a;
+  margin-bottom:35px;
+}
+
+/* GRID */
+.grid-historia{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:28px;
+  max-width:1050px;
+  margin:auto;
+ position:relative;
+  z-index:1;
+}
+
+
+
+
+
+
+
+/* flechas */
+
+
+
+
+
+
+
+.flecha{
+  stroke: #cbd5e1;
+  stroke-width: 2.5;
+  fill: none;
+  opacity: .8;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  marker-end: url(#arrow);
+
+  vector-effect: non-scaling-stroke;
+
+  /* estado inicial */
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+}
+.flecha.animate{
+  animation: draw-line 1.4s ease forwards;
+}
+
+@keyframes draw-line{
+  to{
+    stroke-dashoffset: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Mover Bizancio (4) y Monoteísmo (5) a la derecha */
+.card-historia:nth-child(4){
+  grid-column: 1;
+}
+
+.card-historia:nth-child(5){
+  grid-column: 3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TARJETA */
+/* ===== TARJETAS CINEMATOGRÁFICAS ===== */
+.card-historia{
+  background:#ffffff;
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 18px 40px rgba(0,0,0,.15);
+  text-align:left;
+  position:relative;
+
+  /* estado inicial del reveal */
+  opacity:0;
+  transform:translateY(60px);
+  transition:
+    opacity .8s ease,
+    transform .9s cubic-bezier(.19,1,.22,1);
+}
+/* ETAPA */
+.etapa{
+  display:inline-block;
+  background:#1f3c4a;
+  color:white;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+/* TÍTULO */
+.card-historia h4{
+  font-size:17px;
+  margin:10px 0;
+  color:#0f172a;
+}
+
+/* TEXTO */
+.card-historia p{
+  font-size:14px;
+  line-height:1.7;
+  color:#334155;
+}
+
+/* HOVER */
+
+.card-historia:hover{
+  transform:translateY(-8px);
+  box-shadow:0 26px 60px rgba(0,0,0,.22);
+}
+
+/* REVEAL FINAL */
+.card-historia.reveal{
+  opacity:1;
+  transform:translate(0,0);
+}
+
+/* REVEAL DIFERENTE POR ETAPA */
+.card-historia:nth-child(1){ transform:translateX(-80px); }
+.card-historia:nth-child(2){ transform:translateX(80px); }
+.card-historia:nth-child(3){ transform:translateY(80px); }
+.card-historia:nth-child(4){ transform:scale(.85); }
+.card-historia:nth-child(5){ transform:translateY(-80px); }
+
+
+
+
+
+
+
+
+
+/* LUZ CINEMATOGRÁFICA */
+
+/* REVEAL */
+.card-historia.reveal{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+
+.card-historia.reveal::after{
+  opacity:1;
+}
+
+/* ETIQUETA DE ETAPA */
+.card-historia .etapa{
+  display:inline-block;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:white;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+/* TÍTULO */
+.card-historia h4{
+  margin:10px 0;
+  font-size:17px;
+  color:#1e3a8a;
+}
+
+/* TEXTO */
+.card-historia p{
+  font-size:14px;
+  line-height:1.7;
+  color:#334155;
+}
+
+
+
+
+
+.card-historia.reveal::after{
+  opacity:1;
+}
+
+
+/* TÍTULO */
+.card-historia h4{
+  margin:10px 0;
+  font-size:17px;
+  color:#1e3a8a;
+}
+
+/* TEXTO */
+.card-historia p{
+  font-size:14px;
+  line-height:1.6;
+  color:#334155;
+}
+
+
+
+
+
+
+
+
+
+
+/* ====== HOVER (RESALTA EVENTO) ====== */
+.evento:hover .contenido{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,.15);
+}
+
+/* ====== COLORES POR ETAPA (SEGÚN LIBRO) ====== */
+
+/* Antigua Grecia */
+.evento:nth-of-type(1) .contenido{
+  border-left-color:#3b82f6;
+}
+
+/* Roma Antigua */
+.evento:nth-of-type(2) .contenido{
+  border-left-color:#f97316;
+}
+
+/* Legado Romano */
+.evento:nth-of-type(3) .contenido{
+  border-left-color:#22c55e;
+}
+
+/* Imperio Bizantino */
+.evento:nth-of-type(4) .contenido{
+  border-left-color:#a855f7;
+}
+
+/* Monoteísmo */
+.evento:nth-of-type(5) .contenido{
+  border-left-color:#e11d48;
+}
+
+
+@media(max-width:768px){
+
+  .timeline::before{
+    left:20px;
+  }
+
+  .evento{
+    flex-direction:column;
+    padding-left:40px;
+  }
+
+  .evento:nth-child(even){
+    flex-direction:column;
+  }
+
+  .fecha{
+    width:auto;
+    text-align:left;
+    margin-bottom:8px;
+    font-size:14px;
+  }
+
+  .contenido{
+    width:100%;
+  }
+}
+
+
+
+/* ===== ESTADO BASE CINEMATOGRÁFICO ===== */
+.card-historia{
+  opacity:0;
+  transition:
+    opacity .9s ease,
+    transform 1s cubic-bezier(.19,1,.22,1),
+    filter 1s ease;
+  will-change: transform, opacity, filter;
+}
+
+
+
+
+
+
+/* MICRO INTERACCIÓN */
+.card-historia:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 30px 65px rgba(0,0,0,.25);
+}
+
+
+
+
+/* DESTACAR PRIMERA ETAPA */
+.card-historia:nth-child(1){
+   box-shadow: 0 18px 40px rgba(0,0,0,.15) !important;
+
+  border: none !important;
+  outline: none !important;
+}
+
+
+
+/* ===== REVEALS POR ETAPA ===== */
+
+/* 🏛 Antigua Grecia – izquierda */
+.card-historia:nth-child(1){
+
+  transform:translateX(-80px) scale(0.95);
+}
+
+/* 🏛 Roma Antigua – derecha */
+.card-historia:nth-child(2){
+  transform:translateX(80px) scale(0.95);
+}
+
+/* ⚖️ Legado Romano – desde abajo */
+.card-historia:nth-child(3){
+  transform:translateY(90px) scale(0.92);
+}
+
+/* ✨ Imperio Bizantino – zoom elegante */
+.card-historia:nth-child(4){
+  transform:scale(0.85);
+}
+
+/* ✝️ Monoteísmo – desde arriba */
+.card-historia:nth-child(5){
+  transform:translateY(-80px) scale(0.95);
+}
+
+/* ===== CUANDO SE REVELA ===== */
+.card-historia.reveal{
+  opacity:1;
+  transform:translate(0,0) scale(1);
+  filter:blur(0);
+}
+
+
+
+
+.numero{
+  position:relative;
+  top:18px;
+  right:22px;
+  font-size:28px;
+  font-weight:800;
+  color:rgba(59,130,246,.15);
+}
+
+
+
+
+
+
+
+
+
+
+.timeline-pro{
+  position:relative;
+}
+
+.timeline-pro::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.04);
+  opacity:0;
+  transition:.6s ease;
+  pointer-events:none;
+}
+
+.timeline-pro:has(.card-historia.reveal)::before{
+  opacity:1;
+}
+
+
+
+
+.flecha:nth-of-type(1){ animation-delay:0.1s; }
+.flecha:nth-of-type(2){ animation-delay:0.3s; }
+.flecha:nth-of-type(3){ animation-delay:0.6s; }
+.flecha:nth-of-type(4){ animation-delay:0.9s; }
+.flecha:nth-of-type(5){ animation-delay:1.2s; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.timeline-center{
+  position: absolute;
+  top: 80%;               /* súbela o bájala aquí */
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6); /* TODO en una sola línea */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* tamaño real de la imagen */
+.timeline-center img{
+  width: 300px;           /* 👈 aquí la haces más pequeña */
+  max-width: 35vw;
+  opacity: 0.75;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,.15));
+}
+
+
+
+
+
+
+
+marker path{
+  opacity:0.9;
+}
+
+summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;          /* 👈 espacio ENTRE flecha, emoji y texto */
+  padding: 14px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+
+details {
+  max-width: 820px;
+  margin: 0 auto 14px;
+  font-family: Arial, sans-serif;
+}
+
+details summary::before {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+details[open] summary::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+details[open] .item-summary {
+  box-shadow: 0 25px 60px rgba(0,0,0,.18);
+  transform: scale(1.01);
+}
+
+
+details[open] summary {
+  background: #e0e7ff;
+}
+
+details p {
+font-size: 0.95rem;
+  color: #374151;
+  max-width: 80ch;
+}
+
+
+
+
+details p::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #6366f1, transparent);
+  margin-bottom: 12px;
+  border-radius: 2px;
+}
+
+details[open] > *:not(summary) {
+  animation: slideFade .45s ease;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+/* arregla summary */
+summary {
+  list-style: none;
+  display: block;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* card */
+.item {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+}
+
+.item-summary {
+ 
+  color: #000; /* negro */
+
+}
+
+.item-summary:hover .arrow {
+  transform: translateX(4px);
+}
+
+
+
+
+
+
+
+.item-summary::before {
+ content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 5px;
+  border-radius: 8px;
+  background: rgba(0,0,0,.15);
+ }
+
+
+/*ALGO DEL TEMA 2*/
+
+.item-summary {
+  position: relative; /* 👈 AÑADE ESTO */
+  cursor: pointer;
+  padding: 18px;
+  font-size: 18px;
+  list-style: none;
+}
+
+
+
+
+
+
+
+
+.timeline-pro{
+  position:relative;
+}
+
+.timeline-pro::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.04);
+  opacity:0;
+  transition:.6s ease;
+  pointer-events:none;
+}
+
+.timeline-pro:has(.card-historia.reveal)::before{
+  opacity:1;
+}
+
+
+
+
+.flecha:nth-of-type(1){ animation-delay:0.1s; }
+.flecha:nth-of-type(2){ animation-delay:0.3s; }
+.flecha:nth-of-type(3){ animation-delay:0.6s; }
+.flecha:nth-of-type(4){ animation-delay:0.9s; }
+.flecha:nth-of-type(5){ animation-delay:1.2s; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.timeline-center{
+  position: absolute;
+  top: 80%;               /* súbela o bájala aquí */
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6); /* TODO en una sola línea */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* tamaño real de la imagen */
+.timeline-center img{
+  width: 300px;           /* 👈 aquí la haces más pequeña */
+  max-width: 35vw;
+  opacity: 0.75;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,.15));
+}
+
+
+
+
+
+
+
+marker path{
+  opacity:0.9;
+}
+
+summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;          /* 👈 espacio ENTRE flecha, emoji y texto */
+  padding: 14px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+
+details {
+  max-width: 820px;
+  margin: 0 auto 14px;
+  font-family: Arial, sans-serif;
+}
+
+details summary::before {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+details[open] summary::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+details[open] .item-summary {
+  box-shadow: 0 25px 60px rgba(0,0,0,.18);
+  transform: scale(1.01);
+}
+
+
+details[open] summary {
+  background: #e0e7ff;
+}
+
+details p {
+font-size: 0.95rem;
+  color: #374151;
+  max-width: 80ch;
+}
+
+
+
+
+details p::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #6366f1, transparent);
+  margin-bottom: 12px;
+  border-radius: 2px;
+}
+
+details[open] > *:not(summary) {
+  animation: slideFade .45s ease;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+/* arregla summary */
+summary {
+  list-style: none;
+  display: block;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* card */
+.item {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+}
+
+
+
+.item-summary:hover .arrow {
+  transform: translateX(4px);
+}
+
+
+
+
+
+
+
+.item-summary::before {
+ content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 5px;
+  border-radius: 8px;
+  background: rgba(0,0,0,.15);
+ }
+
+
+/* Flecha con micro-animación */
+
+.arrow {
+  font-size: 1.4rem;
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+}
+
+details[open] .arrow {
+  transform: rotate(90deg) scale(1.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* fila superior */
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* pastilla */
+.badge {
+  background: #1f2937;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* número */
+.numero {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgba(0,0,0,0.12);
+}
+
+/* título */
+.titulo {
+  margin-top: 8px;
+  font-size: 1rem;
+}
+
+
+.titulo-principal{
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+
+
+/* imágenes */
+.imagenes {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.imagenes img {
+  width: 40%;
+  border-radius: 16px;
+}
+
+/* fondos */
+/* COLORES DE CADA SECCIÓN */
+.bg-1 {
+  background-color: #f3f7ff; /* azul claro */
+}
+
+.bg-2 {
+  background-color: #e9f9ff; /* celeste */
+}
+
+.bg-3 {
+  background-color: #f0fbff; /* azul muy suave */
+}
+
+.bg-4 {
+  background-color: #fff6e8; /* beige */
+}
+
+.bg-5 {
+  background-color: #eefcf4; /* verde claro */
+}
+
+
+
+
+
+
+
+/* animación contenido */
+.item > *:not(summary) {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+.item[open] > *:not(summary) {
+  max-height: 1000px; /* suficiente para texto + imágenes */
+  opacity: 1;
+}
+
+
+
+
+.icono {
+  margin-right: 12px;
+}
+
+
+
+
+summary {
+  list-style: none;
+  display: block;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+details:hover {
+  transform: scale(1.01);
+}
+
+.numero {
+  display: none;
+}
+
+
+
+
+.cards-tema4 {
+  max-width: 1100px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 26px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0,0,0,.15);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+}
+
+.card .sub {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card ul {
+  margin-top: 14px;
+  padding-left: 18px;
+}
+
+.card ul li {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+/* Colores suaves por tarjeta */
+.card-1 {
+  background: linear-gradient(135deg, #f3f7ff, #ffffff);
+}
+
+.card-2 {
+  background: linear-gradient(135deg, #e9f9ff, #ffffff);
+}
+
+.card-3 {
+  background: linear-gradient(135deg, #eefcf4, #ffffff);
+}
+
+
+
+
+.grid-temas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  max-width: 1000px;
+  margin: 0 auto 50px;
+  padding: 0 15px;
+}
+
+
+.card h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.card ul {
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+/* colores por tema */
+.tema4 {
+  background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+  border-left: 6px solid #0284c7;
+}
+
+.tema5 {
+  background: linear-gradient(135deg, #ecfeff, #f0fdfa);
+  border-left: 6px solid #0d9488;
+}
+
+.tema4:nth-child(1) { border-left-color: #7e57c2; }
+.tema4:nth-child(2) { border-left-color: #1e88e5; }
+.tema4:nth-child(3) { border-left-color: #ec407a; }
+.tema4:nth-child(4) { border-left-color: #43a047; }
+
+
+
+
+
+.card h3 {
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+
+.card.resumen {
+  transform: scale(1.02);
+  border-left-width: 7px;
+}
+
+
+
+
+
+@media (max-width: 768px){
+
+  .mapa{
+    grid-template-columns: 1fr;
+  }
+
+  .imagenes{
+    grid-template-columns: 1fr;
+  }
+
+  .caja{
+    width:100%;
+  }
+
+}
+@media (max-width:768px){
+  .seccion-pro{
+    margin:40px 15px;
+  }
+}
+
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+
+<button class="btn-regresar" onclick="location.href='../INICIO.html'">
+  ⬅ Regresar</button>
+  <h1 class="titulo-seccion">
+  <span class="linea1">Sección 2</span>
+
+  <span class="linea2">Historia de las Civilizaciones :Interacciones religiosas y culturales</span>
+</h1>
+</header>
+
+<section class="seccion-pro">
+
+<div class="tabs">
+  <button class="activo-btn" onclick="mostrarTema(0,this)">
+
+ Tema 1</button>
+  <button onclick="mostrarTema(1,this)">Tema 2</button>
+  <button onclick="mostrarTema(2,this)">Tema 3</button>
+  <button onclick="mostrarTema(3,this)">Tema 4</button>
+  <button onclick="mostrarTema(4,this)">Tema 5</button>
+  <button onclick="mostrarTema(5,this)">Tema 6</button>
+</div>
+
+
+
+<!-- TEMA 1 -->
+<section class="tema activo">
+<button class="boton-voz" onclick="leerTexto('t1')">▶ Leer / Pausar</button>
+
+  <div id="t1">
+
+<h2>TEMA 1</h2>
+<h2>Caminos de la civilización</h2>
+
+<p>La civilización occidental se formó gracias al aporte de dos grandes culturas: la Antigua Grecia y Roma. En Grecia surgieron importantes ideas que aún influyen en nuestra vida diaria. Por ejemplo, la democracia ateniense permitió que los ciudadanos participaran en las decisiones políticas, un modelo que hoy se refleja en las elecciones y gobiernos democráticos. Además, la filosofía griega buscó explicar el mundo usando la razón y no solo los mitos.</p>
+
+
+<img src="../IMAGEN/T1CIVILIZACIONES.PNG" class="img-historia">
+
+
+
+<div class="texto-cuadro" >
+<i>La civilización occidental tiene sus bases en la Antigua Grecia y Roma. Grecia aportó la democracia, la filosofía y el pensamiento racional. Roma destacó por su organización y sus leyes.</i></div>
+
+<p>
+El estudio de la historia de las civilizaciones permite comprender cómo el pasado
+influye en el presente. Los aportes de Grecia y Roma, la importancia de la religión
+en la Edad Media, los encuentros culturales en Oriente Medio y los cambios de la
+modernidad han construido el mundo actual.
+</p>
+
+<p>
+Roma, en cambio, se destacó por su capacidad de organización. Creó un sistema de leyes conocido como derecho romano, que sirvió de base para muchas leyes actuales. Un ejemplo de esto es la idea de que todas las personas deben ser juzgadas bajo las mismas normas. También construyó caminos, acueductos y ciudades, facilitando el comercio y la comunicación. En este contexto se expandió el cristianismo, religión que influyó en los valores morales, la educación y la cultura europea durante siglos.
+</p>
+</div>
+
+
+<section class="timeline-pro">
+  <h3>🔵 Aportes de la civilización</h3>
+ <svg class="timeline-svg"
+     viewBox="0 0 900 420"
+     preserveAspectRatio="none"
+     aria-hidden="true">
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10"
+            refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <!-- 01 → 02 -->
+  <path class="flecha" d="M150 120 Q300 60 450 120"/>
+
+  <!-- 02 → 03 -->
+  <path class="flecha" d="M450 120 Q600 60 750 120"/>
+
+  <!-- 03 ↓ 05 -->
+  <path class="flecha" d="M750 120 Q800 260 750 360"/>
+
+  <!-- 01 ↓ 04 -->
+  <path class="flecha" d="M150 120 Q100 260 150 360"/>
+
+  <!-- 04 → 05 -->
+  <path class="flecha" d="M150 360 Q450 420 750 360"/>
+
+</svg>
+
+<!-- IMAGEN CENTRAL -->
+  <div class="timeline-center">
+    <img src="../IMAGEN/T2.png" alt="Civilización">
+  </div>
+
+  <div class="grid-historia">
+    <!-- cards -->
+  </div>
+
+
+
+
+
+
+
+  <div class="grid-historia">
+
+    <div class="card-historia">
+
+<span class="numero">01</span>
+      <span class="etapa">Antigüedad</span>
+      <h4>🏛 Antigua Grecia</h4>
+      <p>
+        Desarrollo de la democracia, la filosofía y el pensamiento racional,
+        dejando atrás los mitos.
+      </p>
+    </div>
+
+
+    <div class="card-historia">
+     <span class="numero">02</span>
+     <span class="etapa">753 a.C.</span>
+
+      <h4>🏛 Roma Antigua</h4>
+      <p>
+        Gran organización política y social, expansión territorial
+        y unificación de pueblos.
+      </p>
+    </div>
+
+
+    <div class="card-historia">
+    <span class="numero">03</span>
+    <span class="etapa">Imperio</span>
+      <h4>⚖️ Legado Romano</h4>
+      <p>
+        Derecho romano como base de las leyes actuales e infraestructura
+        como caminos y acueductos.
+      </p>
+    </div>
+
+    <div class="card-historia">
+    <span class="numero">04</span>
+    <span class="etapa">Bizancio</span>
+      <h4>✨ Imperio Bizantino</h4>
+      <p>
+        Conservación del conocimiento clásico y fortalecimiento
+        del cristianismo.
+      </p>
+    </div>
+
+
+
+    <div class="card-historia">
+   <span class="numero">05</span>
+
+      <span class="etapa">Religión</span>
+      <h4>✝️ Monoteísmo</h4>
+      <p>
+        Expansión del cristianismo e influencia en la moral,
+        cultura y organización social.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- BOTÓN DEL QUIZ -->
+
+<div style="text-align:center;">
+  <button class="boton-voz" onclick="abrirModal('quiz1')">
+  📝 Quiz del Tema
+  </button>
+</div>
+
+
+<div class="modal" id="quiz1">
+  <div class="modal-contenido">
+    <h3>Quiz – Caminos de la Civilización</h3>
+
+    <div class="pregunta">
+      <p>1️⃣ Grecia aportó la democracia.</p>
+      <button onclick="respuesta('t1r1',true,this)">Verdadero</button>
+      <button onclick="respuesta('t1r1',false,this)">Falso</button>
+      <div id="t1r1" class="resultado"></div>
+      </div>
+
+    <div class="pregunta">
+      <p>2️⃣ Roma no influyó en las leyes actuales.</p>
+      <button onclick="respuesta('t1r2',false,this)">Verdadero</button>
+      <button onclick="respuesta('t1r2',true,this)">Falso</button>
+      <div id="t1r2" class="resultado"></div>
+      </div>
+
+
+    <div class="pregunta">
+      <p>3️⃣ La filosofía griega usaba la razón.</p>
+      <button onclick="respuesta('t1r3',true,this)">Verdadero</button>
+      <button onclick="respuesta('t1r3',false,this)">Falso</button>
+      <div id="t1r3" class="resultado"></div>
+
+
+    </div>
+
+<div class="resultado-final"></div>
+
+<button class="cerrar" onclick="cerrarModal('quiz1')">❌ Cerrar</button>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- TEMA 2 -->
+<section class="tema">
+<button class="boton-voz" onclick="leerTexto('t2')">▶ Leer / Pausar</button>
+
+<h2>TEMA 2</br></h2>
+  <div id="t2">
+
+<h2>Religión en la Edad Media</h2>
+
+<p>Durante la Edad Media, la religión fue el eje principal de la sociedad. En Europa, el cristianismo guiaba la forma de pensar y de vivir de las personas. La Iglesia controlaba la educación y fundó monasterios donde se copiaban libros antiguos, evitando que se perdiera el conocimiento. Por ejemplo, los monjes enseñaban a leer y escribir y preservaban textos de la antigüedad.</p>
+
+
+<div class="texto-cuadro">
+<i>Durante la Edad Media, el cristianismo, el islam y el judaísmo influyeron en la política, la educación y la cultura.</i></div>
+
+
+
+<img src="../IMAGEN/TEMA2-1.PNG" class="img-historia">
+
+<p>Los monasterios fueron centros de conocimiento donde los monjes copiaban manuscritos antiguos, preservando textos de la cultura griega y romana. Gracias a este trabajo, gran parte del saber antiguo no se perdió. Además, los monasterios funcionaban como escuelas y hospitales, ayudando a la población.</p>
+
+
+
+<p>El islam, que se expandió rápidamente, aportó grandes avances científicos. Los musulmanes desarrollaron el álgebra, mejoraron la medicina y tradujeron textos griegos al árabe. Un ejemplo es el uso de hospitales y medicamentos avanzados para la época. El judaísmo, aunque sufrió persecuciones, mantuvo su identidad religiosa y cultural. A pesar de conflictos como las cruzadas, hubo intercambios culturales que permitieron compartir conocimientos entre distintas civilizaciones.</p>
+
+
+</div>
+
+
+
+<h2 class="titulo-principal">
+  <em>💡  Aportes al conocimiento en la Edad Media</em>
+</h2>
+
+<details class="item">
+  <summary class="item-summary bg-1">
+    <div class="header">
+      <span class="arrow">❯</span>
+      <span class="numero">01</span>
+      <span class="titulo">
+      <strong>Monasterios</strong> — proteger el conocimiento
+      </span>
+    </div>
+  </summary>
+
+  <p class="intro">
+    Los monjes copiaban manuscritos antiguos para que el saber no se perdiera.
+  </p>
+
+  <div class="imagenes">
+    <img src="../IMAGEN/monasterio.png" alt="Monasterio">
+    <img src="../IMAGEN/monjes.png" alt="Monjes copiando manuscritos">
+  </div>
+
+  <p class="texto">
+    Se convirtieron en los principales centros de aprendizaje y conservación del
+    conocimiento. En una época donde las guerras y la inestabilidad política
+    amenazaban constantemente la transmisión de la sabiduría, los monasterios
+    ofrecían un santuario donde se copiaban y preservaban manuscritos antiguos.
+  </p>
+
+
+
+  <hr class="linea-separadora">
+</details>
+
+<details class="item">
+  <summary class="item-summary bg-2">
+    <div class="header">
+      <span class="arrow">❯</span>
+      <span class="numero">02</span>
+      <span class="titulo">
+        <strong>Mundo islámico</strong> — ciencia y saber
+      </span>
+    </div>
+  </summary>
+
+  <p class="intro">
+    Se desarrollaron el álgebra, la medicina y los hospitales.
+  </p>
+
+  <div class="imagenes">
+    <img src="../IMAGEN/mundoislamico.png" alt="Mundo islámico">
+    <img src="../IMAGEN/islam.png" alt="Ciencia islámica">
+  </div>
+
+ <p class="texto">
+El mundo islámico no solo preservó el conocimiento de la antigüedad, sino que también lo expandió y desarrolló nuevas ideas que influirían en el Renacimiento europeo. La ciencia islámica es un testimonio del ingenio humano y su capacidad para avanzar en el conocimiento a través de la colaboración y la curiosidad intelectual. La relación entre la ciencia y la religión en el islam también jugó un papel importante, ya que el Corán se interpretó como una invitación a la reflexión y el entendimiento.</p>
+
+</details>
+
+
+
+
+
+
+
+
+<details class="item">
+  <summary class="item-summary bg-3">
+    <div class="header">
+      <span class="arrow">❯</span>
+      <span class="numero">03</span>
+      <span class="titulo">
+        <strong>Traducciones</strong> — el viaje del saber
+      </span>
+    </div>
+  </summary>
+
+  <p class="intro">
+    El conocimiento pasó del griego al árabe y luego al latín, permitiendo que
+    obras clásicas llegaran a Europa.
+  </p>
+
+  <div class="imagenes">
+    <img src="../IMAGEN/traduccion.png" alt="Traducciones">
+    <img src="../IMAGEN/griego.png" alt="Lengua griega">
+  </div>
+
+
+ <p class="texto">
+
+El movimiento de traducción greco-árabe fue un esfuerzo sostenido, bien financiado y de grandes proporciones responsable de la traducción de un volumen significativo de textos seculares griegos al árabe. ​ El movimiento de traducción tuvo lugar en Bagdad, desde mediados del siglo VIII hasta finales del siglo X.</p>
+
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+<details class="item">
+  <summary class="item-summary bg-4">
+    <div class="header">
+      <span class="arrow">❯</span>
+      <span class="numero">04</span>
+      <span class="titulo">
+        <strong>Judaísmo</strong> — identidad y resistencia
+      </span>
+    </div>
+  </summary>
+
+  <p class="intro">
+    A pesar de persecuciones, las comunidades judías preservaron tradiciones y saberes.
+  </p>
+
+  <div class="imagenes">
+    <img src="../IMAGEN/judaismo.png" alt="Judaísmo">
+    <img src="../IMAGEN/juda.png" alt="Tradición judía">
+  </div>
+
+ <p class="texto">
+Hoy día, la historia del pueblo judío continúa, con Israel como un estado moderno y vibrante, y comunidades judías floreciendo en todo el mundo. A pesar de los desafíos, el pueblo judío ha mantenido su identidad y su fe a lo largo de miles de años. La relación con la Tierra Prometida sigue siendo central en la identidad judía, y la diáspora continúa jugando un papel vital en la preservación de las tradiciones y valores judíos. La historia del pueblo judío es una historia de resistencia, supervivencia y renovación constante, que sigue inspirando a generaciones alrededor del mundo. La capacidad del pueblo judío para adaptarse y perseverar frente a la adversidad es un testimonio de su profunda fe y compromiso con su herencia y sus valores. </p>
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+<details class="item">
+  <summary class="item-summary bg-5">
+    <div class="header">
+      <span class="arrow">❯</span>
+      <span class="numero">05</span>
+      <span class="titulo">
+        <strong>Convivencia</strong> — culturas juntas
+      </span>
+    </div>
+  </summary>
+
+  <p class="intro">
+    Cristianos, judíos y musulmanes convivieron y compartieron saberes en algunas ciudades.
+  </p>
+
+  <div class="imagenes">
+    <img src="../IMAGEN/cultura.png" alt="Cultura">
+    <img src="../IMAGEN/convivencia.png" alt="Convivencia cultural">
+  </div>
+
+
+
+ <p class="texto">
+
+La convivencia de cristianos, judíos y musulmanes en la Península Ibérica, conocida como la "España de las tres culturas", fue un período de intenso intercambio cultural y científico, especialmente en lugares como Toledo y Córdoba. Entre los siglos VIII y XV, la colaboración en literatura, medicina, arquitectura y filosofía permitió traducir obras clásicas del griego al árabe y al latín, enriqueciendo el conocimiento europeo. Aunque no siempre fue pacífica, esta interacción dejó un legado imborrable en la lengua, música y arte del país. 
+</p>
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+No fue una época sin conocimiento.  
+Fue la época que evitó que el conocimiento desapareciera.
+</em></p>
+
+
+<div style="text-align:center;">
+  <button class="boton-voz" onclick="abrirModal('quiz2')">
+  📝 Quiz del Tema
+  </button>
+</div>
+
+
+
+
+<div class="modal" id="quiz2">
+  <div class="modal-contenido">
+    <h3>Quiz – Edad Media</h3>
+
+    <div class="pregunta">
+      <p>1️⃣ La religión fue central en la Edad Media.</p>
+      <button onclick="respuesta('t2r1',true,this)">Verdadero</button>
+      <button onclick="respuesta('t2r1',false,this)">Falso</button>
+      <div id="t2r1" class="resultado"></div>
+
+
+
+    </div>
+
+    <div class="pregunta">
+   <p>2️⃣ Los monasterios preservaron libros.</p>
+      <button onclick="respuesta('t2r2',true,this)">Verdadero</button>
+      <button onclick="respuesta('t2r2',false,this)">Falso</button>
+      <div id="t2r2" class="resultado"></div>
+     </div>
+ 
+
+
+     <div class="pregunta">
+      <p>3️⃣ No hubo intercambio cultural.</p>
+      <button onclick="respuesta('t2r3',false,this)">Verdadero</button>
+      <button onclick="respuesta('t2r3',true,this)">Falso</button>
+      <div id="t2r3" class="resultado"></div>
+     </div>
+
+    <button class="cerrar" onclick="cerrarModal('quiz2')">❌ Cerrar</button>
+  </div>
+</div>
+
+
+
+
+</section>
+
+
+
+
+<!-- TEMA 3 -->
+<section class="tema">
+<button class="boton-voz" onclick="leerTexto('t3')">▶ Leer / Pausar</button>
+
+
+<h2>TEMA 3</br></h2>
+  <div id="t3">
+
+<h2>Oriente Medio</h2>
+
+<p>Oriente Medio es considerado una de las regiones más importantes de la historia porque allí nacieron el judaísmo, el cristianismo y el islam. Ciudades como Jerusalén son sagradas para estas tres religiones. Esta región fue un punto clave del comercio entre Asia, África y Europa, lo que permitió el intercambio de productos como especias, telas y conocimientos.</p>
+<div class="texto-cuadro">
+
+
+<img src="../IMAGEN/oriente-medio.png" class="img-historia">
+<i>Oriente Medio fue el lugar de origen del judaísmo, el cristianismo y el islam.</i></div>
+
+<p>A lo largo del tiempo, Oriente Medio ha vivido conflictos religiosos y políticos, pero también momentos de convivencia. Por ejemplo, en algunas ciudades musulmanas convivieron cristianos, judíos y musulmanes, compartiendo espacios de trabajo y estudio. Estas experiencias muestran la importancia del respeto y la tolerancia entre culturas diferentes.</p>
+
+
+<p>Gracias a este intercambio comercial, se difundieron productos, ideas y conocimientos. En algunos periodos históricos, distintas religiones convivieron pacíficamente, compartiendo espacios de trabajo y estudio. Estos ejemplos demuestran la importancia del diálogo y la tolerancia entre culturas.</p>
+
+
+</div>
+
+
+
+
+<div style="text-align:center;">
+  <button class="boton-voz" onclick="abrirModal('quiz3')">
+  📝 Quiz del Tema
+  </button>
+</div>
+
+<div class="modal" id="quiz3">
+  <div class="modal-contenido">
+    <h3>Quiz – Oriente Medio</h3>
+    
+
+
+      <div class="pregunta">
+      <p>1️⃣ Allí nacieron tres religiones.</p>
+      <button onclick="respuesta('t3r1',true,this)">Verdadero</button>
+      <button onclick="respuesta('t3r1',false,this)">Falso</button>
+      <div id="t3r1" class="resultado"></div>
+      </div>
+
+
+      <div class="pregunta">
+      <p>2️⃣ Jerusalén es sagrada para una sola religión.</p>
+      <button onclick="respuesta('t3r2',false,this)">Verdadero</button>
+      <button onclick="respuesta('t3r2',true,this)">Falso</button>
+      <div id="t3r2" class="resultado"></div>
+      </div>
+
+
+     <div class="pregunta">
+     <p>3️⃣ Fue zona clave de comercio.</p>
+        <button onclick="respuesta('t3r3',true,this)">Verdadero</button>
+        <button onclick="respuesta('t3r3',false,this)">Falso</button>
+        <div id="t3r3" class="resultado"></div>
+       </div>
+
+    <button class="cerrar" onclick="cerrarModal('quiz3')">❌ Cerrar</button>
+  </div>
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- TEMA 4 -->
+<section class="tema">
+
+<button class="boton-voz" onclick="leerTexto('t4')">▶ Leer / Pausar</button>
+
+
+<h2>TEMA 4</br></h2>
+  <div id="t4">
+
+<h2>La Modernidad</h2>
+
+<p>La Edad Moderna marcó un cambio profundo en la forma de pensar. El Renacimiento impulsó el interés por la ciencia y el arte, con personajes como Leonardo da Vinci, que combinó arte e investigación científica. La Reforma religiosa cuestionó el poder de la Iglesia y permitió que surgieran nuevas iglesias cristianas.</p>
+
+<div class="texto-cuadro">
+<i>El Renacimiento y las revoluciones industriales transformaron la sociedad.</i></div>
+
+<img src="../IMAGEN/Modernidad.png" class="img-historia">
+
+
+
+<p>La Reforma religiosa cuestionó la autoridad de la Iglesia católica y dio origen a nuevas iglesias cristianas, cambiando el mapa religioso de Europa. Estos procesos generaron conflictos, pero también fomentaron la libertad de pensamiento.</p>
+
+
+<p>Más adelante, la Revolución Industrial transformó la vida cotidiana. Por ejemplo, las personas dejaron el campo para trabajar en fábricas, se crearon máquinas como la máquina de vapor y aumentó la producción de bienes. Estos cambios provocaron el crecimiento de las ciudades y el desarrollo de nuevas clases sociales, sentando las bases del mundo moderno.</p>
+
+</div>
+
+
+
+
+
+<!-- ========================= -->
+<!-- TEMA 4 — MODERNIDAD -->
+<!-- ========================= -->
+
+<h2 class="titulo-principal"> Características de la modernidad</h2>
+
+<p class="descripcion-tema">
+  Estos cambios dieron origen al mundo moderno y sentaron las bases
+  de la sociedad contemporánea actual.
+</p>
+
+
+
+
+
+
+
+
+
+
+<section class="grid-temas">
+
+  <div class="card tema4">
+    <h3>Concepto de la modernidad</h3>
+    <p>
+      Es una etapa histórica caracterizada por grandes cambios en la forma
+      de pensar, producir y organizar la sociedad.
+    </p>
+  </div>
+
+  <div class="card tema4">
+    <h3>🏭 Revolución Industrial</h3>
+    <ul>
+      <li>Uso de máquinas</li>
+      <li>Fábricas</li>
+      <li>Producción en masa</li>
+      <li>Migración a las ciudades</li>
+    </ul>
+  </div>
+
+  
+
+  <div class="card tema4">
+    <h3>🏛️ Cambios sociales</h3>
+    <ul>
+      <li>Estados modernos</li>
+      <li>Derechos ciudadanos</li>
+      <li>Separación Iglesia–Estado</li>
+    </ul>
+  </div>
+
+</section>
+
+<div style="text-align:center;">
+  <button class="boton-voz" onclick="abrirModal('quiz4')">
+  📝 Quiz del Tema
+  </button>
+</div>
+
+
+<div class="modal" id="quiz4">
+  <div class="modal-contenido">
+    <h3>Quiz – Modernidad</h3>
+
+      <div class="pregunta">
+      <p>1️⃣ El Renacimiento impulsó la ciencia.</p>
+      <button onclick="respuesta('t4r1',true,this)">Verdadero</button>
+      <button onclick="respuesta('t4r1',false,this)">Falso</button>
+      <div id="t4r1" class="resultado"></div>
+      </div>
+
+
+     <div class="pregunta">
+     <p>2️⃣ La Revolución Industrial no cambió la sociedad.</p>
+     <button onclick="respuesta('t4r2',false,this)">Verdadero</button>
+     <button onclick="respuesta('t4r2',true,this)">Falso</button>
+     <div id="t4r2" class="resultado"></div>
+     </div>
+
+
+     <div class="pregunta">
+     <p>3️⃣ Surgieron nuevas clases sociales.</p>
+        <button onclick="respuesta('t4r3',true,this)">Verdadero</button>
+        <button onclick="respuesta('t4r3',false,this)">Falso</button>
+        <div id="t4r3" class="resultado"></div>
+       </div>
+
+    <button class="cerrar" onclick="cerrarModal('quiz4')">❌ Cerrar</button>
+  </div>
+</div>
+
+</section>
+
+
+
+
+
+
+
+<!-- TEMA 5 -->
+<section class="tema">
+<button class="boton-voz" onclick="leerTexto('t5')">▶ Leer / Pausar</button>
+
+
+<h2>TEMA 5</br></h2>
+  <div id="t5">
+
+
+<h2>Actualidad</h2>
+
+
+<p>En la actualidad vivimos en un mundo globalizado donde personas de diferentes culturas y religiones conviven constantemente. Por ejemplo, en una misma ciudad pueden existir iglesias, mezquitas y sinagogas. Esto hace necesario el respeto, el diálogo y la tolerancia.</p>
+<img src="../IMAGEN/actualidafd.png" class="img-historia">
+
+<div class="texto-cuadro" >
+<i>Hoy vivimos en un mundo diverso donde el respeto es fundamental.</i></div>
+
+
+<p>Los derechos humanos buscan garantizar la igualdad entre las personas, sin importar su religión, cultura o género. Un ejemplo es el derecho a la educación y a la libertad de expresión. Conocer la historia de las civilizaciones nos ayuda a comprender por qué estos valores son tan importantes hoy en día y a evitar errores del pasado.</p>
+
+
+<p>Para vivir en un mundo tan variado, necesitamos practicar la convivencia pacífica, que consiste en respetar a los demás y aceptar que no todos somos iguales. Esto se ve en situaciones simples, como compartir el aula con compañeros que hablan otro idioma, practican otra religión o tienen costumbres diferentes. Cuando dialogamos, escuchamos y tratamos con respeto, logramos una convivencia sana que mejora la vida en comunidad y evita conflictos. Así, la diversidad se convierte en una riqueza y no en un problema.</p>
+
+</div>
+
+<!-- ========================= -->
+<!-- TEMA 5 — ACTUALIDAD -->
+<!-- ========================= -->
+
+<h2 class="titulo-principal">🌍 Aportes del mundo actual</h2>
+
+<p class="descripcion-tema">
+  Vivimos en un mundo globalizado y diverso donde el respeto, la tolerancia
+  y los derechos humanos son fundamentales para la convivencia.
+</p>
+
+
+
+<section class="grid-temas">
+
+  <div class="card tema5">
+    <h3>🌐 Globalización</h3>
+    <ul>
+      <li>Países interconectados</li>
+      <li>Intercambio cultural</li>
+      <li>Avances tecnológicos</li>
+    </ul>
+  </div>
+
+  <div class="card tema5">
+    <h3>🌈 Diversidad</h3>
+    <ul>
+      <li>Cultural</li>
+      <li>Religiosa</li>
+      <li>Lingüística</li>
+      <li>De género</li>
+    </ul>
+  </div>
+
+  <div class="card tema5">
+    <h3>⚖️ Derechos Humanos</h3>
+    <ul>
+      <li>Igualdad</li>
+      <li>Libertad</li>
+      <li>No discriminación</li>
+      <li>Educación</li>
+    </ul>
+  </div>
+</section>
+
+
+    <p>
+     
+    </p>
+ 
+
+
+<div style="text-align:center;">
+  <button class="boton-voz" onclick="abrirModal('quiz5')">
+  📝 Quiz del Tema
+  </button>
+</div>
+
+<div class="modal" id="quiz5">
+  <div class="modal-contenido">
+    <h3>Quiz – Actualidad</h3>
+
+   <div class="pregunta">
+   <p>1️⃣ Vivimos en un mundo diverso.</p>
+      <button onclick="respuesta('t5r1',true,this)">Verdadero</button>
+      <button onclick="respuesta('t5r1',false,this)">Falso</button>
+      <div id="t5r1" class="resultado"></div>
+     </div>
+
+
+    <div class="pregunta">
+      <p>2️⃣ El respeto es innecesario hoy.</p>
+      <button onclick="respuesta('t5r2',false,this)">Verdadero</button>
+      <button onclick="respuesta('t5r2',true,this)">Falso</button>
+      <div id="t5r2" class="resultado"></div>
+     </div>
+
+
+     <div class="pregunta">
+      <p>3️⃣ Los derechos humanos buscan igualdad.</p>
+      <button onclick="respuesta('t5r3',true,this)">Verdadero</button>
+      <button onclick="respuesta('t5r3',false,this)">Falso</button>
+      <div id="t5r3" class="resultado"></div>
+     </div>
+
+    <button class="cerrar" onclick="cerrarModal('quiz5')">❌ Cerrar</button>
+  </div>
+</div>
+
+</section>
+
+
+
+<!-- TEMA 6 -->
+<section class="tema">
+
+  <h2 class="mapa-title">Mapa Mental General</h2>
+<div class="mapa">
+
+<div class="linea-horizontal"></div>
+
+
+
+<div class="caja">
+  🏛 Grecia y Roma
+  <div class="mini-tema">
+    <p>
+      Aportaron bases fundamentales de la civilización occidental.
+    </p>
+    <ul>
+      <li>Democracia</li>
+      <li>Filosofía</li>
+      <li>Derecho romano</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="caja">
+  🌍 Oriente Medio
+  <div class="mini-tema">
+    <p>
+      Zona clave de intercambio cultural y comercial.
+    </p>
+    <ul>
+      <li>Ruta de la seda</li>
+      <li>Avances en matemáticas</li>
+      <li>Difusión del conocimiento</li>
+    </ul>
+  </div>
+</div>
+
+
+
+<div class="caja">
+  ⚙ Modernidad
+  <div class="mini-tema">
+    <p>
+      Etapa de grandes cambios científicos y sociales.
+    </p>
+    <ul>
+      <li>Revolución científica</li>
+      <li>Ilustración</li>
+      <li>Avances tecnológicos</li>
+    </ul>
+  </div>
+</div> 
+
+
+
+
+  
+
+<div class="caja">
+  👩‍🏫 Actualidad
+  <div class="mini-tema">
+    <p>
+      Sociedad diversa, globalizada y tecnológica.
+    </p>
+    <ul>
+      <li>Diversidad cultural</li>
+      <li>Globalización</li>
+      <li>Derechos humanos</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+<script>
+const sonidoBien = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3");
+const sonidoMal  = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3");
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   CONTROL DE TEMAS (TABS)
+   ========================= */
+let actual = 0;
+const temas = document.querySelectorAll(".tema");
+const botonesTabs = document.querySelectorAll(".tabs button");
+
+function mostrarTema(i, btn){
+  temas[actual].classList.remove("activo");
+  botonesTabs[actual].classList.remove("activo-btn");
+
+  actual = i;
+  temas[actual].classList.add("activo");
+  botonesTabs[actual].classList.add("activo-btn");
+
+
+
+  speechSynthesis.cancel();
+}
+
+
+
+
+
+
+
+/* =========================
+   LECTURA DE TEXTO
+   ========================= */
+let hablando = false;
+
+function leerTexto(id){
+  if(hablando){
+    speechSynthesis.cancel();
+    hablando = false;
+    return;
+  }
+  const texto = document.getElementById(id).innerText;
+  const voz = new SpeechSynthesisUtterance(texto);
+  voz.lang = "es-ES";
+  hablando = true;
+  voz.onend = () => hablando = false;
+  speechSynthesis.speak(voz);
+}
+
+/* =========================
+   MODALES
+   ========================= */
+function abrirModal(id){
+  document.getElementById(id).style.display = "flex";
+}
+
+function cerrarModal(id){
+  document.getElementById(id).style.display = "none";
+}
+
+/* =========================
+   QUIZ + PUNTAJE
+   ========================= */
+let puntajes = {};
+
+function respuesta(id, correcto, boton){
+  const r = document.getElementById(id);
+  const modal = boton.closest(".modal");
+  const quizId = modal.id;
+
+  // Inicializa puntaje del quiz
+  if(!puntajes[quizId]){
+    puntajes[quizId] = { total: 3, correctas: 0 };
+  }
+
+  // Bloquea doble respuesta
+  if(r.innerHTML !== "") return;
+
+
+
+
+ if(correcto){
+  r.innerHTML = "✅ ¡Correcto!";
+  r.style.color = "green";
+  boton.classList.add("btn-correcto");
+  sonidoBien.play();
+  puntajes[quizId].correctas++;
+}else{
+  r.innerHTML = "❌ Incorrecto";
+  r.style.color = "red";
+  boton.classList.add("btn-incorrecto");
+  sonidoMal.play();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Desactiva botones de esa pregunta
+  const botones = boton.parentElement.querySelectorAll("button");
+  botones.forEach(b => {
+  if(b !== boton){
+    b.classList.add("btn-correcto");
+  }
+});
+
+
+  // ¿Terminó el quiz?
+  const respondidas = modal.querySelectorAll(".resultado:not(:empty)").length;
+  if(respondidas === puntajes[quizId].total){
+    mostrarResultadoFinal(modal, quizId);
+  }
+}
+
+function mostrarResultadoFinal(modal, quizId){
+  const cont = modal.querySelector(".resultado-final");
+  const score = puntajes[quizId].correctas;
+
+  let mensaje = "", emoji = "";
+  if(score === 3){
+    mensaje = "Excelente 🌟";
+    emoji = "🏆";
+  }else if(score === 2){
+    mensaje = "Bien 👍";
+    emoji = "😊";
+  }else{
+    mensaje = "Repasa el tema 📘";
+    emoji = "📖";
+  }
+
+  cont.innerHTML = `
+    <h4>${emoji} Resultado final</h4>
+    <p>${mensaje}</p>
+    <p>Puntaje: ${score} / 3</p>
+    <button class="boton-voz" onclick="reintentarQuiz('${quizId}')">
+      🔄 Reintentar quiz
+    </button>
+  `;
+}
+
+function reintentarQuiz(quizId){
+  const modal = document.getElementById(quizId);
+
+  modal.querySelectorAll(".resultado").forEach(r => r.innerHTML = "");
+  modal.querySelectorAll(".pregunta button").forEach(b => {
+    b.disabled = false;
+    b.classList.remove("btn-correcto","btn-incorrecto");
+  });
+
+  modal.querySelector(".resultado-final").innerHTML = "";
+  puntajes[quizId] = { total: 3, correctas: 0 };
+}
+
+
+
+
+
+document.querySelectorAll('.caja').forEach(caja=>{
+  caja.addEventListener('click',()=>{
+    caja.classList.toggle('activa');
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+const eventos = document.querySelectorAll('.evento');
+
+const mostrarEventos = () => {
+  eventos.forEach(evento => {
+    const pos = evento.getBoundingClientRect().top;
+    if(pos < window.innerHeight - 100){
+      evento.classList.add('mostrar');
+    }
+  });
+};
+
+window.addEventListener('scroll', mostrarEventos);
+mostrarEventos();
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const timeline = document.querySelector(".timeline");
+  const flechas = document.querySelectorAll(".flecha");
+
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          flechas.forEach((flecha, i) => {
+            setTimeout(() => {
+              flecha.classList.add("animate");
+            }, i * 200); // efecto secuencial
+          });
+          observer.disconnect(); // se ejecuta una sola vez
+        }
+      });
+    },
+    {
+      threshold: 0.35
+    }
+  );
+
+  if(timeline){
+    observer.observe(timeline);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== REVEAL CINEMATOGRÁFICO ===== */
+const cards = document.querySelectorAll('.card-historia');
+
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach((entry, i) => {
+      if(entry.isIntersecting){
+        setTimeout(()=>{
+          entry.target.classList.add('reveal');
+        }, i * 180);
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold:0.25 }
+);
+
+cards.forEach(card => observer.observe(card));
+
+
+
+observer.observe(document.querySelector('.timeline'));
+
+
+
+
+</script>
+
+</body>
 </html>
