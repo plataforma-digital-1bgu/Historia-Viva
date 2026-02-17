@@ -14,6 +14,13 @@ body{
   background:linear-gradient(135deg,#eef2f7,#e3edf3);
 }
 
+html, body{
+  overflow-x:hidden;
+}
+
+
+
+
 /* HEADER */
 header{
   position:relative;
@@ -310,9 +317,6 @@ height: 2px;
 
 
 
-
-
-
 /* MAPA */
 .centro{
   text-align:center;
@@ -375,37 +379,6 @@ height: 2px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .caja{
   background: linear-gradient(135deg,#f8fafc,#eef2f7);
   padding:22px;
@@ -435,14 +408,16 @@ height: 2px;
 
 }
 
-.caja:last-child{
-  grid-column: 2 / 3;
-  border-left:8px solid #f59e0b;
-transform:scale(1.05);
-  box-shadow:0 15px 35px rgba(0,0,0,.15);
-  background:#eef2f7;
 
+
+@media(min-width:768px){
+  .caja:last-child{
+    transform:scale(1.05);
+  }
 }
+
+
+
 
 
 
@@ -721,22 +696,6 @@ color:#b91c1c;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ===== BOTONES QUIZ PRO ===== */
 
 .pregunta button{
@@ -986,7 +945,6 @@ box-shadow: 0 25px 50px rgba(0,0,0,.15);
 
 
 
-
 /* ===== SECCIÓN HISTORIA PRO ===== */
 .timeline-pro{
   margin:60px auto;
@@ -1195,14 +1153,6 @@ box-shadow: 0 25px 50px rgba(0,0,0,.15);
   line-height:1.7;
   color:#334155;
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -2061,6 +2011,33 @@ details:hover {
 
 
 
+@media (max-width: 768px){
+
+  .mapa{
+    grid-template-columns: 1fr;
+  }
+
+  .imagenes{
+    grid-template-columns: 1fr;
+  }
+
+  .caja{
+    width:100%;
+  }
+
+}
+@media (max-width:768px){
+  .seccion-pro{
+    margin:40px 15px;
+  }
+}
+
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+
+}
 
 
 </style>
