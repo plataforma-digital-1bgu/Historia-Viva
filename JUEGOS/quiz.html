@@ -12,7 +12,8 @@ body{
   font-family:'Segoe UI',sans-serif;
   background:#000;
   color:white;
-  overflow:hidden;
+    overflow-x:hidden;
+  overflow-y:auto;
   transition: background 0.5s ease;
 }
 
@@ -86,6 +87,12 @@ canvas#ruleta{
 @keyframes latidoRuleta{
   from { transform: scale(1); }
   to { transform: scale(1.02); }
+}
+
+#ruleta{
+  width:90vw;
+  max-width:500px;
+  aspect-ratio:1/1;
 }
 
 
@@ -288,6 +295,36 @@ body.girando {
   color: black;
 }
 
+
+
+
+
+
+@media (max-width: 900px){
+
+  header{
+    flex-direction:column;
+    gap:15px;
+    text-align:center;
+  }
+
+  .container{
+    flex-direction:column;
+    gap:40px;
+    margin-top:20px;
+  }
+
+  .app{
+    width:90%;
+    max-width:420px;
+  }
+
+}
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -318,7 +355,7 @@ body.girando {
 
 <div class="ruleta-container">
 <div class="puntero">▼</div>
-<canvas id="ruleta" class="ruleta" width="500" height="500"></canvas>
+<canvas id="ruleta" class="ruleta"></canvas>
 </div>
 
 <div class="app">
@@ -349,6 +386,16 @@ body.girando {
 <audio id="sndVolver" src="../Sonido/Sonidodeseleccionar.mp3"></audio>
 <audio id="sndFondo" src="../Sonido/musica-fondo.mp3" loop></audio>
 <audio id="sonidoMoneda" src="../Sonido/moneda.mp3"></audio>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -518,29 +565,48 @@ let indiceActual=null;
 const canvas=document.getElementById("ruleta");
 const ctx=canvas.getContext("2d");
 
+
+
+
+function ajustarCanvas(){
+  const size = canvas.offsetWidth;
+  canvas.width = size;
+  canvas.height = size;
+}
+
+ajustarCanvas();
+window.addEventListener("resize", ajustarCanvas);
+
+
+
+
+
 function dibujar(){
- const total=preguntas.length;
- if(total===0) return;
- const arc=2*Math.PI/total;
+ const total = preguntas.length;
+ if(total === 0) return;
+
+ const center = canvas.width / 2;
+ const radius = canvas.width / 2 - 20;
+ const arc = 2 * Math.PI / total;
+
+ ctx.clearRect(0, 0, canvas.width, canvas.height);
 
  for(let i=0;i<total;i++){
   ctx.beginPath();
   ctx.fillStyle=`hsl(${i*360/total},70%,50%)`;
-  ctx.moveTo(250,250);
-  ctx.arc(250,250,230,i*arc+angulo,(i+1)*arc+angulo);
+  ctx.moveTo(center,center);
+  ctx.arc(center,center,radius,i*arc+angulo,(i+1)*arc+angulo);
   ctx.fill();
 
   ctx.save();
-  ctx.translate(250,250);
+  ctx.translate(center,center);
   ctx.rotate(i*arc+arc/2+angulo);
   ctx.fillStyle="white";
   ctx.font="bold 18px Arial";
-  ctx.fillText(preguntas[i].anio,120,5);
+  ctx.fillText(preguntas[i].anio,radius-100,5);
   ctx.restore();
  }
 }
-dibujar();
-
 
 
 
@@ -799,7 +865,7 @@ function girar(){
  let anim=setInterval(()=>{
   angulo+=velocidad;
   velocidad*=0.985;
-  ctx.clearRect(0,0,500,500);
+ctx.clearRect(0,0,canvas.width,canvas.height);
   dibujar();
 
   if(velocidad<0.01){
