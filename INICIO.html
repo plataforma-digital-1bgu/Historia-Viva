@@ -121,10 +121,9 @@ body{
 header.banner{
     position:relative;
     width:100%;
-    height:100vh; /* 🔥 ocupa toda la pantalla */
+    height:auto;   /* 🔥 CAMBIA ESTO */
     overflow:hidden;
 }
-
 
 
 section.bloques{
@@ -173,6 +172,12 @@ section.bloques{
         font-size:15px;
     }
 
+    footer {
+        background: linear-gradient(to bottom, #3e6d94, #5a8fbf);
+    }
+}
+
+
 
 /* ================== RESPONSIVE CORRECTO ================== */
 
@@ -212,11 +217,10 @@ section.bloques{
 /* ================== FOOTER ================== */
 footer{
     background: linear-gradient(135deg, #1d3557, #3F88C3, #457b9d);
-    color:white;
-    padding:10px;
-    top:25%;
+    color:#fff;
+    padding:5px;
+    top:45%;
     text-align:center;
- margin-top:-90px;   /* esto lo sube */
 }
 
 </style>
