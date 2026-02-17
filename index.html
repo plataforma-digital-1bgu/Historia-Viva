@@ -76,9 +76,11 @@ header{
 .banner{
   position:relative;
   width:100%;
-  height:120vh;
+  height:100vh;
+  min-height:600px;
   overflow:hidden;
 }
+
 
 .banner img.fondo{
   width:100%;
@@ -125,12 +127,14 @@ header{
 /* 🔥 AQUI SE MUEVEN LOS BOTONES */
 .botones{
   position:absolute;
-  top:70%;              /* ⬆ subir o bajar botones */
-  left:50%;             /* centrar horizontal */
-  transform:translate(-30%,-100%);
+  bottom:15%;
+  left:50%;
+  transform:translateX(-50%);
   display:grid;
-  grid-template-columns:repeat(2,280px);
-  gap:60px;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px;
+  width:80%;
+  max-width:600px;
   z-index:10;
 }
 
@@ -226,24 +230,32 @@ footer{
   padding:10px;
 
 }
+@media (max-width:600px){
 
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1024px){
-  .banner{height:70vh;}
-  .botones{
-    grid-template-columns:repeat(2,180px);
-  }
-}
-
-@media(max-width:768px){
-  .banner{height:65vh;}
   .botones{
     grid-template-columns:1fr;
-    top:55%;
+    gap:20px;
+    width:90%;
   }
-  .logo,.logohistoria{width:90px;}
-  .nino,.nina{width:90px;}
+
+  .btn{
+    width:100%;
+  }
+
+}
+.logohistoria{
+    position:absolute;
+    top:50px;              /* altura desde arriba */
+    left:50%;
+    transform:translateX(-50%);
+    width:300px;           /* tamaño grande */
+    max-width:70%;
+  }
+
+  .logo{
+    display:none;          /* ocultamos el otro logo */
+  }
+
 }
 
 </style>
@@ -269,110 +281,6 @@ footer{
   <img src="LOGOHISTORIA.png" class="logohistoria">
   <img src="nino.png" class="nino">
   <img src="nina.png" class="nina">
-
- ================= RESPONSIVE PRO ================= */
-
-/* 💻 Laptop grande */
-@media(max-width:1200px){
-  .logo{
-    left:50px;
-    width:150px;
-  }
-
-  .logohistoria{
-    left:auto;
-    right:50px;
-    width:180px;
-  }
-
-  .botones{
-    transform:translate(-50%,-100%);
-    grid-template-columns:repeat(2,240px);
-    gap:40px;
-  }
-}
-
-/* 📲 Tablet */
-@media(max-width:992px){
-
-  .banner{
-    height:90vh;
-  }
-
-  .logo{
-    top:30px;
-    left:20px;
-    width:120px;
-  }
-
-  .logohistoria{
-    top:30px;
-    right:20px;
-    width:140px;
-    left:auto;
-  }
-
-  .botones{
-    top:65%;
-    left:50%;
-    transform:translate(-50%,-100%);
-    grid-template-columns:repeat(2,200px);
-    gap:30px;
-  }
-
-  .nino,.nina{
-    width:100px;
-  }
-}
-
-/* 📱 Teléfono */
-@media(max-width:600px){
-
-  header h1{
-    font-size:18px;
-  }
-
-  .banner{
-    height:85vh;
-  }
-
-  /* 🔥 Centramos logohistoria */
-  .logohistoria{
-    position:absolute;
-    top:25px;
-    left:50%;
-    transform:translateX(-50%);
-    width:180px;
-  }
-
-  /* Ocultamos el otro logo */
-  .logo{
-    display:none;
-  }
-
-  .botones{
-    top:65%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    grid-template-columns:1fr;
-    gap:20px;
-    width:90%;
-  }
-
-  .btn{
-    font-size:18px;
-    padding:18px;
-    width:100%;
-  }
-
-  /* CORREGIDO SIN ACENTOS */
-  .nino,
-  .nina{
-    width:80px;
-  }
-
-}
-
 
   <div class="botones">
     <div class="btn inicio" onclick="location.href='INICIO.html'">Inicio</div>
