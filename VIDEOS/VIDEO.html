@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Videos de Historia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --azul:#0b2a33;
+  --azul2:#4fa3e3;
+  --verde:#1f5f8b;
+  --fondo:#eef5fb;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:'Segoe UI', sans-serif;
+  background:linear-gradient(180deg,var(--fondo),#dbeaf5);
+}
+
+/* BOTÓN REGRESAR */
+.regresar{
+  position:fixed;
+  top:15px;
+  left:15px;
+  background:linear-gradient(135deg,var(--azul),var(--verde));
+  color:white;
+  padding:10px 22px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+  transition:.3s;
+  z-index:1000;
+}
+
+.regresar:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 30px rgba(0,0,0,.3);
+}
+
+/* HEADER PRO */
+header{
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:white;
+  padding:60px 20px;
+  text-align:center;
+  margin-top:60px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+header h1{
+  font-size:2.2rem;
+  letter-spacing:1px;
+}
+
+header p{
+  margin-top:10px;
+  opacity:.9;
+}
+
+/* CONTENEDOR */
+.contenedor{
+  max-width:1100px;
+  margin:50px auto;
+  padding:20px;
+}
+
+/* SECCIONES */
+.seccion{
+  background:rgba(255,255,255,.9);
+  margin-bottom:40px;
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,.1);
+  transition:.4s;
+}
+
+.seccion:hover{
+  transform:translateY(-6px);
+  box-shadow:0 25px 50px rgba(0,0,0,.18);
+}
+
+.seccion h2{
+  color:var(--azul);
+  margin-bottom:10px;
+}
+
+.subtitulo{
+  font-size:14px;
+  color:#555;
+  margin-bottom:20px;
+}
+
+/* BOTONES */
+.botones{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+.botones button{
+  position:relative;
+  padding:16px 18px 16px 50px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--verde),var(--azul2));
+  color:white;
+  cursor:pointer;
+  font-size:14px;
+  text-align:left;
+  box-shadow:0 8px 18px rgba(31,95,139,.35);
+  transition:.3s;
+  overflow:hidden;
+}
+
+.botones button::before{
+  content:"▶";
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,.25);
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+}
+
+.botones button:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 14px 30px rgba(31,95,139,.5);
+}
+
+.botones button:active{
+  transform:scale(.97);
+}
+</style>
+</head>
+
+<body>
+
+<a class="regresar" href="../VIDEOS../index.html">⬅ Regresar</a>
+
+<header>
+  <h1>🎥 Videos de Historia</h1>
+  <p>Explora cada sección y sus temas organizados por unidades académicas</p>
+</header>
+
+<div class="contenedor">
+
+<!-- SECCIÓN 1 -->
+<div class="seccion">
+<h2>Sección 1: Historia de la humanidad</h2>
+<p class="subtitulo">Origen, evolución y cambios sociales</p>
+<div class="botones">
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=uQ-aoFnbK74')">¿Qué es la Historia?</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=LAckvh90m8A')">Evolución humana</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=TpJ_FRVPosQ')">Transformaciones sociales</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=_r10AWOAzLM')">La mujer en la historia</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=Ptz0vfOZ12w')">Primeras civilizaciones</button>
+</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="seccion">
+<h2>Sección 2: Historia de las civilizaciones</h2>
+<p class="subtitulo">Interacciones religiosas y culturales</p>
+<div class="botones">
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=PtIs0XFFIrA')">Grecia y Roma</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=DjdFLJT5lhY')">Imperio Bizantino</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=IRJnSLlthh8')">Interacciones medievales</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=q2OE5GNaFDs')">Historia interreligiosa en Oriente Medio</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=wEX5oI2ygoE')">Movimientos socioculturales</button>
+</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="seccion">
+<h2>Sección 3: América Latina</h2>
+<p class="subtitulo">Culturas precolombinas y herencia colonial</p>
+<div class="botones">
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=gN61F17egDU')">Mayas e Incas</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=XLYB-GRE6Fk')">Conquista de América</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=287C60niTEY')">Expansión portuguesa</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=o9yxfDeb9D8')">Arte Hispanoamericano</button>
+</div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="seccion">
+<h2>Sección 4: Transformaciones sociales y políticas</h2>
+<p class="subtitulo">Movimientos sociales, crisis y Ecuador actual</p>
+<div class="botones">
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=_Zlxsz23alI')">Revoluciones y resistencia indígena</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=dRGow2pXGIE')">Crisis y migración</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=P8wmYSBeWAk')">Ecuador en el siglo XXI</button>
+</div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="seccion">
+<h2>Sección 5: Sistemas económicos</h2>
+<p class="subtitulo">Del feudalismo al capitalismo moderno</p>
+<div class="botones">
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=IQ6cHUyeMVQ')">Economía colonial</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=3LQAnFEADl4')">Revolución Industrial</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=QMvsc6w9i6I')">Conflictos ideológicos del siglo XX</button>
+<button onclick="abrirYouTube('https://www.youtube.com/watch?v=_EBwzG7L8yM')">Escuelas económicas</button>
+</div>
+</div>
+
+</div>
+
+<script>
+function abrirYouTube(url){
+  window.open(url, "_blank");
+}
+
+
+</script>
+
+</body>
+</html>
