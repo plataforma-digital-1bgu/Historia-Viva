@@ -988,8 +988,31 @@ border-left: 6px solid #2e8b57;
 
 <body>
 
-<header>
-  <button onclick="window.location.href='../INICIO.html'">← Regresar</button>
+<header style="position:relative;">
+<button onclick="RegresarINICIO()" 
+  style="
+    position:absolute;
+    left:20px;
+    top:35px;
+    padding:10px 18px;
+    border:2px solid white;
+    border:none;
+    border-radius:10px;
+    background:rgba(255,255,255,0.25);
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    font-size:14px;
+    backdrop-filter:blur(6px);
+    transition:all .3s ease;
+  outline:none;
+
+  ">
+  ← Regresar
+</button>
+
+
+
 
   <h1 class="titulo-seccion">
     <span class="sec">SECCIÓN 4</span>
@@ -1155,7 +1178,7 @@ En el siglo XXI, Ecuador ha atravesado un proceso continuo de transformación ma
   <strong>Cronología del Ecuador en el siglo XXI</strong>
 </p>
 
-<p>En el año 2000, Ecuador inci el siglo XXI enfrentando una profunda crisis económica que llevó a la dolarización, una medida clave para estabilizar la economía y controlar la inflación. Este hecho marcó un punto de inflexión en la historia del país, influyendo en el sistema financiero, el comercio y la vida cotidiana de la población, así como en los procesos de migración hacia otros países.</p>
+<p>En el año 2000, Ecuador inició el siglo XXI enfrentando una profunda crisis económica que llevó a la dolarización, una medida clave para estabilizar la economía y controlar la inflación. Este hecho marcó un punto de inflexión en la historia del país, influyendo en el sistema financiero, el comercio y la vida cotidiana de la población, así como en los procesos de migración hacia otros países.</p>
 
 <p>Entre 2007 y 2017, el país vivió un periodo de importantes transformaciones políticas y sociales, destacándose la aprobación de la Constitución de 2008, que amplió derechos y fortaleció la participación ciudadana. Durante estos años se impulsaron inversiones en educación, salud e infraestructura, buscando reducir la pobreza y promover un mayor rol del Estado en el desarrollo nacional.</p>
 
@@ -1437,6 +1460,9 @@ function abrirQuiz() {
   mostrarPregunta();
 }
 
+function RegresarINICIO(){
+  window.location.href = "../INICIO.html";
+}
 
 
 // ===================== QUIZ =====================
