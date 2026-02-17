@@ -191,18 +191,23 @@ section.bloques{
 
 }
 
-/* Celular */
+
+
+/* ===== SOLO EN CELULAR ===== */
 @media(max-width:600px){
 
-section.bloques{
-   position:absolute;
-   top:45%;   /* antes era 55% */
-   left:50%;
-   transform:translate(-50%,-50%);
+  .bloques-container{
+      display:grid;
+      grid-template-columns:1fr;  /* 1 solo botón por fila */
+      gap:20px;
+  }
+
+  .bloque{
+      width:100%;
+  }
+
 }
 
-
-}
 
 
 .bloques-container a:nth-child(4),
