@@ -25,7 +25,7 @@ body{
 }
 
 /* BOTÓN REGRESAR */
-.regresar{
+.btn-inicio{
   position:fixed;
   top:15px;
   left:15px;
@@ -37,10 +37,11 @@ body{
   font-weight:bold;
   box-shadow:0 8px 20px rgba(0,0,0,.2);
   transition:.3s;
+  cursor:pointer;
   z-index:1000;
 }
 
-.regresar:hover{
+.btn-inicio:hover{
   transform:translateY(-4px);
   box-shadow:0 15px 30px rgba(0,0,0,.3);
 }
@@ -148,7 +149,8 @@ header p{
 
 <body>
 
-<a class="regresar" href="../INICIO.html">⬅ Regresar</a>
+<button class="btn-inicio" onclick="irInicio()">INICIO</button>
+
 
 <header>
   <h1>🎥 Videos de Historia</h1>
@@ -225,9 +227,11 @@ function abrirYouTube(url){
   window.open(url, "_blank");
 }
 
-
+function irInicio(){
+window.location.href = "INICIO.html";
+";
+}
 </script>
 
 </body>
 </html>
-
