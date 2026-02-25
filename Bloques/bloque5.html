@@ -328,6 +328,61 @@ margin: 40px auto 25px;
   background: linear-gradient(90deg,#7b1e1e,#c62828);
   border-radius:3px;
 }
+
+
+
+.personaje {
+    background: #f5f5f5;
+    padding: 10px;
+    margin: 8px 0;
+    border-left: 4px solid #8b0000;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.personaje:hover {
+    background: #ffeaea;
+}
+
+.visor-imagen {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.visor-imagen img {
+    max-width: 250px;
+    display: none;
+    border-radius: 10px;
+}
+
+
+.personaje-1 {
+    border-left: 6px solid #1976d2;
+    background: #e3f2fd;
+}
+
+.personaje-1:hover {
+    background: #bbdefb;
+}
+
+.personaje-2 {
+    border-left: 6px solid #8e24aa;
+    background: #f3e5f5;
+}
+
+.personaje-2:hover {
+    background: #e1bee7;
+}
+
+.personaje-3 {
+    border-left: 6px solid #2e7d32;
+    background: #e8f5e9;
+}
+
+.personaje-3:hover {
+    background: #c8e6c9;
+}
+
 </style>
 </head>
 
@@ -405,6 +460,24 @@ Se analiza cómo la economía colonial sentó las bases de relaciones comerciale
 
 
 <h3 class="titulo-bonito">Personajes emblemáticos de la economía colonial</h3>
+
+<div class="personaje personaje-1" data-img="../IMAGEN/francisco.png">    
+<strong>Francisco Pizarro</strong>
+    <p>Conquistador del Perú, impulsó la expansión colonial y el control de recursos mineros como la plata de Potosí.</p>
+</div>
+<div class="personaje personaje-2" data-img="../IMAGEN/Hernán.png">
+<strong>Hernán Cortés</strong>
+ <p>Conquistador de México, cuya victoria sobre el Imperio azteca permitió el acceso a grandes riquezas y el establecimiento de un sistema económico colonial basado en la explotación indígena.</p>
+</div>
+<div class="personaje personaje-3" data-img="../IMAGEN/Bartolomé.png">
+<strong>Bartolomé de las Casas</strong>
+<p>Fraile dominico que denunció los abusos contra los pueblos originarios y propuso alternativas al sistema de encomienda, influyendo en debates sobre la organización social y económica de las colonias.</p>
+</div>
+
+
+<div class="visor-imagen">
+    <img id="imagenPersonaje" src="" alt="Personaje">
+</div>
 `,
 imagen:"../IMAGEN/bloque51.jpg",
 mapa:"../IMAGEN/mapa51.png"
@@ -418,8 +491,7 @@ titulo:"Tema 2: Revolución Industrial",
 texto:`<p>La Revolución Industrial fue un proceso histórico de transformación profunda que modificó las estructuras tecnológicas, económicas y sociales a partir del siglo XVIII. Este fenómeno se caracterizó por la incorporación de maquinaria, nuevas fuentes de energía y métodos de producción que reemplazaron progresivamente el trabajo manual y artesanal.</p>
 <p>Entre sus principales consecuencias estuvieron el crecimiento de las ciudades industriales, la aparición de la clase obrera, la consolidación de la burguesía industrial y profundos cambios en las condiciones de trabajo y en la organización de la producción.</p>
 <p>La Revolución Industrial marcó el inicio de la economía moderna y transformó de manera irreversible la vida cotidiana, la producción y las relaciones de poder en el mundo occidental.<p>Su desarrollo estuvo estrechamente vinculado a la acumulación de capital proveniente del comercio internacional y de las colonias, lo que permitió financiar innovaciones técnicas y la expansión del sistema fabril.</p>
-<div class="concepto-destacado">
-Se exploran los cambios tecnológicos, económicos y sociales provocados por la Revolución Industrial.</div>
+<div class="concepto-destacado">Se exploran los cambios tecnológicos, económicos y sociales provocados por la Revolución Industrial.</div>
 <h3 class="titulo-bonito">Transformaciones económicas</h3>
 <p>El proceso industrial generó una profunda reconfiguración de la economía. La burguesía industrial se consolidó como clase dominante, controlando los medios de producción y acumulando capital. La expansión del sistema fabril impulsó un notable aumento de la productividad, lo que favoreció la creación de mercados nacionales e internacionales más dinámicos. Este fenómeno dio origen a una economía moderna basada en la producción en masa y en la circulación de bienes a gran escala.</p>
 <img src="../IMAGEN/Transformaciones.png" class="img-pequena">
@@ -465,18 +537,9 @@ mapa:"../IMAGEN/mapa54.png"
 const infoExtra = [
 
 [
-{
-titulo:"Francisco Pizarro ",
-texto:"Conquistador del Perú, impulsó la expansión colonial y el control de recursos mineros como la plata de Potosí."
-},
-{
-titulo:"Hernán Cortés",
-texto:" Conquistador de México, cuya victoria sobre el Imperio azteca permitió el acceso a grandes riquezas y el establecimiento de un sistema económico colonial basado en la explotación indígena."
-},
-{
-titulo:"Bartolomé de las Casas",
-texto:" Fraile dominico que denunció los abusos contra los pueblos originarios y propuso alternativas al sistema de encomienda, influyendo en debates sobre la organización social y económica de las colonias."
-}
+
+
+
 ],
 
 
@@ -557,13 +620,16 @@ function detenerAudio(){
   speechSynthesis.cancel();
 }
 
+
+
+
 function mostrar(){
   detenerAudio();
 
   document.getElementById("contador").innerText =
     `Tema ${i+1} de ${temas.length}`;
 
-  cont.innerHTML=`
+  cont.innerHTML = `
     <h2>${temas[i].titulo}</h2>
 
     <div style="text-align:center;margin-bottom:20px;">
@@ -573,35 +639,42 @@ function mostrar(){
 
     <img class="img-principal" src="${temas[i].imagen}">
 
-<div style="white-space:pre-line;">${temas[i].texto}</div>
-
-
-
-
-${infoExtra[i] ? `
-<div class="cuadros-extra">
-  ${infoExtra[i].map((item,index)=>`
-    <div class="cuadro cuadro-${index+1}">
-      <h4>${item.titulo}</h4>
-      <p>${item.texto}</p>
+    <div style="white-space:pre-line;">
+      ${temas[i].texto}
     </div>
-  `).join("")}
-</div>
-` : ``}
 
+    ${infoExtra[i] && infoExtra[i].length > 0 ? `
+      <div class="cuadros-extra">
+        ${infoExtra[i].map((item,index)=>`
+          <div class="cuadro cuadro-${index+1}">
+            <h4>${item.titulo}</h4>
+            <p>${item.texto}</p>
+          </div>
+        `).join("")}
+      </div>
+    ` : ``}
 
-
-
-
-
-<div style="text-align:center;margin-top:20px;">
-  <button class="voz-btn" onclick="verMapa('${temas[i].mapa}')">🧠 Ver mapa</button>
-  ${i === 3 ? `<button class="voz-btn" onclick="abrirQuiz()">📝 Quiz</button>` : ``}
-</div>
-
+    <div style="text-align:center;margin-top:20px;">
+      <button class="voz-btn" onclick="verMapa('${temas[i].mapa}')">🧠 Ver mapa</button>
+      ${i === 3 ? `<button class="voz-btn" onclick="abrirQuiz()">📝 Quiz</button>` : ``}
+    </div>
   `;
 
- }
+  // 🔥 ACTIVAR PERSONAJES
+  const personajes = document.querySelectorAll(".personaje");
+  const imagen = document.getElementById("imagenPersonaje");
+
+  personajes.forEach(personaje => {
+    personaje.addEventListener("mouseenter", () => {
+      imagen.src = personaje.getAttribute("data-img");
+      imagen.style.display = "block";
+    });
+
+    personaje.addEventListener("mouseleave", () => {
+      imagen.style.display = "none";
+    });
+  });
+}
 
 function leer(){
   voz.text = temas[i].texto;
@@ -745,6 +818,7 @@ localStorage.setItem("notaSeccion5", puntaje + "/5");
 
 
 
+
 window.addEventListener("beforeunload", detenerAudio);
 
 document.addEventListener("visibilitychange", ()=>{
@@ -752,6 +826,8 @@ document.addEventListener("visibilitychange", ()=>{
     detenerAudio();
   }
 });
+
+
 
 mostrar();
 </script>
