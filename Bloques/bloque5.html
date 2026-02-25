@@ -283,20 +283,51 @@ header p{
 
 
 
-h3::after{
+
+
+
+.img-pequena{
+  width: 800px;      /* tamaño que tú quieras */
+  max-width: 100%;   /* para que sea responsive */
+  display: block;
+  margin: 20px auto; /* centrada */
+  border-radius: 12px;
+}
+.img-media{
+  width: 100%;  /* tamaño que tú quieras */
+  display: block;
+  margin: 20px 0; /* centrada */
+  border-radius: 12px;
+}
+
+
+
+h3.titulo-bonito{
+  text-align: center;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 600;
+  color: #7b1e1e;
+  margin: 40px auto 25px;
+  position: relative;
+  display: block;
+width: fit-content;
+margin: 40px auto 25px;
+  padding-bottom: 8px;
+}
+
+/* Línea decorativa elegante */
+.titulo-bonito::after{
   content:"";
   position:absolute;
   left:50%;
   transform:translateX(-50%);
   bottom:0;
-  width:60%;
+  width:70%;
   height:3px;
-  background:white;
+  background: linear-gradient(90deg,#7b1e1e,#c62828);
   border-radius:3px;
 }
-
-
-
 </style>
 </head>
 
@@ -373,7 +404,7 @@ Se analiza cómo la economía colonial sentó las bases de relaciones comerciale
 </div><p>El comercio estaba totalmente controlado por las metrópolis mediante monopolios y leyes que prohibían a las colonias comerciar libremente o desarrollar industrias propias. Esto mantuvo a América dependiente y subordinada.Se analiza cómo la economía colonial sentó las bases de relaciones comerciales y la explotación de recursos, así como la organización social y económica de la época. Además, se abordan los cambios en la producción agrícola y artesanal, la expansión del comercio internacional y la aparición de nuevas formas de acumulación de riqueza.</p>
 
 
-<h3 style="text-align:center;">Personajes emblemáticos de la economía colonial</h3>
+<h3 class="titulo-bonito">Personajes emblemáticos de la economía colonial</h3>
 `,
 imagen:"../IMAGEN/bloque51.jpg",
 mapa:"../IMAGEN/mapa51.png"
@@ -384,15 +415,14 @@ mapa:"../IMAGEN/mapa51.png"
 
 {
 titulo:"Tema 2: Revolución Industrial",
-texto:`<p>La Revolución Industrial fue un proceso histórico de transformación profunda que modificó las estructuras tecnológicas, económicas y sociales a partir del siglo XVIII. Este fenómeno se caracterizó por la incorporación de maquinaria, nuevas fuentes de energía y métodos de producción que reemplazaron progresivamente el trabajo manual y artesanal.</p><div class="concepto-destacado">
-Se exploran los cambios tecnológicos, económicos y sociales provocados por la Revolución Industrial.</div><p>Su desarrollo estuvo estrechamente vinculado a la acumulación de capital proveniente del comercio internacional y de las colonias, lo que permitió financiar innovaciones técnicas y la expansión del sistema fabril.
+texto:`<p>La Revolución Industrial fue un proceso histórico de transformación profunda que modificó las estructuras tecnológicas, económicas y sociales a partir del siglo XVIII. Este fenómeno se caracterizó por la incorporación de maquinaria, nuevas fuentes de energía y métodos de producción que reemplazaron progresivamente el trabajo manual y artesanal.</p>
 <p>Entre sus principales consecuencias estuvieron el crecimiento de las ciudades industriales, la aparición de la clase obrera, la consolidación de la burguesía industrial y profundos cambios en las condiciones de trabajo y en la organización de la producción.</p>
-<p>La Revolución Industrial marcó el inicio de la economía moderna y transformó de manera irreversible la vida cotidiana, la producción y las relaciones de poder en el mundo occidental.</p>
-
-<h3 style="text-align:center;">Transformaciones económicas</h3>
+<p>La Revolución Industrial marcó el inicio de la economía moderna y transformó de manera irreversible la vida cotidiana, la producción y las relaciones de poder en el mundo occidental.<p>Su desarrollo estuvo estrechamente vinculado a la acumulación de capital proveniente del comercio internacional y de las colonias, lo que permitió financiar innovaciones técnicas y la expansión del sistema fabril.</p>
+<div class="concepto-destacado">
+Se exploran los cambios tecnológicos, económicos y sociales provocados por la Revolución Industrial.</div>
+<h3 class="titulo-bonito">Transformaciones económicas</h3>
 <p>El proceso industrial generó una profunda reconfiguración de la economía. La burguesía industrial se consolidó como clase dominante, controlando los medios de producción y acumulando capital. La expansión del sistema fabril impulsó un notable aumento de la productividad, lo que favoreció la creación de mercados nacionales e internacionales más dinámicos. Este fenómeno dio origen a una economía moderna basada en la producción en masa y en la circulación de bienes a gran escala.</p>
-
-<h3 style="text-align:center;">Cambios sociales</h3>
+<img src="../IMAGEN/Transformaciones.png" class="img-pequena">
 <p>Las transformaciones tecnológicas y económicas tuvieron un impacto directo en la sociedad. El crecimiento acelerado de las ciudades industriales atrajo a miles de trabajadores, generando procesos de urbanización sin precedentes. La aparición de la clase obrera estuvo marcada por duras condiciones laborales: largas jornadas, bajos salarios y estricta disciplina fabril. Al mismo tiempo, se produjo una reconfiguración de las relaciones de poder entre la burguesía y el proletariado, lo que sentó las bases para el surgimiento de movimientos sociales y demandas por derechos laborales</p>
 
 
@@ -422,13 +452,8 @@ mapa:"../IMAGEN/mapa53.png"
 titulo:"Tema 4: Escuelas económicas",
 texto:`<p>Las escuelas económicas surgieron precisamente como respuestas intelectuales a los cambios económicos que comenzaron en la época colonial. La expansión del comercio internacional, la explotación de recursos y la aparición de nuevas formas de acumulación de riqueza generaron preguntas sobre cómo debía organizarse la economía, qué papel debía tener el Estado y cómo se distribuía la riqueza. Estas transformaciones, descritas en la página adyacente, crearon el contexto histórico que dio origen a las primeras teorías económicas.</p><div class="concepto-destacado">El mercantilismo, una de las primeras escuelas económicas, nació directamente de la economía colonial porque las metrópolis buscaban acumular oro y plata controlando estrictamente el comercio de sus colonias.</div><p>A partir de este punto surgieron nuevas corrientes, como el liberalismo, el marxismo y el keynesianismo, que intentaron explicar y orientar el funcionamiento de las economías modernas, influyendo de manera decisiva en las políticas públicas de distintos países. Estas escuelas no solo ofrecieron interpretaciones distintas sobre el papel del Estado, el mercado y la distribución de la riqueza, sino que también moldearon modelos de desarrollo, reformas económicas y decisiones gubernamentales a lo largo de los siglos XIX y XX. Gracias a estas corrientes, los Estados adoptaron políticas que iban desde la libertad absoluta de mercado hasta la intervención estatal para corregir desigualdades, lo que demuestra cómo el pensamiento económico se convirtió en una herramienta fundamental para comprender y dirigir la vida social y política de las naciones.</p>
 
-<h3 style="text-align:center;border-bottom:3px solid white;display:inline-block;
-padding-bottom:8px;">Personajes emblemáticos de las escuelas económicas</h3>
-
-
-
-
-
+<h3 class="titulo-bonito">Personajes emblemáticos de las escuelas económicas</h3>
+<img src="../IMAGEN/P.escuela_economica.png" class="img-media">
 <p>Cada escuela ofreció una visión distinta sobre el papel del Estado, el mercado y la distribución de la riqueza. Estas ideas se reflejan en pensadores que marcaron el rumbo del pensamiento económico moderno.</p>`,
 
 
@@ -437,9 +462,6 @@ mapa:"../IMAGEN/mapa54.png"
 }
 
 ];
-
-
-
 const infoExtra = [
 
 [
