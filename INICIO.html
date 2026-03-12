@@ -246,27 +246,69 @@ section.bloques{
 /* ================== CELULAR ================== */
 @media(max-width:600px){
 
-/* quitar posicion absoluta */
-section.bloques{
-   position:static;
-   transform:none;
-   margin-top:20px;
-   padding-bottom:40px;
+/* ===== HEADER ===== */
+header{
+   padding:25px 15px 50px;
+   text-align:center;
 }
 
-/* bloques en columna */
+h1{
+   font-size:24px;
+}
+
+p{
+   font-size:15px;
+}
+
+/* ===== BOTON INICIO ===== */
+.btn-inicio{
+   top:10px;
+   left:10px;
+   padding:8px 18px;
+   font-size:14px;
+}
+
+/* ===== BANNER ===== */
+.banner{
+   position:relative;
+   width:100%;
+}
+
+.banner img{
+   width:100%;
+   height:260px;
+   object-fit:cover;
+   object-position:center bottom;
+   display:block;
+   margin-top:100xp;
+
+}
+
+/* ===== BLOQUES ===== */
+section.bloques{
+   position:relative;
+   margin-top:140px;
+   padding-bottom:20px;
+}
+
+
+/* CONTENEDOR */
 .bloques-container{
+   display:grid;
    grid-template-columns:1fr;
    justify-items:center;
-   gap:20px;
+   gap:18px;
+   width:100%;
 }
 
-/* tamaño bloques */
+/* BLOQUES */
 .bloque{
    width:92%;
-   height:auto;
-   padding:25px 15px;
+   padding:20px 15px;
    font-size:15px;
+   border-radius:20px;
+   height:auto;
+   box-shadow:0 12px 25px rgba(0,0,0,0.25);
 }
 
 /* eliminar movimientos de escritorio */
@@ -275,33 +317,19 @@ section.bloques{
    transform:none !important;
 }
 
-/* ===== Banner celular ===== */
-.banner{
-   position:relative;
+/* ===== FOOTER ===== */
+footer{
+    padding:12px;
+   text-align:center;
+   font-size:14px;
+   margin-top:0 xp;
 }
 
-.banner img{
-   width:100%;
-   height:200px;        /* altura controlada */
-   object-fit:cover;    /* recorta sin deformar */
-   object-position:center; /* centra la imagen */
-   display:block;
-}
 
-/* mejorar espacio del header */
-header{
-   padding:25px 15px !important;
-}
 
-h1{
-   font-size:26px;
-}
 
-p{
-   font-size:16px;
-}
 
-}
+
 
 /* ================== FOOTER ================== */
 footer{
