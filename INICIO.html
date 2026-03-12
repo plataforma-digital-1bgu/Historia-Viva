@@ -246,6 +246,13 @@ section.bloques{
 /* ================== CELULAR ================== */
 @media(max-width:600px){
 
+/* CONTENEDOR PRINCIPAL DE LA PÁGINA */
+main{
+   width:95%;
+   margin:0 auto;
+}
+
+
 html,body{
    margin:0;
    padding:0;
@@ -282,12 +289,26 @@ p{
 /* ===== BLOQUES ===== */
 section.bloques{
    position:relative;
-   margin-top:500px;
-   padding-bottom:20px;
+   width:100%;
+   top:0;
+   transform:none;
+   margin-top:10px;
+   display:flex;
+   justify-content:center;
+   align-items:center;
 }
 
 
+
 /* ocultar banner en celular */
+
+.banner{
+   height:100px;
+   padding:1px;
+   margin:5px;
+   overflow:hidden;
+
+}
 
 .banner img{
    display:none;
@@ -295,29 +316,35 @@ section.bloques{
 
 /* CONTENEDOR */
 .bloques-container{
+   width:100%;
    display:flex;
    flex-direction:column;
    align-items:center;
    gap:18px;
 }
 
+
+
 /* BLOQUES */
 .bloque{
-   width:90%;
-   max-width:320px;
+   display:block;
+   width:85%;
+   max-width:300px;
    height:130px;
    padding-top:30px;
    font-size:15px;
    border-radius:22px;
    box-shadow:0 10px 22px rgba(0,0,0,0.25);
+   text-align:center;
+
+   margin:0 auto;   /* centra */
 }
 
-/* eliminar movimientos escritorio */
-.b4,
-.b5{
+.b1,.b2,.b3,.b4,.b5{
    transform:none !important;
+   margin-left:auto !important;
+   margin-right:auto !important;
 }
-
 /* ===== FOOTER ===== */
 footer{
    width:100%;
