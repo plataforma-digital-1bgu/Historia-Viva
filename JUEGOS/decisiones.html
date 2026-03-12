@@ -170,6 +170,55 @@ body{
 .final{
  text-align:center;
 }
+
+
+
+
+
+/* ESTRELLAS */
+.estrella{
+ position:absolute;
+ font-size:18px;
+ pointer-events:none;
+ animation:subirEstrella 1.2s ease-out forwards;
+}
+
+@keyframes subirEstrella{
+ 0%{
+  transform:translateY(0) scale(0.6);
+  opacity:1;
+ }
+ 100%{
+  transform:translateY(-120px) scale(1.4);
+  opacity:0;
+ }
+}
+
+
+
+
+
+
+.sello{
+ position:fixed;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%) scale(0);
+ background:#b30000;
+ color:white;
+ padding:20px 40px;
+ font-size:30px;
+ font-weight:bold;
+ border-radius:8px;
+ animation:selloGolpe 0.4s forwards;
+}
+
+@keyframes selloGolpe{
+ 0%{transform:translate(-50%,-50%) scale(3); opacity:0;}
+ 100%{transform:translate(-50%,-50%) scale(1); opacity:1;}
+}
+
+
 </style>
 </head>
 <body>
@@ -305,9 +354,14 @@ function responder(btn, correcto){
    btn.classList.add("correcta");
    sonidoOk.play();
    puntos++;
+ let rect = btn.getBoundingClientRect();
+   estrellas(rect.left + rect.width/2, rect.top);
+ 
+
  } else {
    btn.classList.add("incorrecta");
    sonidoBad.play();
+selloError();
  }
 
  setTimeout(()=>{
@@ -334,6 +388,43 @@ function mostrarFinal(){
  </div>
  `;
 }
+
+
+
+function estrellas(x,y){
+
+ for(let i=0;i<8;i++){
+
+   let s = document.createElement("div");
+   s.className = "estrella";
+   s.textContent = "⭐";
+
+   let dx = (Math.random()*80)-40;
+
+   s.style.left = (x + dx) + "px";
+   s.style.top = y + "px";
+
+   document.body.appendChild(s);
+
+   setTimeout(()=>s.remove(),1200);
+
+ }
+
+}
+
+
+function selloError(){
+
+ let s=document.createElement("div");
+ s.className="sello";
+ s.textContent="INCORRECTO";
+
+ document.body.appendChild(s);
+
+ setTimeout(()=>s.remove(),900);
+
+}
+
 
 /* INICIO */
 document.addEventListener("DOMContentLoaded", ()=>{
