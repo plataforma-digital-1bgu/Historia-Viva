@@ -92,7 +92,7 @@ body{
 
 .b2{
     background: linear-gradient(135deg,#f7971e,#ffd200);
-    color:White;
+    color:white;
 }
 
 .b3{
@@ -157,25 +157,54 @@ section.bloques{
 
 
 
+
 /* ================== RESPONSIVE PRO ================== */
 
 /* 🖥 Pantallas grandes */
 @media(max-width:1400px){
-    .bloques-container{
-        grid-template-columns: repeat(3, 220px);
-        gap:35px 50px;
-  }
 
-    .bloque{
-        width:220px;
-        height:145px;
-        font-size:15px;
-    }
-
-    footer {
-        background: linear-gradient(to bottom, #3e6d94, #5a8fbf);
-    }
+section.bloques{
+   position:absolute;
+   top:45%;
+   left:50%;
+   transform:translate(-50%,-50%);
 }
+
+.bloque:hover{
+    transform: translateY(-10px) scale(1.03);
+}
+
+
+.bloque{
+   width:220px;
+   height:145px;
+   font-size:15px;
+}
+
+footer{
+   background: linear-gradient(to bottom, #3e6d94, #5a8fbf);
+}
+}
+
+
+.b4{ 
+   transform: translateX(140px); 
+}
+
+.b5{ 
+   transform: translateX(140px); 
+}
+
+.b4:hover{
+   transform: translateX(140px) translateY(-10px) scale(1.03);
+}
+
+.b5:hover{
+   transform: translateX(140px) translateY(-10px) scale(1.03);
+}
+
+
+
 
 
 
@@ -210,27 +239,70 @@ section.bloques{
     letter-spacing:.5px;
 }
 
-
 }
 
-/* Celular */
+
+
+/* ================== CELULAR ================== */
 @media(max-width:600px){
 
+/* quitar posicion absoluta */
 section.bloques{
-   position:absolute;
-   top:45%;   /* antes era 55% */
-   left:50%;
-   transform:translate(-50%,-50%);
+   position:static;
+   transform:none;
+   margin-top:20px;
+   padding-bottom:40px;
 }
 
+/* bloques en columna */
+.bloques-container{
+   grid-template-columns:1fr;
+   justify-items:center;
+   gap:20px;
+}
+
+/* tamaño bloques */
+.bloque{
+   width:92%;
+   height:auto;
+   padding:25px 15px;
+   font-size:15px;
+}
+
+/* eliminar movimientos de escritorio */
+.b4,
+.b5{
+   transform:none !important;
+}
+
+/* ===== Banner celular ===== */
+.banner{
+   position:relative;
+}
+
+.banner img{
+   width:100%;
+   height:200px;        /* altura controlada */
+   object-fit:cover;    /* recorta sin deformar */
+   object-position:center; /* centra la imagen */
+   display:block;
+}
+
+/* mejorar espacio del header */
+header{
+   padding:25px 15px !important;
+}
+
+h1{
+   font-size:26px;
+}
+
+p{
+   font-size:16px;
+}
 
 }
 
-
-.bloques-container a:nth-child(4),
-.bloques-container a:nth-child(5){
-    transform: translateX(140px);
-}
 /* ================== FOOTER ================== */
 footer{
     background: linear-gradient(135deg, #1d3557, #3F88C3, #457b9d);
